@@ -10,11 +10,11 @@
 import { Navigation } from "react-native-navigation";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import App from './App';
+import Mixer from './src/screens/Mixer';
 import { COLORS } from './src/constants'
 
 
-Navigation.registerComponent('ambientify.mainscreen', () => App);
+Navigation.registerComponent('ambientify.main', () => Mixer);
 
 Navigation.events().registerAppLaunchedListener(async () => {
 
@@ -23,12 +23,9 @@ Navigation.events().registerAppLaunchedListener(async () => {
       stack: {
         children: [{
           component: {
-            name: 'ambientify.mainscreen',
+            name: 'ambientify.main',
             options: {
               topBar: {
-                title: {
-                  text: 'Ambientify'
-                },
                 leftButtons: [
                   {
                     id: 'ham',
