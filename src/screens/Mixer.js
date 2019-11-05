@@ -23,7 +23,8 @@ Mixer.options = {
   topBar: {
     title: {
       text: 'Ambientify',
-      color: COLORS.topBarFore
+      color: COLORS.topBarFore,
+      alignment: 'center'
     },
     visible: true,
     background: {
