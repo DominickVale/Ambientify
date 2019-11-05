@@ -4,3 +4,33 @@
  * TODO:
  *  implement
  */
+
+import React from 'react'
+import { Text } from 'react-native'
+import { COLORS } from '../constants'
+
+const Mixer = (props) => {
+  return (
+    <>
+      <Text>
+        Mixer screen
+      </Text>
+    </>
+  )
+}
+
+Mixer.options = {
+  topBar: {
+    title: {
+      text: 'Ambientify',
+      color: COLORS.topBarFore,
+      alignment: 'center'
+    },
+    visible: true,
+    background: {
+      color: COLORS.topBarBG
+    }
+  }
+}
+
+export default Mixer

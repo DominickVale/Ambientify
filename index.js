@@ -10,36 +10,45 @@
 import { Navigation } from "react-native-navigation";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import App from './App';
+import Mixer from './src/screens/Mixer';
 import { COLORS } from './src/constants'
+import SideDrawer from "./src/screens/SideDrawer";
 
 
-Navigation.registerComponent('ambientify.mainscreen', () => App);
+Navigation.registerComponent('ambientify.main', () => Mixer);
+Navigation.registerComponent('ambientify.side', () => SideDrawer);
 
 Navigation.events().registerAppLaunchedListener(async () => {
 
   Navigation.setRoot({
     root: {
-      stack: {
-        children: [{
+      sideMenu: {
+        left: {
           component: {
-            name: 'ambientify.mainscreen',
-            options: {
-              topBar: {
-                title: {
-                  text: 'Ambientify'
-                },
-                leftButtons: [
-                  {
-                    id: 'ham',
-                    icon: await Icon.getImageSource("menu", 30, COLORS.icons),
-                    scale: 2
-                  }
-                ],
-              }
-            }
+            name: 'ambientify.side',
+            visible: true
           }
-        }]
+        },
+        center: {
+          stack: {
+            children: [{
+              component: {
+                name: 'ambientify.main',
+                options: {
+                  topBar: {
+                    leftButtons: [
+                      {
+                        id: 'ham',
+                        icon: await Icon.getImageSource("menu", 30, COLORS.icons),
+                        scale: 2
+                      }
+                    ],
+                  }
+                }
+              }
+            }]
+          },
+        }
       }
     }
   });

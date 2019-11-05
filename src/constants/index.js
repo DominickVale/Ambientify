@@ -12,5 +12,7 @@ export const NUMBER_OF_CHANNELS = 12;
 export const SOUND_FILES = {};
 
 export const COLORS = {
-  icons: '#5B636C'
+  icons: '#5B636C',
+  topBarBG: '#06191F',
+  topBarFore: '#EBDAD0',
 }
