@@ -6,7 +6,7 @@ const App = () => {
   return (
     <>
       <SafeAreaView>
-        <Text> Test1 </Text>
+        <Text> Test </Text>
       </SafeAreaView>
     </>
   );

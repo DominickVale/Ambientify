@@ -9,9 +9,8 @@
 
 export const NUMBER_OF_CHANNELS = 12;
 
-export const SOUND_FILES = {
-  WIND: require('../assets/sounds/wind.ogg'),
-  WILDLIFE: require('../assets/sounds/wildlife.ogg'),
-  CROWS: require('../assets/sounds/crows.ogg'),
-  DARK: require('../assets/sounds/dark.ogg'),
-};
+export const SOUND_FILES = {};
+
+export const COLORS = {
+  icons: '#5B636C'
+}
