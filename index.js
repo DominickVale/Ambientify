@@ -10,11 +10,10 @@
 import { Navigation } from "react-native-navigation";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
+import { COLORS } from './src/constants'
 import Mixer from './src/screens/Mixer';
 import Presets from './src/screens/Presets';
-import { COLORS } from './src/constants'
 import SideDrawer from "./src/screens/SideDrawer";
-
 
 Navigation.registerComponent('ambientify.main', () => Mixer);
 Navigation.registerComponent('ambientify.presets', () => Presets);
@@ -37,6 +36,14 @@ Navigation.events().registerAppLaunchedListener(async () => {
           stack: {
             options: {
               topBar: {
+                visible: true,
+                title: {
+                  color: COLORS.topBarFore,
+                  alignment: 'center'
+                },
+                background: {
+                  color: COLORS.topBarBG
+                },
                 leftButtons: [
                   {
                     id: 'ham',
