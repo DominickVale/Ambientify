@@ -6,6 +6,8 @@ import React from 'react'
 import { Text, View, Dimensions, StyleSheet, Button } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 
+import { MAIN_SCREEN, PRESETS_SCREEN } from '../navigation/screens'
+
 const SideDrawer = (props) => {
 
   const openPushScreen = (screen) => {
@@ -13,7 +15,7 @@ const SideDrawer = (props) => {
 
     Navigation.push('appStack', {
       component: {
-        name: `ambientify.${screen}`,
+        name: screen,
         id: screen,
       }
 
@@ -33,8 +35,8 @@ const SideDrawer = (props) => {
         <Text>
           Side Drawer
         </Text>
-        <Button title="Presets" onPress={() => { openPushScreen('presets') }} />
-        <Button title="Mixer" onPress={() => { openPushScreen('main') }} />
+        <Button title="Presets" onPress={() => { openPushScreen(PRESETS_SCREEN) }} />
+        <Button title="Mixer" onPress={() => { openPushScreen(MAIN_SCREEN) }} />
       </View>
     </>
   )
