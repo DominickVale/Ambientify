@@ -66,7 +66,14 @@ Navigation.events().registerAppLaunchedListener(async () => {
                   {
                     component: {
                       name: MAIN_SCREEN,
-                      id: 'main'
+                      id: 'main',
+                      options: {
+                        topBar: {
+                          title: {
+                            text: 'Ambientify'
+                          }
+                        }
+                      }
                     }
                   },
                 ]

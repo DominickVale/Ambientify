@@ -17,6 +17,13 @@ const SideDrawer = (props) => {
       component: {
         name: screen,
         id: screen,
+        options: {
+          topBar: {
+            title: {
+              text: 'Presets'
+            }
+          }
+        }
       }
 
     })
