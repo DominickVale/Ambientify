@@ -8,12 +8,15 @@
 import React from 'react'
 import { Text } from 'react-native'
 
+import Channels from '../containers/Channels'
+
 const Mixer = (props) => {
   return (
     <>
       <Text>
         Mixer screen
       </Text>
+      <Channels />
     </>
   )
 }
