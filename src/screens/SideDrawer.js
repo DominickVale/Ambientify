@@ -15,12 +15,8 @@ const SideDrawer = (props) => {
       component: {
         name: `ambientify.${screen}`,
         id: screen,
-        options: {
-          sideMenu: {
-            visible: false
-          }
-        }
       }
+
     })
     Navigation.mergeOptions('menu', {
       sideMenu: {
