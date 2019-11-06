@@ -1,9 +1,11 @@
 /**
  * TODO
- * Implement all 3 screens (Main, Presets, SideDrawer)
- * Setup basic Navigation
- * Setup redux skeleton
  * 
+ * 
+ * Setup redux skeleton
+ * Add Channels container
+ * Add channel component
+ * Add channel load, play/stop button and volume slider to channel component
  *
  */
 
