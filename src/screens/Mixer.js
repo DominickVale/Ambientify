@@ -9,6 +9,7 @@ import React from 'react'
 import { Text } from 'react-native'
 import { COLORS } from '../constants'
 
+
 const Mixer = (props) => {
   return (
     <>
