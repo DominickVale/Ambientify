@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/slider": "^2.0.3",
     "@types/lodash": "^4.14.144",
     "expo-av": "^7.0.1",
     "react": "16.8.1",
@@ -16,7 +17,8 @@
     "react-native-navigation": "^3.4.0",
     "react-native-vector-icons": "^6.6.0",
     "react-redux": "^7.1.1",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",

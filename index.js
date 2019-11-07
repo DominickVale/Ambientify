@@ -1,25 +1,25 @@
 /**
  * TODO
  * 
- * 
- * Setup redux skeleton
- * Add Channels container
- * Add channel component
  * Add channel load, play/stop button and volume slider to channel component
- *
+ * Work on functionality of channels first.
+ * channels must be able to:
+ * load a sound given a string
+ * play the sound
+ * stop the sound
+ * change the volume
+ * 
+ * DEADLINE: 11/8/2019
  */
 
 import { Navigation } from "react-native-navigation";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import { COLORS } from './src/constants'
-import Mixer from './src/screens/Mixer';
-import Presets from './src/screens/Presets';
-import SideDrawer from "./src/screens/SideDrawer";
+import registerScreens from './src/navigation'
+import { MAIN_SCREEN, SIDE_MENU } from './src/navigation/screens'
 
-Navigation.registerComponent('ambientify.main', () => Mixer);
-Navigation.registerComponent('ambientify.presets', () => Presets);
-Navigation.registerComponent('ambientify.side', () => SideDrawer);
+registerScreens();
 
 Navigation.events().registerAppLaunchedListener(async () => {
 
@@ -29,7 +29,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
         id: 'menu',
         left: {
           component: {
-            name: 'ambientify.side',
+            name: SIDE_MENU,
             id: 'side',
             visible: true
           }
@@ -61,8 +61,15 @@ Navigation.events().registerAppLaunchedListener(async () => {
                 children: [
                   {
                     component: {
-                      name: 'ambientify.main',
-                      id: 'main'
+                      name: MAIN_SCREEN,
+                      id: 'main',
+                      options: {
+                        topBar: {
+                          title: {
+                            text: 'Ambientify'
+                          }
+                        }
+                      }
                     }
                   },
                 ]

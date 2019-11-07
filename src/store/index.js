@@ -1,6 +1,14 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+
 import rootReducer from '../reducers';
 
-const configureStore = () => createStore(rootReducer);
+const middlewares = [];
+if (process.env.NODE_ENV === 'development') {
+  const { logger } = require('redux-logger');
+
+  middlewares.push(logger);
+}
+
+const configureStore = () => compose(applyMiddleware(...middlewares))(createStore)(rootReducer);
 
 export default configureStore;
