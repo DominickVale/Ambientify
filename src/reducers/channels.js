@@ -1,4 +1,4 @@
-import { CHANNEL_INIT, LOAD_SOUND, LOAD_SOUND_ERR } from '../actions'
+import { CHANNEL_INIT, LOAD_SOUND, LOAD_SOUND_ERR, TOGGLE_SOUND } from '../actions'
 import { NUMBER_OF_CHANNELS } from '../constants';
 /**
  * TODO:
@@ -31,7 +31,7 @@ const initialState = {};
 
 for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
   initialState[i] = {
-    soundObject: 'NOT_INITIALIZED',
+    soundObject: undefined,
     file: false,
     playing: false,
     volume: 100,
@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
 
     case CHANNEL_INIT: return {
       ...state,
-      [action.payload.channelId]: {
+      [action.channelId]: {
         soundObject: action.payload.soundObject,
         file: false,
         playing: false,
@@ -53,19 +53,28 @@ export default (state = initialState, action) => {
 
     case LOAD_SOUND: return {
       ...state,
-      [action.payload.channelId]: {
-        ...state[action.payload.channelId],
+      [action.channelId]: {
+        ...state[action.channelId],
         file: action.payload.newSound,
       },
     };
 
     case LOAD_SOUND_ERR: return {
       ...state,
-      [action.payload.channelId]: {
-        ...state[action.payload.channelId],
-        file: action.payload.err,
+      [action.channelId]: {
+        ...state[action.channelId],
+        file: "Already loaded",
       },
     };
+
+    case TOGGLE_SOUND: return {
+      ...state,
+      [action.channelId]: {
+        ...state[action.channelId],
+        playing: !state[action.channelId].playing,
+      },
+    };
+
 
     default: return state;
   }
