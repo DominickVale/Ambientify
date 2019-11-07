@@ -1,10 +1,6 @@
 /**
  * TODO
  * 
- * 
- * Setup redux skeleton
- * Add Channels container 
- * Add channel component
  * Add channel load, play/stop button and volume slider to channel component
  * Work on functionality of channels first.
  * channels must be able to:
