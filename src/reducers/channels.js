@@ -15,13 +15,13 @@ const initialState = {};
  * state = {
  *    0: {
         soundObject: 'NOT_INITIALIZED',
-        loaded: false,
+        file: false,
         playing: false,
         volume: 100,
       },
  *    1: {
         soundObject: 'NOT_INITIALIZED',
-        loaded: false,
+        file: false,
         playing: false,
         volume: 100,
       },
@@ -32,7 +32,7 @@ const initialState = {};
 for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
   initialState[i] = {
     soundObject: 'NOT_INITIALIZED',
-    loaded: false,
+    file: false,
     playing: false,
     volume: 100,
   };
@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
       ...state,
       [action.payload.channelId]: {
         soundObject: action.payload.soundObject,
-        loaded: false,
+        file: false,
         playing: false,
         volume: 100,
       },
@@ -55,7 +55,7 @@ export default (state = initialState, action) => {
       ...state,
       [action.payload.channelId]: {
         ...state[action.payload.channelId],
-        loaded: action.payload.newSound,
+        file: action.payload.newSound,
       },
     };
 
