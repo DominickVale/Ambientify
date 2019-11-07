@@ -9,8 +9,12 @@
 
 export const NUMBER_OF_CHANNELS = 12;
 
-export const SOUND_FILES = {};
-
+export const SOUND_FILES = {
+  crows: require('Ambientify/assets/sounds/crows.ogg'),
+  dark: require('Ambientify/assets/sounds/dark.ogg'),
+  wind: require('Ambientify/assets/sounds/wind.ogg'),
+  wildlife: require('Ambientify/assets/sounds/wildlife.ogg')
+}
 export const COLORS = {
   icons: '#5B636C',
   topBarBG: '#06191F',
