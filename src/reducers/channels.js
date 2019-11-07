@@ -1,4 +1,4 @@
-import { CHANNEL_INIT, LOAD_SOUND } from '../actions'
+import { CHANNEL_INIT, LOAD_SOUND, LOAD_SOUND_ERR } from '../actions'
 import { NUMBER_OF_CHANNELS } from '../constants';
 /**
  * TODO:
@@ -56,6 +56,14 @@ export default (state = initialState, action) => {
       [action.payload.channelId]: {
         ...state[action.payload.channelId],
         file: action.payload.newSound,
+      },
+    };
+
+    case LOAD_SOUND_ERR: return {
+      ...state,
+      [action.payload.channelId]: {
+        ...state[action.payload.channelId],
+        file: action.payload.err,
       },
     };
 
