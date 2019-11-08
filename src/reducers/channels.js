@@ -1,4 +1,4 @@
-import { LOAD_SOUND, LOAD_SOUND_ERR, TOGGLE_SOUND } from '../actions'
+import { LOAD_SOUND, LOAD_SOUND_ERR, PLAY_SOUND, STOP_SOUND } from '../actions'
 import { NUMBER_OF_CHANNELS } from '../constants';
 import { Audio } from 'expo-av'
 /**
@@ -58,11 +58,18 @@ export default (state = initialState, action) => {
       },
     };
 
-    case TOGGLE_SOUND: return {
+    case PLAY_SOUND: return {
       ...state,
       [action.channelId]: {
         ...state[action.channelId],
-        playing: !state[action.channelId].playing,
+        playing: true,
+      },
+    };
+    case STOP_SOUND: return {
+      ...state,
+      [action.channelId]: {
+        ...state[action.channelId],
+        playing: false,
       },
     };
 
