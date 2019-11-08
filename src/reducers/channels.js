@@ -1,5 +1,6 @@
-import { CHANNEL_INIT, LOAD_SOUND, LOAD_SOUND_ERR, TOGGLE_SOUND } from '../actions'
+import { LOAD_SOUND, LOAD_SOUND_ERR, TOGGLE_SOUND } from '../actions'
 import { NUMBER_OF_CHANNELS } from '../constants';
+import { Audio } from 'expo-av'
 /**
  * TODO:
  * Add LOAD_SOUND
@@ -14,13 +15,13 @@ const initialState = {};
 /**
  * state = {
  *    0: {
-        soundObject: 'NOT_INITIALIZED',
+        soundObject: Audio.Sound(),
         file: false,
         playing: false,
         volume: 100,
       },
  *    1: {
-        soundObject: 'NOT_INITIALIZED',
+        soundObject: Audio.Sound(),
         file: false,
         playing: false,
         volume: 100,
@@ -31,7 +32,7 @@ const initialState = {};
 
 for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
   initialState[i] = {
-    soundObject: undefined,
+    soundObject: new Audio.Sound(),
     file: false,
     playing: false,
     volume: 100,
@@ -40,16 +41,6 @@ for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-
-    case CHANNEL_INIT: return {
-      ...state,
-      [action.channelId]: {
-        soundObject: action.payload.soundObject,
-        file: false,
-        playing: false,
-        volume: 100,
-      },
-    };
 
     case LOAD_SOUND: return {
       ...state,
