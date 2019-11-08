@@ -3,32 +3,63 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Text, Button, View } from 'react-native'
 import Slider from '@react-native-community/slider'
 import { Audio } from 'expo-av'
-import { initChannel } from '../actions'
+
+import { loadSound, playSound, stopSound, setVolume } from '../actions'
+import { SOUND_FILES } from '../constants/index'
 /**
  * TODO:
- * Add test button functionalities x redux
+ * Split sound logic into new class or renderless component
  * @param {*} props 
  */
 
 const Channel = (props) => {
   const dispatch = useDispatch();
-  const channel = useSelector(state => state.channels[props.id])
+  const { soundObject, file, playing, volume } = useSelector(state => state.channels[props.id])
+  const soundObjectStatus = async () => await soundObject.getStatusAsync();
 
   useEffect(() => {
-    dispatch(initChannel(props.id, new Audio.Sound()))
-    return () => {
-      cleanup();
-    };
+    console.log(`Channel ${props.id} loaded`)
+    if (soundObject) {
+      soundObject.setOnPlaybackStatusUpdate((playbackStatus) => {
+        if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
+          dispatch(stopSound(props.id)) // Set playing: false when the sound has finished playing
+        }
+      });
+    }
   }, [])
 
   useEffect(() => {
-    console.log("Channel loaded")
-  }, [channel.loaded])
 
-  const cleanup = async () => { }
-  const loadHandler = () => { console.log(channel) }
-  const toggleSoundHandler = () => { }
+    (async () => {
 
+      if (file) {
+        try {
+          if (playing)
+            await soundObject.playAsync();
+          else
+            await soundObject.stopAsync();
+
+          await soundObject.setVolumeAsync(volume)
+        } catch (e) {
+          console.log(e)
+        }
+      }
+
+    })();
+
+  }, [playing, volume, file])
+
+  const loadHandler = () => dispatch(loadSound(props.id, soundObject, SOUND_FILES[props.soundName]))
+
+  const toggleSoundHandler = () => {
+    if (file) {
+      dispatch(playing ? stopSound(props.id) : playSound(props.id));
+    }
+  }
+
+  const volumeHandler = (newVolume) => {
+    dispatch(setVolume(props.id, +newVolume.toFixed(2)))
+  }
   return (
     <>
       <View>
@@ -39,6 +70,8 @@ const Channel = (props) => {
         <Button title=" > " onPress={toggleSoundHandler} />
         <Slider minimumValue={0}
           maximumValue={1}
+          value={volume}
+          onValueChange={volumeHandler}
           step={0.05}
           minimumTrackTintColor="#FFFFFF"
           maximumTrackTintColor="#000000" />
@@ -47,4 +80,4 @@ const Channel = (props) => {
   )
 }
 
-export default Channel
+export default Channel;
