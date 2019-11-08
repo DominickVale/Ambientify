@@ -1,4 +1,4 @@
-import { LOAD_SOUND, LOAD_SOUND_ERR, PLAY_SOUND, STOP_SOUND } from '../actions'
+import { LOAD_SOUND, LOAD_SOUND_ERR, PLAY_SOUND, STOP_SOUND, SET_VOLUME } from '../actions'
 import { NUMBER_OF_CHANNELS } from '../constants';
 import { Audio } from 'expo-av'
 /**
@@ -35,7 +35,7 @@ for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
     soundObject: new Audio.Sound(),
     file: false,
     playing: false,
-    volume: 100,
+    volume: 1,
   };
 }
 
@@ -65,11 +65,20 @@ export default (state = initialState, action) => {
         playing: true,
       },
     };
+
     case STOP_SOUND: return {
       ...state,
       [action.channelId]: {
         ...state[action.channelId],
         playing: false,
+      },
+    };
+
+    case SET_VOLUME: return {
+      ...state,
+      [action.payload.channelId]: {
+        ...state[action.payload.channelId],
+        volume: action.payload.newVolume,
       },
     };
 
