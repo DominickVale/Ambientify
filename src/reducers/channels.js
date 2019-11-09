@@ -50,14 +50,6 @@ export default (state = initialState, action) => {
       },
     };
 
-    case LOAD_SOUND_ERR: return {
-      ...state,
-      [action.channelId]: {
-        ...state[action.channelId],
-        file: "Already loaded",
-      },
-    };
-
     case PLAY_SOUND: return {
       ...state,
       [action.channelId]: {
