@@ -9,7 +9,9 @@ import PlaybackButton from './PlaybackButton'
 import LoadButton from './LoadButton'
 /**
  * TODO:
- * Split sound logic into new class or renderless component
+ * 
+ * Add load button prompt + load sound screen implementation
+ * 
  * @param {*} props 
  */
 

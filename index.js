@@ -1,15 +1,11 @@
 /**
  * TODO
  * 
- * Add channel load, play/stop button and volume slider to channel component
- * Work on functionality of channels first.
- * channels must be able to:
- * load a sound given a string
- * play the sound
- * stop the sound
- * change the volume
+ * Add basic presets screen implementation
+ * Fix loadSound action and LoadButton component.
+ * Add load sound screen and basic implementation.
  * 
- * DEADLINE: 11/8/2019
+ * DEADLINE: 11/14/2019
  */
 
 import { Navigation } from "react-native-navigation";
