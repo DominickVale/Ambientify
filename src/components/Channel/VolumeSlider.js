@@ -15,11 +15,13 @@ const VolumeSlider = ({ channelId }) => {
   }, [volume])
 
   const volumeHandler = async (newVolume) => {
-    setLocalVolume(newVolume)
-    try {
-      await soundObject.setVolumeAsync(newVolume)
-    } catch (error) {
-      console.log(error)
+    if (file) {
+      setLocalVolume(newVolume)
+      try {
+        await soundObject.setVolumeAsync(newVolume)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
