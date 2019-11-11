@@ -6,6 +6,8 @@
 import React, { useEffect } from 'react'
 import { Text, BackHandler } from 'react-native'
 
+import NavHeader from '../components/NavHeader'
+
 const Presets = ({ componentId }) => {
 
   const backButtonHandler = () => {
@@ -26,6 +28,7 @@ const Presets = ({ componentId }) => {
 
   return (
     <>
+      <NavHeader title="Presets" />
       <Text> Presets screen</Text>
     </>
   )

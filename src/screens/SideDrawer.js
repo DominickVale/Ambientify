@@ -17,7 +17,7 @@ const SideDrawer = (props) => {
           Side Drawer
         </Text>
         <Button title="Presets" onPress={() => { props.navigation.navigate('Presets') }} />
-        <Button title="Mixer" onPress={() => { props.navigation.navigate('Home') }} />
+        <Button title="Mixer" onPress={() => { props.navigation.navigate('Mixer') }} />
       </View>
     </>
   )
