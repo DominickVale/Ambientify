@@ -21,12 +21,4 @@ const Mixer = (props) => {
   )
 }
 
-Mixer.options = {
-  topBar: {
-    title: {
-      text: 'Ambientify',
-    },
-  }
-}
-
 export default Mixer

@@ -3,21 +3,32 @@
  *  implement
  */
 
-import React from 'react'
-import { Text } from 'react-native'
+import React, { useEffect } from 'react'
+import { Text, BackHandler } from 'react-native'
 
-const Presets = (props) => {
+const Presets = ({ componentId }) => {
+
+  const backButtonHandler = () => {
+    return true;
+  }
+
+  useEffect(() => {
+    /*     BackHandler.addEventListener('hardwareBackPress', backButtonHandler)
+        const componentDidDisappear = Navigation.events().registerComponentDidDisappearListener(({ componentId: compId }) => {
+          if (componentId === compId) {
+            BackHandler.removeEventListener('hardwareBackPress', backButtonHandler)
+          }
+        })
+    
+        return () => {
+        } */
+  }, [])
+
   return (
     <>
       <Text> Presets screen</Text>
     </>
   )
 }
-Presets.options = {
-  topBar: {
-    title: {
-      text: 'Presets',
-    },
-  }
-}
+
 export default Presets

@@ -8,72 +8,18 @@
  * DEADLINE: 11/14/2019
  */
 
-import { Navigation } from "react-native-navigation";
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import React from 'react';
+import { Provider } from 'react-redux';
+import { AppRegistry } from 'react-native';
+import { name as appName } from './app.json';
+import App from './App';
+import configureStore from './src/store';
 
-import { COLORS } from './src/constants'
-import registerScreens from './src/navigation'
-import { MAIN_SCREEN, SIDE_MENU } from './src/navigation/screens'
+const store = configureStore();
 
-registerScreens();
-
-Navigation.events().registerAppLaunchedListener(async () => {
-
-  Navigation.setRoot({
-    root: {
-      sideMenu: {
-        id: 'menu',
-        left: {
-          component: {
-            name: SIDE_MENU,
-            id: 'side',
-            visible: true
-          }
-        },
-        center: {
-          stack: {
-            options: {
-              topBar: {
-                visible: true,
-                title: {
-                  color: COLORS.topBarFore,
-                  alignment: 'center'
-                },
-                background: {
-                  color: COLORS.topBarBG
-                },
-                leftButtons: [
-                  {
-                    id: 'ham',
-                    icon: await Icon.getImageSource("menu", 30, COLORS.icons),
-                    scale: 2
-                  }
-                ],
-              }
-            },
-            children: [{
-              stack: {
-                id: 'appStack',
-                children: [
-                  {
-                    component: {
-                      name: MAIN_SCREEN,
-                      id: 'main',
-                      options: {
-                        topBar: {
-                          title: {
-                            text: 'Ambientify'
-                          }
-                        }
-                      }
-                    }
-                  },
-                ]
-              }
-            }]
-          }
-        }
-      }
-    }
-  });
-});
+const Root = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+AppRegistry.registerComponent(appName, () => Root);
