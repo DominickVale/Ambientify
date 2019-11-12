@@ -1,12 +1,9 @@
-import { LOAD_SOUND, LOAD_SOUND_ERR, PLAY_SOUND, STOP_SOUND, SET_VOLUME } from '../actions'
+import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, SET_VOLUME } from '../actions'
 import { NUMBER_OF_CHANNELS } from '../constants';
 import { Audio } from 'expo-av'
 /**
  * TODO:
- * Add LOAD_SOUND
- * Add UNLOAD_SOUND
- * Add CHANGE_VOLUME
- * Add STOP_ALL_CHANNELS
+ * Add presets related actions
  */
 
 // Initialize the state, fill it with the preferred number of channels with default settings
@@ -34,6 +31,7 @@ for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
   initialState[i] = {
     soundObject: new Audio.Sound(),
     file: false,
+    currentSound: 'none',
     playing: false,
     volume: 1,
   };
@@ -47,6 +45,7 @@ export default (state = initialState, action) => {
       [action.channelId]: {
         ...state[action.channelId],
         file: action.payload.newSound,
+        currentSound: action.payload.newSoundName,
       },
     };
 
