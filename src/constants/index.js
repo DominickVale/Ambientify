@@ -17,6 +17,6 @@ export const SOUND_FILES = {
 }
 export const COLORS = {
   icons: '#5B636C',
-  topBarBG: '#06191F',
-  topBarFore: '#EBDAD0',
+  headerBG: '#06191F',
+  headerFore: '#EBDAD0',
 }
