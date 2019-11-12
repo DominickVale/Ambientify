@@ -8,7 +8,7 @@ import LoadButton from './LoadButton'
 /**
  * TODO:
  * 
- * Add load button prompt + load sound screen implementation
+ * Implement presets functionality
  * 
  * @param {*} props 
  */
