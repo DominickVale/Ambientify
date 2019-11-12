@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { View, Button } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import { withNavigation } from 'react-navigation'
 
 import { loadSound } from '../../actions'
 import { SOUND_FILES } from '../../constants/index'
 
-const LoadButton = ({ channelId, soundName }) => {
+const LoadButton = ({ channelId, soundName, navigation }) => {
   const dispatch = useDispatch();
   const { soundObject, file } = useSelector(state => state.channels[channelId])
 
@@ -30,7 +31,8 @@ const LoadButton = ({ channelId, soundName }) => {
   }, [file])
 
   const loadHandler = () => {
-    dispatch(loadSound(channelId, soundObject, SOUND_FILES[soundName]))
+    //dispatch(loadSound(channelId, soundObject, SOUND_FILES[soundName]))
+    navigation.navigate('SoundPicker')
   }
 
   return (
@@ -42,4 +44,4 @@ const LoadButton = ({ channelId, soundName }) => {
   )
 }
 
-export default LoadButton;
+export default withNavigation(LoadButton)

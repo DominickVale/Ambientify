@@ -7,14 +7,20 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Mixer from '../screens/Mixer'
 import Presets from '../screens/Presets'
 import SideDrawer from '../screens/SideDrawer'
+import SoundPicker from '../screens/SoundPicker'
 import { COLORS } from '../constants'
+
+/**
+ * TODO: 
+ * Add SoundPicker modal
+ */
 
 const defaultNavSettings = (navigation, title) => ({
   title: title,
   headerStyle: {
-    backgroundColor: COLORS.topBarBG,
+    backgroundColor: COLORS.headerBG
   },
-  headerTintColor: COLORS.topBarFore,
+  headerTintColor: COLORS.headerFore,
   headerLeftContainerStyle: { paddingLeft: 10 },
   headerLeft: () => {
     return (
@@ -30,9 +36,15 @@ const defaultNavSettings = (navigation, title) => ({
 
 const MixerNav = createStackNavigator(
   {
-    Mixer: { screen: Mixer }
+    Mixer: { screen: Mixer },
+    SoundPicker: { screen: SoundPicker }
   },
-  { defaultNavigationOptions: ({ navigation }) => defaultNavSettings(navigation, 'Ambientify') })
+  {
+    defaultNavigationOptions: ({ navigation }) => defaultNavSettings(navigation, 'Ambientify'),
+    mode: 'modal',
+    transparentCard: true,
+    cardStyle: { opacity: 1 }
+  })
 
 const PresetsNav = createStackNavigator(
   {
@@ -46,6 +58,7 @@ const AppNavigator = createDrawerNavigator(
     Presets: PresetsNav,
   },
   {
+    //First screen to show up will be Mixer
     initialRouteName: 'Mixer',
     contentComponent: SideDrawer,
   });
