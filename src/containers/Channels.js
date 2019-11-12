@@ -24,9 +24,9 @@ const Channels = (props) => {
   return (
     <>
       <Text> Channels container</Text>
-      <Channel id={0} soundName='crows' />
-      <Channel id={1} soundName='wildlife' />
-      <Channel id={2} soundName='dark' />
+      <Channel channelId={0} />
+      <Channel channelId={1} />
+      <Channel channelId={2} />
     </>
   )
 }
