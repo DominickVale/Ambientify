@@ -1,10 +1,8 @@
 /**
  * TODO
  * 
- * Add basic presets screen implementation
- * Fix loadSound action and LoadButton component.
- * Add load sound screen and basic implementation.
- * 
+ * Finish basic presets screen implementation
+ * Start presets functionality implementation
  * DEADLINE: 11/15/2019
  */
 
