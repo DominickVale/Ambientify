@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer } from 'react-navigation'
 
 import AppNavigator from './src/navigation'
 
