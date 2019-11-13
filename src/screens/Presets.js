@@ -7,7 +7,7 @@ import React, { useEffect } from 'react'
 import { Text, BackHandler } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
-import NavHeader from '../components/NavHeader'
+import PresetItem from '../components/PresetItem'
 
 const Presets = ({ componentId, navigation }) => {
 
@@ -31,8 +31,11 @@ const Presets = ({ componentId, navigation }) => {
 
   return (
     <>
-      <NavHeader title="Presets" />
-      <Text> Presets screen</Text>
+      <Text> Presets screen.</Text>
+      <PresetItem id={0} />
+      <PresetItem id={1} />
+      <PresetItem id={2} />
+      <PresetItem id={3} />
     </>
   )
 }

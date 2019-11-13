@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
 import channelsReducer from './channels'
-import settingsReducer from './settings'
+import presetsReducer from './presets'
 
 export default combineReducers({
   channels: channelsReducer,
-  settings: settingsReducer,
+  presets: presetsReducer,
 });
