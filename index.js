@@ -2,7 +2,7 @@
  * TODO
  * 
  * Finish basic presets screen implementation
- * Start presets functionality implementation
+ * Add and implement load/save preset functionality
  * DEADLINE: 11/15/2019
  */
 
