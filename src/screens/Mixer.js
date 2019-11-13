@@ -8,19 +8,18 @@
 import React, { useEffect } from 'react'
 import { Text, BackHandler } from 'react-native'
 import RNMinimizeApp from 'react-native-minimize'
+import { withNavigation } from 'react-navigation'
 
 import Channels from '../containers/Channels'
 
 const Mixer = (props) => {
   useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      RNMinimizeApp.minimizeApp();
-      return true
-    })
+    BackHandler.addEventListener('hardwareBackPress', () => RNMinimizeApp.minimizeApp());
     return () => {
       BackHandler.removeEventListener('hardwareBackPress')
     };
   }, [])
+
   return (
     <>
       <Text>
@@ -31,4 +30,4 @@ const Mixer = (props) => {
   )
 }
 
-export default Mixer
+export default withNavigation(Mixer)
