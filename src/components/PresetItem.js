@@ -11,6 +11,8 @@ const PresetItem = (props) => {
     <View>
       <Text>Preset n. {props.id}</Text>
       <Button title="Add preset 1" onPress={() => dispatch(addPreset('testing1'))} />
+      <Button title="Add preset 2" onPress={() => dispatch(addPreset('testing2'))} />
+      <Button title="Add preset 3" onPress={() => dispatch(addPreset('testing3'))} />
     </View>
   )
 }
