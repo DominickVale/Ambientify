@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { View } from 'react-native'
 import Slider from '@react-native-community/slider'
 import { useSelector } from 'react-redux'
 
+import { setVolume } from '../../actions'
 
 const VolumeSlider = ({ channelId }) => {
+  const dispatch = useDispatch()
   const [localVolume, setLocalVolume] = useState(1)
   const { soundObject, volume, file } = useSelector(state => state.channels[channelId])
 
   useEffect(() => {
-    (() => {
-      if (file) volumeHandler(volume)
+    (async () => {
+      if (file) {
+        try {
+          await soundObject.setVolumeAsync(volume)
+        } catch (error) {
+          console.log(error)
+        }
+      }
     })();
   }, [volume])
 
   const volumeHandler = async (newVolume) => {
-    if (file) {
-      setLocalVolume(newVolume)
-      try {
-        await soundObject.setVolumeAsync(newVolume)
-      } catch (error) {
-        console.log(error)
-      }
-    }
+    dispatch(setVolume(channelId, newVolume))
   }
 
   return (
