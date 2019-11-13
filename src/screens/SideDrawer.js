@@ -4,46 +4,20 @@
  */
 import React from 'react'
 import { Text, View, Dimensions, StyleSheet, Button } from 'react-native'
-import { Navigation } from 'react-native-navigation'
-
-import { MAIN_SCREEN, PRESETS_SCREEN } from '../navigation/screens'
 
 const SideDrawer = (props) => {
 
-  const openPushScreen = (screen) => {
-    console.log("open push screen")
-
-    Navigation.push('appStack', {
-      component: {
-        name: screen,
-        id: screen,
-        options: {
-          topBar: {
-            title: {
-              text: 'Presets'
-            }
-          }
-        }
-      }
-
-    })
-    Navigation.mergeOptions('menu', {
-      sideMenu: {
-        left: {
-          visible: false,
-        },
-      },
-    })
+  const openPushScreen = () => {
   }
 
   return (
     <>
-      <View style={[style.container, { width: Dimensions.get("window").width * 0.8 }]}>
+      <View style={[style.container]}>
         <Text>
           Side Drawer
         </Text>
-        <Button title="Presets" onPress={() => { openPushScreen(PRESETS_SCREEN) }} />
-        <Button title="Mixer" onPress={() => { openPushScreen(MAIN_SCREEN) }} />
+        <Button title="Presets" onPress={() => { props.navigation.navigate('Presets') }} />
+        <Button title="Mixer" onPress={() => { props.navigation.navigate('Mixer') }} />
       </View>
     </>
   )

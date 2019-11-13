@@ -1,26 +1,66 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { Navigation } from "react-native-navigation";
+import { TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import Mixer from '../screens/Mixer';
-import Presets from '../screens/Presets';
-import SideDrawer from "../screens/SideDrawer";
-import { MAIN_SCREEN, PRESETS_SCREEN, SIDE_MENU } from './screens'
-import configureStore from '../store'
+import Mixer from '../screens/Mixer'
+import Presets from '../screens/Presets'
+import SideDrawer from '../screens/SideDrawer'
+import SoundPicker from '../screens/SoundPicker'
+import { COLORS } from '../constants'
 
-let store = configureStore();
+/**
+ * TODO: 
+ * Add SoundPicker modal
+ */
 
-const reduxWrap = (Component) => {
-  return (props) => (
-    <Provider store={store}>
-      <Component {...props} />
-    </Provider>)
-}
+const defaultNavSettings = (navigation, title) => ({
+  title: title,
+  headerStyle: {
+    backgroundColor: COLORS.headerBG
+  },
+  headerTintColor: COLORS.headerFore,
+  headerLeftContainerStyle: { paddingLeft: 10 },
+  headerLeft: () => {
+    return (
+      <TouchableOpacity onPress={navigation.toggleDrawer}>
+        <Icon name="menu" size={30} color={COLORS.icons} />
+      </TouchableOpacity>
+    )
+  },
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
+})
 
-export default () => {
-  console.log('Registering screens...')
-  Navigation.registerComponent(MAIN_SCREEN, () => reduxWrap(Mixer));
-  Navigation.registerComponent(PRESETS_SCREEN, () => reduxWrap(Presets));
-  Navigation.registerComponent(SIDE_MENU, () => reduxWrap(SideDrawer));
-  console.log('Screens registered.')
-}
+const MixerNav = createStackNavigator(
+  {
+    Mixer: { screen: Mixer },
+    SoundPicker: { screen: SoundPicker }
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => defaultNavSettings(navigation, 'Ambientify'),
+    mode: 'modal',
+    transparentCard: true,
+    cardStyle: { opacity: 1 }
+  })
+
+const PresetsNav = createStackNavigator(
+  {
+    Presets: { screen: Presets }
+  },
+  { defaultNavigationOptions: ({ navigation }) => defaultNavSettings(navigation, 'Presets') })
+
+const AppNavigator = createDrawerNavigator(
+  {
+    Mixer: MixerNav,
+    Presets: PresetsNav,
+  },
+  {
+    //First screen to show up will be Mixer
+    initialRouteName: 'Mixer',
+    contentComponent: SideDrawer,
+  });
+
+export default AppNavigator
