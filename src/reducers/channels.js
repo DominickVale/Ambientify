@@ -8,24 +8,6 @@ import { Audio } from 'expo-av'
 
 // Initialize the state, fill it with the preferred number of channels with default settings
 const initialState = {};
-//After initialization, state should look like this
-/**
- * state = {
- *    0: {
-        soundObject: Audio.Sound(),
-        file: false,
-        playing: false,
-        volume: 100,
-      },
- *    1: {
-        soundObject: Audio.Sound(),
-        file: false,
-        playing: false,
-        volume: 100,
-      },
-      etc...
- * }
- */
 
 for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
   initialState[i] = {
