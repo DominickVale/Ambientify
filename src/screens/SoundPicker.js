@@ -2,17 +2,13 @@ import React, { useEffect } from 'react'
 import { View, Text, TouchableOpacity, BackHandler } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
+import { useBackHandler } from '../utils/'
 import SoundCategory from '../components/SoundCategory'
 import { SOUND_FILES } from '../constants'
 
 const SoundPicker = ({ navigation }) => {
 
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => navigation.goBack());
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress')
-    };
-  }, [])
+  useBackHandler(BackHandler, navigation, () => navigation.goBack());
 
   return (
     <View onPress={() => navigation.pop()} style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
