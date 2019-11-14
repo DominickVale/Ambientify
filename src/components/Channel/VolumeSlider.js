@@ -9,7 +9,7 @@ import { setVolume } from '../../actions'
 const VolumeSlider = ({ channelId }) => {
   const dispatch = useDispatch()
   const [localVolume, setLocalVolume] = useState(1)
-  const { soundObject, volume, file } = useSelector(state => state.channels[channelId])
+  const { soundObject, volume, file, currentSound } = useSelector(state => state.channels[channelId])
 
   useEffect(() => {
     (async () => {
@@ -22,6 +22,15 @@ const VolumeSlider = ({ channelId }) => {
       }
     })();
   }, [volume])
+
+  useEffect(() => {
+    /**
+     * Set local volume when a preset is loaded.
+     * This prevents any unwanted flickering of the slider 
+     * that would be caused by dispatching on each slider value update
+     */
+    setLocalVolume(volume)
+  }, [file, currentSound])
 
   const volumeHandler = async (newVolume) => {
     dispatch(setVolume(channelId, newVolume))
