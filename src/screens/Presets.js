@@ -32,10 +32,9 @@ const Presets = ({ componentId, navigation }) => {
   return (
     <>
       <Text> Presets screen.</Text>
-      <PresetItem id={0} />
-      <PresetItem id={1} />
-      <PresetItem id={2} />
-      <PresetItem id={3} />
+      <PresetItem id={0} presetName="testing" />
+      <PresetItem id={1} presetName="testing" />
+      <PresetItem id={2} presetName="testing" />
     </>
   )
 }

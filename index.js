@@ -3,6 +3,10 @@
  * 
  * Finish basic presets screen implementation
  * Add and implement load/save preset functionality
+ * 
+ * Fix loadsound dispatch = too long
+ * Refactor and clean code
+ * 
  * DEADLINE: 11/15/2019
  */
 

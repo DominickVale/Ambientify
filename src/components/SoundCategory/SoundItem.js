@@ -11,7 +11,7 @@ const SoundItem = ({ channelId, navigation, soundName, soundCategory }) => {
   const [loadState, setLoadState] = useState('Load')
 
   const loadButtonHandler = () => {
-    dispatch(loadSound(channelId, SOUND_FILES[soundCategory][soundName], soundName))
+    dispatch(loadSound(channelId, SOUND_FILES[soundCategory][soundName], soundCategory, soundName))
     navigation.popToTop();
   }
 

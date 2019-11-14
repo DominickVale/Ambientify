@@ -1,6 +1,8 @@
-import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, SET_VOLUME } from '../actions'
-import { NUMBER_OF_CHANNELS } from '../constants';
 import { Audio } from 'expo-av'
+import { merge } from 'lodash'
+
+import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, SET_VOLUME, LOAD_PRESET } from '../actions'
+import { NUMBER_OF_CHANNELS } from '../constants';
 /**
  * TODO:
  * Add presets related actions
@@ -13,6 +15,7 @@ for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
   initialState[i] = {
     soundObject: new Audio.Sound(),
     file: false,
+    currentSoundCategory: 'none',
     currentSound: 'none',
     playing: false,
     volume: 1,
@@ -20,6 +23,8 @@ for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
 }
 
 export default (state = initialState, action) => {
+
+
   switch (action.type) {
 
     case LOAD_SOUND: return {
@@ -27,6 +32,7 @@ export default (state = initialState, action) => {
       [action.channelId]: {
         ...state[action.channelId],
         file: action.payload.newSound,
+        currentSoundCategory: action.payload.newSoundCategory,
         currentSound: action.payload.newSoundName,
       },
     };
@@ -55,6 +61,7 @@ export default (state = initialState, action) => {
       },
     };
 
+    case LOAD_PRESET: return merge({}, state, action.payload.newChannelsState)
 
     default: return state;
   }

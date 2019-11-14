@@ -10,11 +10,12 @@ export const STOP_SOUND = 'STOP_SOUND'
 export const SET_VOLUME = 'SET_VOLUME' //Only used by preset dispatches
 
 export const ADD_PRESET = 'ADD_PRESET'
+export const LOAD_PRESET = 'LOAD_PRESET'
 export const REMOVE_PRESET = 'REMOVE_PRESET'
 
-export const loadSound = (channelId, newSound, newSoundName) => ({
+export const loadSound = (channelId, newSound, newSoundCategory, newSoundName) => ({
   type: LOAD_SOUND,
-  payload: { newSound, newSoundName },
+  payload: { newSound, newSoundCategory, newSoundName },
   channelId
 })
 
@@ -38,5 +39,14 @@ export const addPreset = name => async (dispatch, getState) => {
   dispatch({
     type: ADD_PRESET,
     payload: { name, currentChannelsState }
+  })
+}
+
+export const loadPreset = name => async (dispatch, getState) => {
+  const newChannelsState = { ...getState().presets[name] }
+  console.log(newChannelsState)
+  dispatch({
+    type: LOAD_PRESET,
+    payload: { name, newChannelsState }
   })
 }
