@@ -1,10 +1,10 @@
-import { ADD_PRESET, REMOVE_PRESET } from '../actions'
+import { ADD_PRESET, REMOVE_PRESET, DELETE_PRESET } from '../actions'
 /**
  * TODO:
  * Implement settings
  */
 
-const initialState = {}
+const initialState = []
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -16,11 +16,17 @@ export default (state = initialState, action) => {
           currentSound: channelsState[key].currentSound,
           volume: channelsState[key].volume
         }))
-
       return {
         ...state,
         [action.payload.name]: savedState
       }
+
+    // TODO: FIX
+    case DELETE_PRESET:
+      return {
+        ...Object.keys(state).filter(preset => preset != action.payload.name)
+      }
+
     default: return state;
   }
 };
