@@ -1,15 +1,19 @@
 /**
  * TODO:
- *  implement
+ *  Render list of presets, add onPress => load preset
+ *  Add 'Add preset' button
  */
 
 import React, { useEffect } from 'react'
-import { Text, BackHandler } from 'react-native'
+import { Text, Button, BackHandler } from 'react-native'
+import { useSelector } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 
 import PresetItem from '../components/PresetItem'
 
 const Presets = ({ componentId, navigation }) => {
+
+  const presets = useSelector(state => state.presets);
 
   const backButtonHandler = () => {
     navigation.navigate('Mixer')
@@ -32,9 +36,11 @@ const Presets = ({ componentId, navigation }) => {
   return (
     <>
       <Text> Presets screen.</Text>
-      <PresetItem id={0} presetName="testing" />
-      <PresetItem id={1} presetName="testing" />
-      <PresetItem id={2} presetName="testing" />
+      <Button title="+" onPress={() => navigation.push('AddPreset')} />
+      {Object.keys(presets).map(preset => {
+        // Maybe add something else (?)
+        return (<PresetItem presetName={preset} key={preset} />)
+      })}
     </>
   )
 }

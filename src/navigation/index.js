@@ -6,6 +6,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Mixer from '../screens/Mixer'
 import Presets from '../screens/Presets'
+import AddPreset from '../screens/AddPreset'
 import SideDrawer from '../screens/SideDrawer'
 import SoundPicker from '../screens/SoundPicker'
 import { COLORS } from '../constants'
@@ -48,9 +49,15 @@ const MixerNav = createStackNavigator(
 
 const PresetsNav = createStackNavigator(
   {
-    Presets: { screen: Presets }
+    Presets: { screen: Presets },
+    AddPreset: { screen: AddPreset }
   },
-  { defaultNavigationOptions: ({ navigation }) => defaultNavSettings(navigation, 'Presets') })
+  {
+    defaultNavigationOptions: ({ navigation }) => defaultNavSettings(navigation, 'Presets'),
+    mode: 'modal',
+    transparentCard: true,
+    cardStyle: { opacity: 1 }
+  })
 
 const AppNavigator = createDrawerNavigator(
   {
