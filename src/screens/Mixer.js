@@ -20,7 +20,7 @@ const Mixer = ({ navigation }) => {
     return true;
   }
 
-  useBackHandlerWithListener(BackHandler, navigation, 'didBlur', backButtonHandler);
+  useBackHandlerWithListener(BackHandler, navigation, backButtonHandler);
 
   return (
     <>

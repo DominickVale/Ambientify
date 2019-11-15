@@ -21,7 +21,7 @@ const Presets = ({ componentId, navigation }) => {
     return true;
   }
 
-  useBackHandlerWithListener(BackHandler, navigation, 'didBlur', backButtonHandler);
+  useBackHandlerWithListener(BackHandler, navigation, backButtonHandler);
 
   return (
     <>
