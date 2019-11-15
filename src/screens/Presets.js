@@ -9,6 +9,7 @@ import { Text, Button, BackHandler } from 'react-native'
 import { useSelector } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 
+import { useBackHandlerWithListener } from '../utils'
 import PresetItem from '../components/PresetItem'
 
 const Presets = ({ componentId, navigation }) => {
@@ -20,18 +21,7 @@ const Presets = ({ componentId, navigation }) => {
     return true;
   }
 
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', backButtonHandler)
-
-    const componentDidBlur = navigation.addListener('didBlur', payload => {
-      BackHandler.removeEventListener('hardwareBackPress', backButtonHandler) // Remove handler if back button is pressed
-    })
-
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', backButtonHandler) //Remove handler if app closes or component is unloaded
-      componentDidBlur.remove();
-    }
-  }, [])
+  useBackHandlerWithListener(BackHandler, navigation, 'didBlur', backButtonHandler);
 
   return (
     <>

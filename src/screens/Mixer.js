@@ -10,15 +10,17 @@ import { Text, BackHandler } from 'react-native'
 import RNMinimizeApp from 'react-native-minimize'
 import { withNavigation } from 'react-navigation'
 
+import { useBackHandlerWithListener } from '../utils'
 import Channels from '../containers/Channels'
 
-const Mixer = (props) => {
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => RNMinimizeApp.minimizeApp());
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress')
-    };
-  }, [])
+const Mixer = ({ navigation }) => {
+
+  const backButtonHandler = () => {
+    RNMinimizeApp.minimizeApp()
+    return true;
+  }
+
+  useBackHandlerWithListener(BackHandler, navigation, 'didBlur', backButtonHandler);
 
   return (
     <>
