@@ -4,7 +4,7 @@ import { ADD_PRESET, REMOVE_PRESET, DELETE_PRESET } from '../actions'
  * Implement settings
  */
 
-const initialState = []
+const initialState = {}
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -21,11 +21,10 @@ export default (state = initialState, action) => {
         [action.payload.name]: savedState
       }
 
-    // TODO: FIX
     case DELETE_PRESET:
-      return {
-        ...Object.keys(state).filter(preset => preset != action.payload.name)
-      }
+      const newState = { ...state };
+      delete newState[action.payload.name]
+      return newState
 
     default: return state;
   }
