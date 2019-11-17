@@ -25,6 +25,9 @@ export const SOUND_FILES = {
   MUSIC: {
     test_sound1: require('#ambientify-sounds/test_sound1.ogg'),
     test_sound2: require('#ambientify-sounds/test_sound2.ogg'),
+  },
+  HOUSE: {
+    clock_tick_1: require('#ambientify-sounds/clock_tick_1.ogg')
   }
 
 }
