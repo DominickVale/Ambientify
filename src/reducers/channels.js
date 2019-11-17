@@ -1,11 +1,11 @@
 import { Audio } from 'expo-av'
 import { merge } from 'lodash'
 
-import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, SET_VOLUME, LOAD_PRESET } from '../actions'
+import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, SET_VOLUME, LOAD_PRESET, SET_LOOPS, TOGGLE_LOOPING } from '../actions'
 import { NUMBER_OF_CHANNELS } from '../constants';
 /**
  * TODO:
- * Add presets related actions
+ * Add Settings
  */
 
 // Initialize the state, fill it with the preferred number of channels with default settings
@@ -15,6 +15,8 @@ for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
   initialState[i] = {
     soundObject: new Audio.Sound(),
     file: false,
+    loops: { times: 1, minutes: 1 },
+    looping: false,
     currentSoundCategory: 'none',
     currentSound: 'none',
     playing: false,
@@ -58,6 +60,22 @@ export default (state = initialState, action) => {
       [action.payload.channelId]: {
         ...state[action.payload.channelId],
         volume: action.payload.newVolume,
+      },
+    };
+
+    case SET_LOOPS: return {
+      ...state,
+      [action.payload.channelId]: {
+        ...state[action.payload.channelId],
+        loops: action.payload.loops,
+      },
+    };
+
+    case TOGGLE_LOOPING: return {
+      ...state,
+      [action.channelId]: {
+        ...state[action.channelId],
+        looping: ![action.channelId].looping
       },
     };
 

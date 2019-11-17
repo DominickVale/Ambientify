@@ -8,6 +8,8 @@ export const LOAD_SOUND_ERR = 'LOAD_SOUND_ERR';
 export const PLAY_SOUND = 'PLAY_SOUND'
 export const STOP_SOUND = 'STOP_SOUND'
 export const SET_VOLUME = 'SET_VOLUME'
+export const SET_LOOPS = 'SET_LOOPS'
+export const TOGGLE_LOOPING = 'TOGGLE_LOOPING'
 
 export const ADD_PRESET = 'ADD_PRESET'
 export const LOAD_PRESET = 'LOAD_PRESET'
@@ -32,6 +34,16 @@ export const stopSound = channelId => ({
 export const setVolume = (channelId, newVolume) => ({
   type: SET_VOLUME,
   payload: { channelId, newVolume }
+})
+
+export const setLoops = (channelId, loops) => ({
+  type: SET_LOOPS,
+  payload: { channelId, loops }
+})
+
+export const toggleLooping = channelId => ({
+  type: TOGGLE_LOOPING,
+  channelId
 })
 
 export const addPreset = name => async (dispatch, getState) => {
