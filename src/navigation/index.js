@@ -9,12 +9,9 @@ import Presets from '../screens/Presets'
 import AddPreset from '../screens/AddPreset'
 import SideDrawer from '../screens/SideDrawer'
 import SoundPicker from '../screens/SoundPicker'
+import LoopsWheel from '../screens/LoopsWheel'
 import { COLORS } from '../constants'
 
-/**
- * TODO: 
- * Add SoundPicker modal
- */
 
 const defaultNavSettings = (navigation, title) => ({
   title: title,
@@ -38,7 +35,8 @@ const defaultNavSettings = (navigation, title) => ({
 const MixerNav = createStackNavigator(
   {
     Mixer: { screen: Mixer },
-    SoundPicker: { screen: SoundPicker }
+    SoundPicker: { screen: SoundPicker },
+    LoopsWheel: { screen: LoopsWheel }
   },
   {
     defaultNavigationOptions: ({ navigation }) => defaultNavSettings(navigation, 'Ambientify'),

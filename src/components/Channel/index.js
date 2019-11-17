@@ -4,6 +4,7 @@ import { Text, View } from 'react-native'
 import _ from 'lodash'
 
 import VolumeSlider from './VolumeSlider'
+import LoopsWheelButton from './LoopsWheelButton'
 import PlaybackButton from './PlaybackButton'
 import LoadButton from './LoadButton'
 
@@ -56,6 +57,7 @@ const Channel = ({ channelId }) => {
           {channelTitle}
         </Text>
         <LoadButton channelId={channelId} />
+        <LoopsWheelButton channelId={channelId} />
         <PlaybackButton channelId={channelId} />
         <VolumeSlider channelId={channelId} />
       </View>
