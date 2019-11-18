@@ -14,7 +14,10 @@ export default (state = initialState, action) => {
         ({
           currentSoundCategory: channelsState[key].currentSoundCategory,
           currentSound: channelsState[key].currentSound,
-          volume: channelsState[key].volume
+          volume: channelsState[key].volume,
+          playing: channelsState[key].playing,
+          looping: channelsState[key].looping,
+          loops: channelsState[key].loops
         }))
       return {
         ...state,
