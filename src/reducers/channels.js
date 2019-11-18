@@ -75,7 +75,7 @@ export default (state = initialState, action) => {
       ...state,
       [action.channelId]: {
         ...state[action.channelId],
-        looping: ![action.channelId].looping
+        looping: !state[action.channelId].looping
       },
     };
 
