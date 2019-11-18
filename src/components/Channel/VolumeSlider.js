@@ -30,7 +30,7 @@ const VolumeSlider = ({ channelId }) => {
      * that would be caused by dispatching on each slider value update
      */
     setLocalVolume(volume)
-  }, [file, currentSound])
+  }, [file, currentSound, soundObject])
 
   const volumeHandler = async (newVolume) => {
     dispatch(setVolume(channelId, newVolume))
