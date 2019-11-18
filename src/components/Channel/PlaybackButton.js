@@ -44,7 +44,7 @@ const PlaybackButton = ({ channelId }) => {
 
 
   useEffect(() => {
-    if (looping && file && currentSound !== "none") {
+    if (looping && file && currentSound !== "none" && soundFinishedPlaying) {
       elapsedTime.current = Date.now() - startTime.current
 
       if (playedCount >= loops.times || elapsedTime.current > (loops.minutes * 60000)) {

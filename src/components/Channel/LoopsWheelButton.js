@@ -16,14 +16,17 @@ const getWheelData = () => {
 
 const LoopsWheelButton = ({ channelId, navigation }) => {
   const dispatch = useDispatch()
-  const { soundObject, looping } = useSelector(state => state.channels[channelId])
+  const { soundObject, looping, file } = useSelector(state => state.channels[channelId])
   useEffect(() => {
     getWheelData();
   }, [])
 
   const toggleRandomShuffle = async () => {
+    if (!looping) {
+      let { durationMillis } = await soundObject.getStatusAsync()
+      soundObject.playFromPositionAsync(durationMillis - 10)
+    }
     dispatch(toggleLooping(channelId))
-    await soundObject.setStatusAsync({ didJustFinish: true })
   }
   return (
     <>
