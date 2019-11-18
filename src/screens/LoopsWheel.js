@@ -5,7 +5,7 @@ import { View, Text, Button, BackHandler } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 import { useBackHandler } from '../utils/'
-import { setLoops, toggleLooping } from '../actions'
+import { setLoops } from '../actions'
 
 const LoopsWheel = ({ navigation }) => {
   const wheelData = navigation.getParam('wheelData')
@@ -19,7 +19,6 @@ const LoopsWheel = ({ navigation }) => {
 
   const buttonHandler = () => {
     dispatch(setLoops(channelId, { times: timesWheelState + 1, minutes: minutesWheelState + 1 }))
-    dispatch(toggleLooping(channelId))
     navigation.goBack();
   }
 
