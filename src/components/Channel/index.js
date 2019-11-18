@@ -8,7 +8,7 @@ import LoopsWheelButton from './LoopsWheelButton'
 import PlaybackButton from './PlaybackButton'
 import LoadButton from './LoadButton'
 
-import { loadSound } from '../../actions'
+import { loadSound, playSound } from '../../actions'
 import { SOUND_FILES } from '../../constants'
 /**
  * TODO:
@@ -20,12 +20,19 @@ import { SOUND_FILES } from '../../constants'
 
 const Channel = ({ channelId }) => {
   const dispatch = useDispatch();
-  const { soundObject, file, currentSoundCategory, currentSound } = useSelector(state => state.channels[channelId])
+  const { soundObject, file, currentSoundCategory, currentSound, playing, looping } = useSelector(state => state.channels[channelId])
   const [channelTitle, setChannelTitle] = useState(`Channel ${channelId}`)
 
   const loadSoundWithTitle = async () => {
     await soundObject.loadAsync(file)
-      .then(() => setChannelTitle(currentSound.split('_').join(' ')));
+      .then(async () => {
+        setChannelTitle(currentSound.split('_').join(' '));
+        if (looping) {
+          if (playing) {
+            await soundObject.playAsync();
+          }
+        }
+      });
   }
 
   useEffect(() => {
