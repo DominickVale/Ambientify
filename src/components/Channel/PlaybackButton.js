@@ -9,7 +9,8 @@ import { playSound, stopSound, toggleLooping } from '../../actions'
  * 
  * TODO:
  * 
- * Fix sounds with low times settings ending too soon
+ * Add onComponentUnmount clean up
+ * Fix shuffling on preset load
  * Refactor and move to own file/component
  * Improve pseudorandom number generator
  * 
@@ -25,6 +26,7 @@ const PlaybackButton = ({ channelId }) => {
   const startTime = useRef(0)
   const soundDuration = useRef(1)
   const elapsedTime = useRef(0)
+  const timeoutId = useRef(0);
 
   useEffect(() => {
 
@@ -44,46 +46,51 @@ const PlaybackButton = ({ channelId }) => {
 
 
   useEffect(() => {
-    if (looping && file && currentSound !== "none" && soundFinishedPlaying) {
-      elapsedTime.current = Date.now() - startTime.current
 
-      if (playedCount >= loops.times || elapsedTime.current > (loops.minutes * 60000)) {
-        console.log('Stopping because playedCount >= loops.times || elapsedTime > loops.minutes... Played count: ', playedCount, 'elapsed time:', (elapsedTime.current) / 1000)
-        setPlayedCount(1)
-        startTime.current = 0;
-        elapsedTime.current = 0;
-        soundObject.stopAsync();
-        soundObject.playAsync();
-      } else {
+    (async () => {
+      if (looping && file && currentSound !== "none" && soundFinishedPlaying) {
+        elapsedTime.current = Date.now() - startTime.current
 
-        console.log('current elapsed time: ', elapsedTime.current)
-        let minutes = loops.minutes * 60000;
-        let times = 0;
-        let timesCanBePlayed = minutes / soundDuration.current
+        if (playedCount - 1 >= loops.times || elapsedTime.current > (loops.minutes * 60000)) {
+          console.log('Stopping because playedCount >= loops.times || elapsedTime > loops.minutes... Played count: ', playedCount - 1, 'elapsed time:', (elapsedTime.current) / 1000)
+          setPlayedCount(1)
+          startTime.current = 0;
+          elapsedTime.current = 0;
+          /**
+           * Bit of a hacky way to fire didJustFinish event for the soundObject so that it can start shuffling withot having it to play first
+           */
+          let { durationMillis } = await soundObject.getStatusAsync()
+          soundObject.playFromPositionAsync(durationMillis - 1)
+        } else {
 
-        times = loops.times > timesCanBePlayed ? timesCanBePlayed : loops.times
+          console.log('current elapsed time: ', elapsedTime.current)
+          let minutes = loops.minutes * 60000;
+          let times = 0;
+          let timesCanBePlayed = minutes / soundDuration.current
 
-        const min = (soundDuration.current / times) - (elapsedTime.current / (100 * playedCount))  //fix
-        const max = Math.floor(((minutes / times) - Math.abs((elapsedTime.current / 100)) + (soundDuration.current / playedCount)))//fix
+          times = loops.times > timesCanBePlayed ? timesCanBePlayed : loops.times
 
-        console.log(min, '-', max)
-        let nextInterval = Math.floor((Math.random() * (max - min) + min))
-        console.log('next interval: ', nextInterval, ' Played count: ', playedCount)
-        if (soundFinishedPlaying) {
-          const timeoutId = BackgroundTimer.setTimeout(() => {
+          const max = (minutes / times) - (elapsedTime.current / 100) // fix
+          const min = max / (times % (playedCount) + 1) // fix
 
-            if (looping) {
-              soundObject.stopAsync();
-              soundObject.playAsync();
+          console.log(min, '-', max)
+          let nextInterval = Math.floor((Math.random() * (max - min) + min))
+          console.log('next interval: ', nextInterval, ' Played count: ', playedCount)
+          if (soundFinishedPlaying) {
+            timeoutId.current = BackgroundTimer.setTimeout(() => {
 
-              setPlayedCount(playedCount + 1)
-            }
-            BackgroundTimer.clearTimeout(timeoutId)
-          }, nextInterval)
+              if (looping) {
+                soundObject.stopAsync();
+                soundObject.playAsync();
+
+                setPlayedCount(playedCount + 1)
+              }
+              BackgroundTimer.clearTimeout(timeoutId.current)
+            }, nextInterval)
+          }
         }
-      }
-    }
-
+      } else if (!looping && timeoutId.current) BackgroundTimer.clearInterval(timeoutId.current)
+    })();
   }, [soundFinishedPlaying, looping, soundDuration, playedCount, loops])
 
 
@@ -91,11 +98,13 @@ const PlaybackButton = ({ channelId }) => {
   useEffect(() => {
     (async () => {
       if (file) {
-        if (looping) setPlaybackButtonTitle('looping')
         try {
           if (playing) {
             setPlaybackButtonTitle('||')
-            await soundObject.playAsync();
+            if (!looping) {
+              await soundObject.playAsync();
+              await soundObject.setIsLoopingAsync(true);
+            }
           }
           else {
             setPlaybackButtonTitle('>')
@@ -110,14 +119,15 @@ const PlaybackButton = ({ channelId }) => {
 
   const toggleSoundHandler = () => {
     if (file) {
-      if (looping && playing) {
-        setPlayedCount(1)
-        console.log('Set starTtime time to 0 because stopped random')
-        startTime.current = 0;
-        elapsedTime.current = 0;
-        dispatch(stopSound(channelId))
-        dispatch(toggleLooping(channelId))
-
+      if (looping) {
+        if (playing) {
+          setPlayedCount(1)
+          console.log('Set starTtime time to 0 because stopped random')
+          startTime.current = 0;
+          elapsedTime.current = 0;
+          dispatch(stopSound(channelId))
+          dispatch(toggleLooping(channelId))
+        }
       } else dispatch(playing ? stopSound(channelId) : playSound(channelId));
     }
   }

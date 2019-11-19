@@ -51,7 +51,8 @@ const Channel = ({ channelId }) => {
         } catch (error) { console.error('Error in loading sound in handler at Channel: ', channelId, error) }
       } else {
         if (currentSound != 'none') {
-          dispatch(loadSound(channelId, SOUND_FILES[currentSoundCategory][currentSound], currentSoundCategory, currentSound))
+          let soundFile = SOUND_FILES[currentSoundCategory][currentSound];
+          dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
         }
       }
     })()
