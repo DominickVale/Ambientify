@@ -31,3 +31,12 @@ export const useBackHandlerWithListener = (BackHandler, navigation, callback) =>
   }, [navigation.state])
 
 }
+
+export const playFromLastMillis = async (soundObject) => {
+  /**
+  * Bit of a hacky way to fire didJustFinish event for the soundObject so that it can start shuffling withot having it to play first
+  */
+  let { durationMillis } = await soundObject.getStatusAsync()
+  soundObject.playFromPositionAsync(durationMillis - 1)
+  await soundObject.setIsLoopingAsync(false);
+}

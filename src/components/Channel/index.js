@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Text, View } from 'react-native'
 import _ from 'lodash'
@@ -10,6 +10,7 @@ import LoadButton from './LoadButton'
 
 import { loadSound, playSound } from '../../actions'
 import { SOUND_FILES } from '../../constants'
+import { playFromLastMillis } from '../../utils'
 /**
  * TODO:
  * 
@@ -23,13 +24,17 @@ const Channel = ({ channelId }) => {
   const { soundObject, file, currentSoundCategory, currentSound, playing, looping } = useSelector(state => state.channels[channelId])
   const [channelTitle, setChannelTitle] = useState(`Channel ${channelId}`)
 
+  const sound = useRef(currentSound)
+  const oldSound = sound.current;
+
   const loadSoundWithTitle = async () => {
     await soundObject.loadAsync(file)
       .then(async () => {
         setChannelTitle(currentSound.split('_').join(' '));
         if (looping) {
           if (playing) {
-            await soundObject.playAsync();
+            dispatch(playSound(channelId))
+            playFromLastMillis(soundObject);
           }
         }
       });
@@ -39,24 +44,23 @@ const Channel = ({ channelId }) => {
     (async () => {
       if (file) {
         const status = await soundObject.getStatusAsync()
+        const soundFile = SOUND_FILES[currentSoundCategory][currentSound];
         try {
-          if (!status.isLoaded) { // If the sound object is not loaded, load new sound file from redux state
+          if (!status.isLoaded) {
             setChannelTitle('Loading...')
             loadSoundWithTitle();
           } else {
             // In case of new sound file being loaded by preset dispatch
-            await soundObject.unloadAsync();
-            loadSoundWithTitle();
+            await soundObject.unloadAsync().then(async () => loadSoundWithTitle());
+            if (oldSound != currentSound) dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
           }
         } catch (error) { console.error('Error in loading sound in handler at Channel: ', channelId, error) }
       } else {
-        if (currentSound != 'none') {
-          let soundFile = SOUND_FILES[currentSoundCategory][currentSound];
-          dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
-        }
+        if (currentSound != 'none') dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
       }
+
     })()
-  }, [file, currentSound])
+  }, [file, currentSound, currentSound, oldSound])
 
   return (
     <>

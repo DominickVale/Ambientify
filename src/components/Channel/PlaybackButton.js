@@ -4,7 +4,7 @@ import { View, Button, AppState } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { playSound, stopSound, toggleLooping } from '../../actions'
-
+import { playFromLastMillis } from '../../utils'
 /**
  * 
  * TODO:
@@ -48,7 +48,7 @@ const PlaybackButton = ({ channelId }) => {
   useEffect(() => {
 
     (async () => {
-      if (looping && file && currentSound !== "none" && soundFinishedPlaying) {
+      if (looping && file && currentSound !== "none" && soundFinishedPlaying && playing) {
         elapsedTime.current = Date.now() - startTime.current
 
         if (playedCount - 1 >= loops.times || elapsedTime.current > (loops.minutes * 60000)) {
@@ -56,11 +56,7 @@ const PlaybackButton = ({ channelId }) => {
           setPlayedCount(1)
           startTime.current = 0;
           elapsedTime.current = 0;
-          /**
-           * Bit of a hacky way to fire didJustFinish event for the soundObject so that it can start shuffling withot having it to play first
-           */
-          let { durationMillis } = await soundObject.getStatusAsync()
-          soundObject.playFromPositionAsync(durationMillis - 1)
+          playFromLastMillis(soundObject);
         } else {
 
           console.log('current elapsed time: ', elapsedTime.current)
@@ -105,13 +101,11 @@ const PlaybackButton = ({ channelId }) => {
               await soundObject.playAsync();
               await soundObject.setIsLoopingAsync(true);
             }
-          }
-          else {
+          } else {
             setPlaybackButtonTitle('>')
             await soundObject.stopAsync();
           }
-        }
-        catch (e) { console.log(e) }
+        } catch (e) { console.log(e) }
       }
     })();
   }, [playing])
@@ -127,6 +121,8 @@ const PlaybackButton = ({ channelId }) => {
           elapsedTime.current = 0;
           dispatch(stopSound(channelId))
           dispatch(toggleLooping(channelId))
+        } else {
+          playFromLastMillis(soundObject);
         }
       } else dispatch(playing ? stopSound(channelId) : playSound(channelId));
     }

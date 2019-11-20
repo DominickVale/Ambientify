@@ -4,7 +4,7 @@ import { WheelPicker } from 'react-native-wheel-picker-android'
 import { View, Text, Button, BackHandler } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
-import { useBackHandler } from '../utils/'
+import { useBackHandler, playFromLastMillis } from '../utils/'
 import { setLoops, toggleLooping, playSound } from '../actions'
 
 const LoopsWheel = ({ navigation }) => {
@@ -21,12 +21,7 @@ const LoopsWheel = ({ navigation }) => {
 
   const toggleRandomShuffle = async () => {
     if (file) {
-      /**
-       * Bit of a hacky way to fire didJustFinish event for the soundObject so that it can start shuffling withot having it to play first
-       */
-      let { durationMillis } = await soundObject.getStatusAsync()
-      soundObject.playFromPositionAsync(durationMillis - 1)
-      await soundObject.setIsLoopingAsync(false);
+      playFromLastMillis(soundObject);
 
       if (!looping) {
         dispatch(toggleLooping(channelId))
