@@ -8,7 +8,7 @@ import LoopsWheelButton from './LoopsWheelButton'
 import PlaybackButton from './PlaybackButton'
 import LoadButton from './LoadButton'
 
-import { loadSound, playSound } from '../../actions'
+import { loadSound, playSound, stopSound } from '../../actions'
 import { SOUND_FILES } from '../../constants'
 import { playFromLastMillis } from '../../utils'
 /**
@@ -28,14 +28,16 @@ const Channel = ({ channelId }) => {
   const oldSound = sound.current;
 
   const loadSoundWithTitle = async () => {
+    console.log('should be loading a channel sound...')
     await soundObject.loadAsync(file)
       .then(async () => {
         setChannelTitle(currentSound.split('_').join(' '));
-        if (looping) {
-          if (playing) {
-            dispatch(playSound(channelId))
+        dispatch(stopSound(channelId))
+        if (playing) {
+          if (looping) {
             playFromLastMillis(soundObject);
-          }
+            dispatch(playSound(channelId))
+          } else dispatch(playSound(channelId))
         }
       });
   }
@@ -54,7 +56,7 @@ const Channel = ({ channelId }) => {
             } else {
               // In case of new sound file being loaded by preset dispatch
               await soundObject.unloadAsync().then(async () => loadSoundWithTitle());
-              if (oldSound != currentSound) dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
+              //if (oldSound != currentSound) dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
             }
           } catch (error) { console.error('Error in loading sound in handler at Channel: ', channelId, error) }
         } else {
