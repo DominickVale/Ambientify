@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import AsyncStorage from '@react-native-community/async-storage'
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import { persistStore, persistReducer } from 'redux-persist'
 import thunk from 'redux-thunk'
 import rootReducer from '../reducers';
@@ -7,6 +8,7 @@ import rootReducer from '../reducers';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  stateReconciler: autoMergeLevel2,
   blacklist: ['channels']
 }
 
