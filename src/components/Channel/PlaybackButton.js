@@ -18,7 +18,7 @@ import { playFromLastMillis } from '../../utils'
  */
 const PlaybackButton = ({ channelId }) => {
   const dispatch = useDispatch();
-  const { soundObject, playing, file, loops, looping, currentSound } = useSelector(state => state.channels[channelId])
+  const { soundObject, playing, file, loops, looping, currentSound, volume } = useSelector(state => state.channels[channelId])
 
   const [playedCount, setPlayedCount] = useState(1)
   const [soundFinishedPlaying, setSoundFinishedPlaying] = useState(false)
@@ -31,6 +31,7 @@ const PlaybackButton = ({ channelId }) => {
 
   useEffect(() => {
 
+    let nextPitch = (Math.random() * (1.8 - 0.6) + 0.6)
     if (soundObject) {
       soundObject.setOnPlaybackStatusUpdate((playbackStatus) => {
         soundDuration.current = playbackStatus.durationMillis;
@@ -38,6 +39,8 @@ const PlaybackButton = ({ channelId }) => {
         if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
           if (!looping) dispatch(stopSound(channelId))
           setSoundFinishedPlaying(true)
+          console.log('next pitch: ', nextPitch)
+          soundObject.setRateAsync(nextPitch, false, Audio.PitchCorrectionQuality.Medium)
           if (playedCount === 1) startTime.current = Date.now();
         } else setSoundFinishedPlaying(false)
 
@@ -63,30 +66,27 @@ const PlaybackButton = ({ channelId }) => {
           let minutes = loops.minutes * 60000;
           let times = 0;
           let timesCanBePlayed = minutes / soundDuration.current
-          let nextPitch = (Math.random() * (1.8 - 0.6) + 0.6)
           times = loops.times
 
-          if (loops.times > timesCanBePlayed) {
-            times = timesCanBePlayed
-            dispatch(setLoops(channelId, { times: Math.floor(timesCanBePlayed), minutes: loops.minutes }))
-          }
+          /*           if (loops.times > timesCanBePlayed) {
+                      times = timesCanBePlayed
+                      dispatch(setLoops(channelId, { times: Math.floor(timesCanBePlayed), minutes: loops.minutes }))
+                    } */
 
           const max = (minutes / times) - (elapsedTime.current / 100) // fix
-          const min = max / (times % (playedCount) + 1) * Math.min(nextPitch, 1) // fix
+          const min = max / (playedCount % (times) + 1) // fix
 
           let nextInterval = Math.floor((Math.random() * (max - min) + min))
 
           console.log('next interval: ', nextInterval,
             ' Played count: ', playedCount,
             'min-max: ', min, '-', max,
-            'next pitch: ', nextPitch,
             'current elapsed time: ', elapsedTime.current)
 
           if (soundFinishedPlaying) {
             timeoutId.current = BackgroundTimer.setTimeout(() => {
               if (looping) {
                 soundObject.stopAsync();
-                soundObject.setRateAsync(nextPitch, false, Audio.PitchCorrectionQuality.Medium)
                 soundObject.playAsync();
                 setPlayedCount(playedCount + 1)
 
