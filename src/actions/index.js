@@ -14,12 +14,18 @@ export const TOGGLE_LOOPING = 'TOGGLE_LOOPING'
 export const ADD_PRESET = 'ADD_PRESET'
 export const LOAD_PRESET = 'LOAD_PRESET'
 export const DELETE_PRESET = 'DELETE_PRESET'
+export const ADD_CUSTOM_SOUND = 'ADD_CUSTOM_SOUND'
 
-export const loadSound = (channelId, newSound, newSoundCategory, newSoundName) => ({
-  type: LOAD_SOUND,
-  payload: { newSound, newSoundCategory, newSoundName },
-  channelId
-})
+export const loadSound = (channelId, newSound, newSoundCategory, newSoundName) => async (dispatch, getState) => {
+  if (newSoundCategory === 'CUSTOM') {
+    newSound = getState().presets.customSounds[newSoundName]
+  }
+  dispatch({
+    type: LOAD_SOUND,
+    payload: { newSound, newSoundCategory, newSoundName },
+    channelId
+  })
+}
 
 export const playSound = channelId => ({
   type: PLAY_SOUND,
@@ -65,4 +71,9 @@ export const loadPreset = name => async (dispatch, getState) => {
 export const deletePreset = name => ({
   type: DELETE_PRESET,
   payload: { name }
+})
+
+export const addCustomSound = (soundName, uri) => ({
+  type: ADD_CUSTOM_SOUND,
+  payload: { soundName, uri }
 })

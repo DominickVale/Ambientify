@@ -28,8 +28,8 @@ export const SOUND_FILES = {
   },
   HOUSE: {
     clock_tick_1: require('#ambientify-sounds/clock_tick_1.ogg')
-  }
-
+  },
+  CUSTOM: {}
 }
 export const COLORS = {
   icons: '#5B636C',

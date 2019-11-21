@@ -29,7 +29,7 @@ const Presets = ({ componentId, navigation }) => {
       <Button title="+" onPress={() => navigation.push('AddPreset')} />
       {Object.keys(presets).map(preset => {
         // Maybe add something else (?)
-        return (<PresetItem presetName={preset} key={preset} />)
+        if (preset !== 'customSounds') return (<PresetItem presetName={preset} key={preset} />)
       })}
     </>
   )

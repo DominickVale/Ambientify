@@ -42,25 +42,28 @@ const Channel = ({ channelId }) => {
 
   useEffect(() => {
     (async () => {
-      if (file) {
-        const status = await soundObject.getStatusAsync()
-        const soundFile = SOUND_FILES[currentSoundCategory][currentSound];
-        try {
-          if (!status.isLoaded) {
-            setChannelTitle('Loading...')
-            loadSoundWithTitle();
-          } else {
-            // In case of new sound file being loaded by preset dispatch
-            await soundObject.unloadAsync().then(async () => loadSoundWithTitle());
-            if (oldSound != currentSound) dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
-          }
-        } catch (error) { console.error('Error in loading sound in handler at Channel: ', channelId, error) }
-      } else {
-        if (currentSound != 'none') dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
-      }
+      if (currentSoundCategory !== 'none') {
+        let soundFile;
+        if (currentSoundCategory !== 'CUSTOM') soundFile = SOUND_FILES[currentSoundCategory][currentSound];
+        if (file) {
+          const status = await soundObject.getStatusAsync()
+          try {
+            if (!status.isLoaded) {
+              setChannelTitle('Loading...')
+              loadSoundWithTitle();
+            } else {
+              // In case of new sound file being loaded by preset dispatch
+              await soundObject.unloadAsync().then(async () => loadSoundWithTitle());
+              if (oldSound != currentSound) dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
+            }
+          } catch (error) { console.error('Error in loading sound in handler at Channel: ', channelId, error) }
+        } else {
+          if (currentSound != 'none') dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
+        }
 
+      }
     })()
-  }, [file, currentSound, currentSound, oldSound])
+  }, [file, currentSound, currentSound, oldSound, currentSoundCategory])
 
   return (
     <>

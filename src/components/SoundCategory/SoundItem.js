@@ -10,8 +10,14 @@ const SoundItem = ({ channelId, navigation, soundName, soundCategory }) => {
   const dispatch = useDispatch();
   const [loadState, setLoadState] = useState('Load')
 
+  const customSounds = useSelector(state => state.presets.customSounds)
+
   const loadButtonHandler = () => {
-    dispatch(loadSound(channelId, SOUND_FILES[soundCategory][soundName], soundCategory, soundName))
+    if (soundCategory === 'CUSTOM') {
+
+      dispatch(loadSound(channelId, customSounds[soundName], 'CUSTOM', soundName))
+      console.log('loading custom sound')
+    } else { dispatch(loadSound(channelId, SOUND_FILES[soundCategory][soundName], soundCategory, soundName)) }
     navigation.popToTop();
   }
 

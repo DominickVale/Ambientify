@@ -1,10 +1,12 @@
-import { ADD_PRESET, REMOVE_PRESET, DELETE_PRESET } from '../actions'
+import { ADD_PRESET, REMOVE_PRESET, DELETE_PRESET, ADD_CUSTOM_SOUND } from '../actions'
 /**
  * TODO:
  * Implement settings
  */
 
-const initialState = {}
+const initialState = {
+  customSounds: {}
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -17,7 +19,8 @@ export default (state = initialState, action) => {
           volume: channelsState[key].volume,
           playing: channelsState[key].playing,
           looping: channelsState[key].looping,
-          loops: channelsState[key].loops
+          loops: channelsState[key].loops,
+          uri: channelsState[key].currentSoundCategory === 'CUSTOM' ? channelsState[key].file : false
         }))
       return {
         ...state,
@@ -29,6 +32,15 @@ export default (state = initialState, action) => {
       delete newState[action.payload.name]
       return newState
 
+    case ADD_CUSTOM_SOUND: return ({
+      ...state,
+      customSounds: {
+        ...state.customSounds,
+        [action.payload.soundName]: {
+          uri: `${action.payload.uri}`,
+        }
+      }
+    })
     default: return state;
   }
 };
