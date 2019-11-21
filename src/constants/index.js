@@ -25,12 +25,14 @@ export const SOUND_FILES = {
   ENVIRONMENT: {
     Lake_Waves_01: require('#ambientify-sounds/Lake_Waves_01.ogg')
   },
+  WEATHER: {
+    Big_Thunder_Clap: require('#ambientify-sounds/Big_Thunder_Clap.ogg'),
+    Thunder_Clap_And_Rumble: require('#ambientify-sounds/Thunder_Clap_And_Rumble.ogg'),
+    Light_Rain_01: require('#ambientify-sounds/Light_Rain_01.ogg'),
+  },
   MUSIC: {
     test_sound1: require('#ambientify-sounds/test_sound1.ogg'),
     test_sound2: require('#ambientify-sounds/test_sound2.ogg'),
-  },
-  HOUSE: {
-    clock_tick_1: require('#ambientify-sounds/clock_tick_1.ogg')
   },
   CUSTOM: {}
 }
