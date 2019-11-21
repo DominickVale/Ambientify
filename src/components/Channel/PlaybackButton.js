@@ -2,15 +2,16 @@ import React, { useState, useEffect, useRef } from 'react'
 import BackgroundTimer from 'react-native-background-timer';
 import { View, Button, AppState } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import { Audio } from 'expo-av'
 
-import { playSound, stopSound, toggleLooping } from '../../actions'
+import { playSound, stopSound, toggleLooping, setLoops } from '../../actions'
 import { playFromLastMillis } from '../../utils'
 /**
  * 
  * TODO:
  * 
  * Add onComponentUnmount clean up
- * Fix shuffling on preset load
+ * Improve Pitch randomization
  * Refactor and move to own file/component
  * Improve pseudorandom number generator
  * 
@@ -59,29 +60,39 @@ const PlaybackButton = ({ channelId }) => {
           playFromLastMillis(soundObject);
         } else {
 
-          console.log('current elapsed time: ', elapsedTime.current)
           let minutes = loops.minutes * 60000;
           let times = 0;
           let timesCanBePlayed = minutes / soundDuration.current
+          let nextPitch = (Math.random() * (1.8 - 0.6) + 0.6)
+          times = loops.times
 
-          times = loops.times > timesCanBePlayed ? timesCanBePlayed : loops.times
+          if (loops.times > timesCanBePlayed) {
+            times = timesCanBePlayed
+            dispatch(setLoops(channelId, { times: Math.floor(timesCanBePlayed), minutes: loops.minutes }))
+          }
 
           const max = (minutes / times) - (elapsedTime.current / 100) // fix
-          const min = max / (times % (playedCount) + 1) // fix
+          const min = max / (times % (playedCount) + 1) * Math.min(nextPitch, 1) // fix
 
-          console.log(min, '-', max)
           let nextInterval = Math.floor((Math.random() * (max - min) + min))
-          console.log('next interval: ', nextInterval, ' Played count: ', playedCount)
+
+          console.log('next interval: ', nextInterval,
+            ' Played count: ', playedCount,
+            'min-max: ', min, '-', max,
+            'next pitch: ', nextPitch,
+            'current elapsed time: ', elapsedTime.current)
+
           if (soundFinishedPlaying) {
             timeoutId.current = BackgroundTimer.setTimeout(() => {
-
               if (looping) {
                 soundObject.stopAsync();
+                soundObject.setRateAsync(nextPitch, false, Audio.PitchCorrectionQuality.Medium)
                 soundObject.playAsync();
-
                 setPlayedCount(playedCount + 1)
+
               }
               BackgroundTimer.clearTimeout(timeoutId.current)
+
             }, nextInterval)
           }
         }

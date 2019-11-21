@@ -22,6 +22,9 @@ export const SOUND_FILES = {
   DARK: {
     dark: require('#ambientify-sounds/dark.ogg'),
   },
+  ENVIRONMENT: {
+    Lake_Waves_01: require('#ambientify-sounds/Lake_Waves_01.ogg')
+  },
   MUSIC: {
     test_sound1: require('#ambientify-sounds/test_sound1.ogg'),
     test_sound2: require('#ambientify-sounds/test_sound2.ogg'),
