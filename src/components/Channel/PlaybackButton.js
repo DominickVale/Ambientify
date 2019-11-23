@@ -10,6 +10,7 @@ import { playFromLastMillis } from '../../utils'
  * 
  * TODO:
  * 
+ * Fix resume playing for looping channels
  * Add onComponentUnmount clean up
  * Improve Pitch randomization
  * Refactor and move to own file/component
@@ -65,13 +66,7 @@ const PlaybackButton = ({ channelId }) => {
 
           let minutes = loops.minutes * 60000;
           let times = 0;
-          let timesCanBePlayed = minutes / soundDuration.current
           times = loops.times
-
-          /*           if (loops.times > timesCanBePlayed) {
-                      times = timesCanBePlayed
-                      dispatch(setLoops(channelId, { times: Math.floor(timesCanBePlayed), minutes: loops.minutes }))
-                    } */
 
           const max = (minutes / times) - (elapsedTime.current / 100) // fix
           const min = max / (playedCount % (times) + 1) // fix
@@ -88,7 +83,7 @@ const PlaybackButton = ({ channelId }) => {
               if (looping) {
                 soundObject.stopAsync();
                 soundObject.playAsync();
-                setPlayedCount(playedCount + 1)
+                setPlayedCount(playedCount => playedCount + 1)
 
               }
               BackgroundTimer.clearTimeout(timeoutId.current)
