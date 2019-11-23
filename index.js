@@ -1,13 +1,11 @@
 /**
  * TODO
  * 
- * Finish basic presets screen implementation
- * Add and implement load/save preset functionality
- * 
- * Fix loadsound dispatch = too long
+ * Rename looping to something else.
+ * Start adding basic ui components
+ * Start styling said components
+ * Add some animations with lottie
  * Refactor and clean code
- * 
- * DEADLINE: 11/15/2019
  */
 import 'react-native-gesture-handler'
 import React from 'react';
