@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler'
 import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
 import { createAppContainer } from 'react-navigation'
