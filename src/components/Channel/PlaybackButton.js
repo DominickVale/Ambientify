@@ -10,8 +10,6 @@ import { playFromLastMillis } from '../../utils'
  * 
  * TODO:
  * 
- * Fix resume playing for looping channels
- * Add onComponentUnmount clean up
  * Improve Pitch randomization
  * Refactor and move to own file/component
  * Improve pseudorandom number generator
@@ -40,8 +38,10 @@ const PlaybackButton = ({ channelId }) => {
         if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
           if (!looping) dispatch(stopSound(channelId))
           setSoundFinishedPlaying(true)
+
           console.log('next pitch: ', nextPitch)
           soundObject.setRateAsync(nextPitch, false, Audio.PitchCorrectionQuality.Medium)
+
           if (playedCount === 1) startTime.current = Date.now();
         } else setSoundFinishedPlaying(false)
 
@@ -52,8 +52,13 @@ const PlaybackButton = ({ channelId }) => {
 
   useEffect(() => {
 
+    /**
+     * Random shuffling / looping function.
+     * Sets up a timeout with a dynamic pseudo-random interval value such that given n minutes it will play ~n times before n minutes time span.
+     * It isn't good enough but it gets the job done pretty decently given the simplicity of it... 
+     */
     (async () => {
-      if (looping && file && currentSound !== "none" && soundFinishedPlaying && playing) {
+      if (looping && currentSound !== "none" && soundFinishedPlaying && playing) {
         elapsedTime.current = Date.now() - startTime.current
 
         if (playedCount - 1 >= loops.times || elapsedTime.current > (loops.minutes * 60000)) {
@@ -73,17 +78,18 @@ const PlaybackButton = ({ channelId }) => {
 
           let nextInterval = Math.floor((Math.random() * (max - min) + min))
 
-          console.log('next interval: ', nextInterval,
+          console.log(
+            ' next interval: ', nextInterval,
             ' Played count: ', playedCount,
-            'min-max: ', min, '-', max,
-            'current elapsed time: ', elapsedTime.current)
+            ' min-max: ', min, '-', max,
+            ' current elapsed time: ', elapsedTime.current)
 
           if (soundFinishedPlaying) {
             timeoutId.current = BackgroundTimer.setTimeout(() => {
-              if (looping) {
+              if (looping && playing) {
                 soundObject.stopAsync();
                 soundObject.playAsync();
-                setPlayedCount(playedCount => playedCount + 1)
+                setPlayedCount(count => count + 1)
 
               }
               BackgroundTimer.clearTimeout(timeoutId.current)
@@ -94,8 +100,6 @@ const PlaybackButton = ({ channelId }) => {
       } else if (!looping && timeoutId.current) BackgroundTimer.clearInterval(timeoutId.current)
     })();
   }, [soundFinishedPlaying, looping, soundDuration, playedCount, loops])
-
-
 
   useEffect(() => {
     (async () => {
@@ -116,7 +120,6 @@ const PlaybackButton = ({ channelId }) => {
     })();
   }, [playing])
 
-
   const toggleSoundHandler = () => {
     if (file) {
       if (looping) {
@@ -126,9 +129,10 @@ const PlaybackButton = ({ channelId }) => {
           startTime.current = 0;
           elapsedTime.current = 0;
           dispatch(stopSound(channelId))
-          dispatch(toggleLooping(channelId))
+          BackgroundTimer.clearInterval(timeoutId.current)
         } else {
-          playFromLastMillis(soundObject);
+          dispatch(playSound(channelId))
+          playFromLastMillis(soundObject)
         }
       } else dispatch(playing ? stopSound(channelId) : playSound(channelId));
     }
