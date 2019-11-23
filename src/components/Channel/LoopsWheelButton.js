@@ -1,27 +1,47 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View, Button } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 
-let wheelData = []
-const getWheelData = () => {
-  let values = [];
-  for (let i = 1; i < 60; i++) {
-    values.push(`${i}`);
-  }
-  wheelData = values
-}
 
 const LoopsWheelButton = ({ channelId, navigation }) => {
-  const { looping, loops } = useSelector(state => state.channels[channelId])
-  useEffect(() => {
-    getWheelData();
-  }, [])
+  const { looping, loops, soundObject, currentSound } = useSelector(state => state.channels[channelId])
+
+  let timesWheelData = []
+  let minutesWheelData = []
+
+  const _getWheelData = (soundDuration) => {
+    let minutes = loops.minutes * 60000;
+    let timesCanBePlayed = minutes / soundDuration
+
+    for (let i = 1; i < 60; i++) {
+      minutesWheelData.push(`${i}`);
+      if (timesCanBePlayed > i) timesWheelData.push(`${i}`)
+    }
+  }
+
+  const checkData = async () => {
+    try {
+      const status = await soundObject.getStatusAsync();
+      const soundDuration = status.durationMillis
+      console.log('sound duration is: ', soundDuration)
+      if (currentSound !== 'none') {
+        _getWheelData(soundDuration)
+        console.log(timesWheelData, minutesWheelData)
+      }
+    } catch (error) { console.log(error) }
+  }
+
+  const onButtonPress = async () => {
+    if (currentSound !== 'none') {
+      await checkData().then(() => navigation.push('LoopsWheel', { minutesWheelData, timesWheelData, channelId }));
+    }
+  }
 
   return (
     <>
       <View>
-        <Button title={looping ? `${loops.times}x - ${loops.minutes}m` : '∞'} onPress={() => navigation.push('LoopsWheel', { wheelData, channelId })} />
+        <Button title={looping ? `${loops.times}x - ${loops.minutes}m` : '∞'} onPress={onButtonPress} />
       </View>
     </>
   )
