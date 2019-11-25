@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { View } from 'react-native'
-import Slider from '@react-native-community/slider'
 import { useSelector } from 'react-redux'
 
 import { setVolume } from '../../actions'
+import Slider from './Slider'
 
 const VolumeSlider = ({ channelId }) => {
   const dispatch = useDispatch()
@@ -32,20 +32,14 @@ const VolumeSlider = ({ channelId }) => {
     setLocalVolume(volume)
   }, [file, currentSound, soundObject])
 
-  const volumeHandler = async (newVolume) => {
+  const volumeHandler = (newVolume) => {
     dispatch(setVolume(channelId, newVolume))
   }
 
   return (
     <>
       <View>
-        <Slider minimumValue={0}
-          maximumValue={1}
-          value={localVolume}
-          onValueChange={volumeHandler}
-          step={0.05}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000" />
+        <Slider onChange={volumeHandler} />
       </View>
     </>
   )
