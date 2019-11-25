@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react'
-import { Text } from 'react-native'
+import { Text, ScrollView } from 'react-native'
 import Channel from '../components/Channel'
 import { Audio } from 'expo-av'
+
+import { StyledChannelsContainer } from './styles'
+import { NUMBER_OF_CHANNELS } from '../constants'
 
 async function initSounds() {
   await Audio.setAudioModeAsync({
@@ -21,12 +24,21 @@ const Channels = (props) => {
     initSounds();
   }, [])
 
+  const getChannels = () => {
+    let channels = [];
+    for (let i = 1; i <= NUMBER_OF_CHANNELS; i++) {
+      channels.push(<Channel channelId={i} key={i} />)
+    }
+    return channels
+  }
+
   return (
     <>
-      <Text> Channels container</Text>
-      <Channel channelId={0} />
-      <Channel channelId={1} />
-      <Channel channelId={2} />
+      <ScrollView>
+        <StyledChannelsContainer>
+          {getChannels()}
+        </StyledChannelsContainer>
+      </ScrollView>
     </>
   )
 }

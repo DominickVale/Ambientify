@@ -16,7 +16,7 @@ import { COLORS } from '../constants'
 const defaultNavSettings = (navigation, title) => ({
   title: title,
   headerStyle: {
-    backgroundColor: COLORS.headerBG
+    backgroundColor: COLORS.primary
   },
   headerTintColor: COLORS.headerFore,
   headerLeftContainerStyle: { paddingLeft: 10 },

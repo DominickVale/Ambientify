@@ -28,20 +28,11 @@ export default class Slider extends React.Component {
   UNSAFE_componentWillUpdate(nextProps, nextState) {
     const { value, deltaValue, barHeight } = this.state;
 
-    const currentCappedValue = this.capValueWithinRange(value + deltaValue, [
-      min,
-      max
-    ]);
-
-    const nextCappedValue = this.capValueWithinRange(nextState.value + nextState.deltaValue, [
-      min,
-      max
-    ]);
+    const currentCappedValue = this.capValueWithinRange(value + deltaValue, [min, max]);
+    const nextCappedValue = this.capValueWithinRange(nextState.value + nextState.deltaValue, [min, max]);
 
     if (!isEqual(currentCappedValue, nextCappedValue)) {
-      if (!(nextCappedValue - currentCappedValue >= this.props.step)) {
-        this.props.onChange(parseFloat((Math.round(nextCappedValue / 1) / 100).toFixed(2)))
-      }
+      this.props.onChange(parseFloat((nextCappedValue / 100).toFixed(2)))
     }
   }
 

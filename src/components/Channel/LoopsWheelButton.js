@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, Button } from 'react-native'
+import { View, Text } from 'react-native'
 import { useSelector } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 
+import { StyledButton, StyledButtonText } from './styles'
 
 const LoopsWheelButton = ({ channelId, navigation }) => {
   const { randomizing, loops, soundObject, currentSound } = useSelector(state => state.channels[channelId])
@@ -41,7 +42,9 @@ const LoopsWheelButton = ({ channelId, navigation }) => {
   return (
     <>
       <View>
-        <Button title={randomizing ? `${loops.times}x - ${loops.minutes}m` : '∞'} onPress={onButtonPress} />
+        <StyledButton onPress={onButtonPress}>
+          <StyledButtonText>{randomizing ? `${loops.times}x - ${loops.minutes}m` : '∞'}</StyledButtonText>
+        </StyledButton>
       </View>
     </>
   )

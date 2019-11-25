@@ -1,6 +1,8 @@
 import React from 'react'
-import { View, Button } from 'react-native'
+import { View, Text } from 'react-native'
 import { withNavigation } from 'react-navigation'
+
+import { StyledButton, StyledButtonText } from './styles'
 
 const LoadButton = ({ channelId, navigation }) => {
 
@@ -11,7 +13,9 @@ const LoadButton = ({ channelId, navigation }) => {
   return (
     <>
       <View>
-        <Button title="Load" onPress={loadHandler} />
+        <StyledButton onPress={loadHandler}>
+          <StyledButtonText>Load</StyledButtonText>
+        </StyledButton>
       </View>
     </>
   )

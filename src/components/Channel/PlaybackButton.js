@@ -2,10 +2,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import BackgroundTimer from 'react-native-background-timer';
 import { View, Button, AppState } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Audio } from 'expo-av'
 
+import { StyledPlaybackButton, StyledButtonText } from './styles'
 import { playSound, stopSound, toggleRandom, setLoops } from '../../actions'
 import { playFromLastMillis } from '../../utils'
+import { COLORS } from '../../constants';
 /**
  * 
  * TODO:
@@ -15,6 +18,9 @@ import { playFromLastMillis } from '../../utils'
  * Improve pseudorandom number generator
  * 
  */
+const playIcon = <Icon name="play-arrow" size={30} />;
+const pauseIcon = <Icon name="pause" size={30} />
+
 const PlaybackButton = ({ channelId }) => {
   const dispatch = useDispatch();
   const { soundObject, playing, file, loops, randomizing, currentSound, volume } = useSelector(state => state.channels[channelId])
@@ -22,7 +28,7 @@ const PlaybackButton = ({ channelId }) => {
 
   const [playedCount, setPlayedCount] = useState(1)
   const [soundFinishedPlaying, setSoundFinishedPlaying] = useState(false)
-  const [playbackButtonTitle, setPlaybackButtonTitle] = useState('>')
+  const [playbackButtonTitle, setPlaybackButtonTitle] = useState(playIcon)
 
   const startTime = useRef(0)
   const soundDuration = useRef(1)
@@ -109,13 +115,13 @@ const PlaybackButton = ({ channelId }) => {
       if (file) {
         try {
           if (playing) {
-            setPlaybackButtonTitle('||')
+            setPlaybackButtonTitle(pauseIcon)
             if (!randomizing) {
               await soundObject.playAsync();
               await soundObject.setIsLoopingAsync(true);
             }
           } else {
-            setPlaybackButtonTitle('>')
+            setPlaybackButtonTitle(playIcon)
             await soundObject.stopAsync();
           }
         } catch (e) { console.log(e) }
@@ -144,7 +150,9 @@ const PlaybackButton = ({ channelId }) => {
   return (
     <>
       <View>
-        <Button title={playbackButtonTitle} onPress={toggleSoundHandler} />
+        <StyledPlaybackButton onPress={toggleSoundHandler}>
+          <StyledButtonText>{playbackButtonTitle}</StyledButtonText>
+        </StyledPlaybackButton>
       </View>
     </>
   )

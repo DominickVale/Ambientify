@@ -9,7 +9,7 @@
  *  Underscores ( _ ) will be translated to spaces. E.g    Test_Sound   ->  Test Sound
  */
 
-export const NUMBER_OF_CHANNELS = 12;
+export const NUMBER_OF_CHANNELS = 9;
 
 export const SOUND_FILES = {
   NATURE: {
@@ -38,6 +38,13 @@ export const SOUND_FILES = {
 }
 export const COLORS = {
   icons: '#5B636C',
-  headerBG: '#06191F',
+  primary: '#06191F',
+  channelBG: 'rgba(6, 25, 31, 0.65)',
   headerFore: '#EBDAD0',
+  sideDrawerBG: '#0F2A32',
+  buttonText: '#B9B4B1',
+  sliderTop: '#EAE3D2',
+  sliderBar: '#81889B',
+  playButtonBG: '#0C2029',
+  playButtonFore: '#B2B5BD'
 }

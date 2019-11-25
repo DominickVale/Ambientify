@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Text, View } from 'react-native'
+import { ToastAndroid } from 'react-native'
 import _ from 'lodash'
 
 import VolumeSlider from './VolumeSlider'
 import LoopsWheelButton from './LoopsWheelButton'
 import PlaybackButton from './PlaybackButton'
 import LoadButton from './LoadButton'
+
+import { StyledChannelContainer, ChannelTitle } from './styles'
 
 import { loadSound, playSound, stopSound } from '../../actions'
 import { SOUND_FILES } from '../../constants'
@@ -69,15 +71,18 @@ const Channel = ({ channelId }) => {
 
   return (
     <>
-      <View>
-        <Text>
-          {channelTitle}
-        </Text>
+      <StyledChannelContainer>
+        <ChannelTitle numberOfLines={1} onPress={() => ToastAndroid.showWithGravityAndOffset(
+          channelTitle,
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM,
+          0, 100)}> {channelTitle} </ChannelTitle>
+
         <LoadButton channelId={channelId} />
         <LoopsWheelButton channelId={channelId} />
-        <PlaybackButton channelId={channelId} />
         <VolumeSlider channelId={channelId} />
-      </View>
+        <PlaybackButton channelId={channelId} />
+      </StyledChannelContainer>
     </>
   )
 }
