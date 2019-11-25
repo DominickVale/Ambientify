@@ -24,9 +24,6 @@ const Mixer = ({ navigation }) => {
 
   return (
     <>
-      <Text>
-        Mixer screen
-      </Text>
       <Channels />
     </>
   )
