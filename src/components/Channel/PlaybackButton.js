@@ -18,6 +18,7 @@ import { playFromLastMillis } from '../../utils'
 const PlaybackButton = ({ channelId }) => {
   const dispatch = useDispatch();
   const { soundObject, playing, file, loops, randomizing, currentSound, volume } = useSelector(state => state.channels[channelId])
+  const { pitchRandomization } = useSelector(state => state.settings)
 
   const [playedCount, setPlayedCount] = useState(1)
   const [soundFinishedPlaying, setSoundFinishedPlaying] = useState(false)
@@ -30,7 +31,6 @@ const PlaybackButton = ({ channelId }) => {
 
   useEffect(() => {
 
-    let nextPitch = (Math.random() * (1.8 - 0.6) + 0.6)
     if (soundObject) {
       soundObject.setOnPlaybackStatusUpdate((playbackStatus) => {
         soundDuration.current = playbackStatus.durationMillis;
@@ -39,15 +39,18 @@ const PlaybackButton = ({ channelId }) => {
           if (!randomizing) dispatch(stopSound(channelId))
           setSoundFinishedPlaying(true)
 
-          console.log('next pitch: ', nextPitch)
-          soundObject.setRateAsync(nextPitch, false, Audio.PitchCorrectionQuality.Medium)
+          if (pitchRandomization) {
+            let nextPitch = (Math.random() * (1.8 - 0.6) + 0.6)
+            console.log('next pitch: ', nextPitch)
+            soundObject.setRateAsync(nextPitch, false, Audio.PitchCorrectionQuality.Medium)
+          }
 
           if (playedCount === 1) startTime.current = Date.now();
         } else setSoundFinishedPlaying(false)
 
       });
     }
-  }, [soundObject, soundFinishedPlaying, playedCount, startTime, randomizing, elapsedTime])
+  }, [soundObject, soundFinishedPlaying, playedCount, startTime, randomizing, elapsedTime, pitchRandomization])
 
 
   useEffect(() => {

@@ -1,11 +1,11 @@
 /**
  * TODO
  * 
+ * Refactor and clean code
  * Add settings
  * Start adding basic ui components
  * Start styling said components
  * Add some animations with lottie
- * Refactor and clean code
  */
 import 'react-native-gesture-handler'
 import React from 'react';

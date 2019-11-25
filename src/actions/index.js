@@ -16,6 +16,8 @@ export const LOAD_PRESET = 'LOAD_PRESET'
 export const DELETE_PRESET = 'DELETE_PRESET'
 export const ADD_CUSTOM_SOUND = 'ADD_CUSTOM_SOUND'
 
+export const TOGGLE_PITCH = 'TOGGLE_PITCH'
+
 export const loadSound = (channelId, newSound, newSoundCategory, newSoundName) => async (dispatch, getState) => {
   if (newSoundCategory === 'CUSTOM') {
     newSound = getState().presets.customSounds[newSoundName]
@@ -76,4 +78,8 @@ export const deletePreset = name => ({
 export const addCustomSound = (soundName, uri) => ({
   type: ADD_CUSTOM_SOUND,
   payload: { soundName, uri }
+})
+
+export const togglePitch = () => ({
+  type: TOGGLE_PITCH,
 })
