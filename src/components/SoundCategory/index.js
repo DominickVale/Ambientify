@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DocumentPicker from 'react-native-document-picker'
 import * as FileSystem from 'expo-file-system'
 import { Text, View, Button, TextInput } from 'react-native'
@@ -8,19 +8,15 @@ import SoundItem from './SoundItem'
 import { SOUND_FILES } from '../../constants'
 import { addCustomSound } from '../../actions'
 
-/**
- * TODO:
- * add option to delete custom sounds
- * add mp3 and wav compatibility
- * (far future): try to use a different method for saving the file. Currently the file is just being copied into the app's folder...
- * 
- */
-
 const index = (props) => {
   const dispatch = useDispatch()
   const [textValue, setTextValue] = useState('');
 
   const customSounds = useSelector(state => state.presets.customSounds)
+
+  useEffect(() => {
+    console.log(SOUND_FILES[props.category])
+  }, [])
 
   const pickCustomSound = async () => {
     try {
@@ -46,6 +42,8 @@ const index = (props) => {
     <SoundItem soundName={soundName} soundCategory={props.category} channelId={props.channelId} key={`${props.category}.${soundName}`} />
   ))
 
+  const textValueHandler = (text) => setTextValue(text)
+
 
   return (
     <View>
@@ -54,8 +52,8 @@ const index = (props) => {
       {props.category == 'CUSTOM' && (
         <View>
           {textValue ?
-            (<TextInput value={textValue} autoCorrect={true} onChangeText={setTextValue(text)} />) : (
-              <TextInput placeholder="Enter the new sound name" autoCorrect={true} onChangeText={setTextValue(text)} />
+            (<TextInput value={textValue} autoCorrect={true} onChangeText={textValueHandler} />) : (
+              <TextInput placeholder="Enter the new sound name" autoCorrect={true} onChangeText={textValueHandler} />
             )}
           <Button title="load custom sound" onPress={pickCustomSound} />
           {soundsFromCustom}
