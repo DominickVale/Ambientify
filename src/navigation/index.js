@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -28,8 +28,12 @@ const defaultNavSettings = (navigation, title) => ({
     )
   },
   headerTitleStyle: {
+    flex: 1,
     fontWeight: 'bold',
+    textAlign: 'center',
+    alignSelf: 'center'
   },
+  headerRight: () => { return (<View></View>) } // Needed to center header title.
 })
 
 const MixerNav = createStackNavigator(
