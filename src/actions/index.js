@@ -9,7 +9,7 @@ export const PLAY_SOUND = 'PLAY_SOUND'
 export const STOP_SOUND = 'STOP_SOUND'
 export const SET_VOLUME = 'SET_VOLUME'
 export const SET_LOOPS = 'SET_LOOPS'
-export const TOGGLE_LOOPING = 'TOGGLE_LOOPING'
+export const TOGGLE_RANDOM = 'TOGGLE_RANDOM'
 
 export const ADD_PRESET = 'ADD_PRESET'
 export const LOAD_PRESET = 'LOAD_PRESET'
@@ -47,8 +47,8 @@ export const setLoops = (channelId, loops) => ({
   payload: { channelId, loops }
 })
 
-export const toggleLooping = channelId => ({
-  type: TOGGLE_LOOPING,
+export const toggleRandom = channelId => ({
+  type: TOGGLE_RANDOM,
   channelId
 })
 

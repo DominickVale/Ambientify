@@ -21,7 +21,7 @@ import { playFromLastMillis } from '../../utils'
 
 const Channel = ({ channelId }) => {
   const dispatch = useDispatch();
-  const { soundObject, file, currentSoundCategory, currentSound, playing, looping } = useSelector(state => state.channels[channelId])
+  const { soundObject, file, currentSoundCategory, currentSound, playing, randomizing } = useSelector(state => state.channels[channelId])
   const [channelTitle, setChannelTitle] = useState(`Channel ${channelId}`)
 
   const sound = useRef(currentSound)
@@ -34,7 +34,7 @@ const Channel = ({ channelId }) => {
         setChannelTitle(currentSound.split('_').join(' '));
         dispatch(stopSound(channelId))
         if (playing) {
-          if (looping) {
+          if (randomizing) {
             playFromLastMillis(soundObject);
             dispatch(playSound(channelId))
           } else dispatch(playSound(channelId))

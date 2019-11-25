@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
           currentSound: channelsState[key].currentSound,
           volume: channelsState[key].volume,
           playing: channelsState[key].playing,
-          looping: channelsState[key].looping,
+          randomizing: channelsState[key].randomizing,
           loops: channelsState[key].loops,
           uri: channelsState[key].currentSoundCategory === 'CUSTOM' ? channelsState[key].file : false
         }))

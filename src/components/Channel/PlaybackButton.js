@@ -4,7 +4,7 @@ import { View, Button, AppState } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { Audio } from 'expo-av'
 
-import { playSound, stopSound, toggleLooping, setLoops } from '../../actions'
+import { playSound, stopSound, toggleRandom, setLoops } from '../../actions'
 import { playFromLastMillis } from '../../utils'
 /**
  * 
@@ -17,7 +17,7 @@ import { playFromLastMillis } from '../../utils'
  */
 const PlaybackButton = ({ channelId }) => {
   const dispatch = useDispatch();
-  const { soundObject, playing, file, loops, looping, currentSound, volume } = useSelector(state => state.channels[channelId])
+  const { soundObject, playing, file, loops, randomizing, currentSound, volume } = useSelector(state => state.channels[channelId])
 
   const [playedCount, setPlayedCount] = useState(1)
   const [soundFinishedPlaying, setSoundFinishedPlaying] = useState(false)
@@ -36,7 +36,7 @@ const PlaybackButton = ({ channelId }) => {
         soundDuration.current = playbackStatus.durationMillis;
 
         if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
-          if (!looping) dispatch(stopSound(channelId))
+          if (!randomizing) dispatch(stopSound(channelId))
           setSoundFinishedPlaying(true)
 
           console.log('next pitch: ', nextPitch)
@@ -47,18 +47,18 @@ const PlaybackButton = ({ channelId }) => {
 
       });
     }
-  }, [soundObject, soundFinishedPlaying, playedCount, startTime, looping, elapsedTime])
+  }, [soundObject, soundFinishedPlaying, playedCount, startTime, randomizing, elapsedTime])
 
 
   useEffect(() => {
 
     /**
-     * Random shuffling / looping function.
+     * Random shuffling / randomizing function.
      * Sets up a timeout with a dynamic pseudo-random interval value such that given n minutes it will play ~n times before n minutes time span.
      * It isn't good enough but it gets the job done pretty decently given the simplicity of it... 
      */
     (async () => {
-      if (looping && currentSound !== "none" && soundFinishedPlaying && playing) {
+      if (randomizing && currentSound !== "none" && soundFinishedPlaying && playing) {
         elapsedTime.current = Date.now() - startTime.current
 
         if (playedCount - 1 >= loops.times || elapsedTime.current > (loops.minutes * 60000)) {
@@ -86,7 +86,7 @@ const PlaybackButton = ({ channelId }) => {
 
           if (soundFinishedPlaying) {
             timeoutId.current = BackgroundTimer.setTimeout(() => {
-              if (looping && playing) {
+              if (randomizing && playing) {
                 soundObject.stopAsync();
                 soundObject.playAsync();
                 setPlayedCount(count => count + 1)
@@ -97,9 +97,9 @@ const PlaybackButton = ({ channelId }) => {
             }, nextInterval)
           }
         }
-      } else if (!looping && timeoutId.current) BackgroundTimer.clearInterval(timeoutId.current)
+      } else if (!randomizing && timeoutId.current) BackgroundTimer.clearInterval(timeoutId.current)
     })();
-  }, [soundFinishedPlaying, looping, soundDuration, playedCount, loops])
+  }, [soundFinishedPlaying, randomizing, soundDuration, playedCount, loops])
 
   useEffect(() => {
     (async () => {
@@ -107,7 +107,7 @@ const PlaybackButton = ({ channelId }) => {
         try {
           if (playing) {
             setPlaybackButtonTitle('||')
-            if (!looping) {
+            if (!randomizing) {
               await soundObject.playAsync();
               await soundObject.setIsLoopingAsync(true);
             }
@@ -122,7 +122,7 @@ const PlaybackButton = ({ channelId }) => {
 
   const toggleSoundHandler = () => {
     if (file) {
-      if (looping) {
+      if (randomizing) {
         if (playing) {
           setPlayedCount(1)
           console.log('Set starTtime time to 0 because stopped random')

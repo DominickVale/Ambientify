@@ -1,7 +1,7 @@
 import { Audio } from 'expo-av'
 import { merge } from 'lodash'
 
-import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, SET_VOLUME, LOAD_PRESET, SET_LOOPS, TOGGLE_LOOPING } from '../actions'
+import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, SET_VOLUME, LOAD_PRESET, SET_LOOPS, TOGGLE_RANDOM } from '../actions'
 import { NUMBER_OF_CHANNELS } from '../constants';
 /**
  * TODO:
@@ -16,7 +16,7 @@ for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
     soundObject: new Audio.Sound(),
     file: false,
     loops: { times: 1, minutes: 1 },
-    looping: false,
+    randomizing: false,
     currentSoundCategory: 'none',
     currentSound: 'none',
     playing: false,
@@ -71,11 +71,11 @@ export default (state = initialState, action) => {
       },
     };
 
-    case TOGGLE_LOOPING: return {
+    case TOGGLE_RANDOM: return {
       ...state,
       [action.channelId]: {
         ...state[action.channelId],
-        looping: !state[action.channelId].looping
+        randomizing: !state[action.channelId].randomizing
       },
     };
 

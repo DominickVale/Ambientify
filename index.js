@@ -1,7 +1,7 @@
 /**
  * TODO
  * 
- * Rename looping to something else.
+ * Add settings
  * Start adding basic ui components
  * Start styling said components
  * Add some animations with lottie

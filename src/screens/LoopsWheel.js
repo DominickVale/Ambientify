@@ -5,11 +5,11 @@ import { View, Text, Button, BackHandler } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 import { useBackHandler, playFromLastMillis } from '../utils/'
-import { setLoops, toggleLooping, playSound } from '../actions'
+import { setLoops, toggleRandom, playSound } from '../actions'
 
 const LoopsWheel = ({ navigation }) => {
   const dispatch = useDispatch();
-  const { soundObject, file, looping } = useSelector(state => state.channels[navigation.getParam('channelId')])
+  const { soundObject, file, randomizing } = useSelector(state => state.channels[navigation.getParam('channelId')])
 
   const timesWheelData = useRef(navigation.getParam('timesWheelData'))
   const minutesWheelData = useRef(navigation.getParam('minutesWheelData'))
@@ -22,11 +22,11 @@ const LoopsWheel = ({ navigation }) => {
 
   const toggleRandomShuffle = async () => {
     if (file) {
-      console.log('should start looping')
+      console.log('should start randomizing')
       playFromLastMillis(soundObject);
 
-      if (!looping) {
-        dispatch(toggleLooping(channelId.current))
+      if (!randomizing) {
+        dispatch(toggleRandom(channelId.current))
         dispatch(playSound(navigation.getParam('channelId')))
       }
     }

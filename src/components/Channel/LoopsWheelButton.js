@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation'
 
 
 const LoopsWheelButton = ({ channelId, navigation }) => {
-  const { looping, loops, soundObject, currentSound } = useSelector(state => state.channels[channelId])
+  const { randomizing, loops, soundObject, currentSound } = useSelector(state => state.channels[channelId])
 
   let timesWheelData = []
   let minutesWheelData = []
@@ -41,7 +41,7 @@ const LoopsWheelButton = ({ channelId, navigation }) => {
   return (
     <>
       <View>
-        <Button title={looping ? `${loops.times}x - ${loops.minutes}m` : '∞'} onPress={onButtonPress} />
+        <Button title={randomizing ? `${loops.times}x - ${loops.minutes}m` : '∞'} onPress={onButtonPress} />
       </View>
     </>
   )
