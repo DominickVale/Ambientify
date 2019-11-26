@@ -16,7 +16,7 @@ align-content: center;
 
 export const DrawerTitle = styled.Text`
 color: ${COLORS.headerFore};
-font-weight: bold;
+font-family: 'Montserrat-SemiBold';
 font-size: 20px;
 align-self: flex-start;
 `
@@ -48,6 +48,7 @@ justify-content: flex-start;
 
 export const SideDrawerItemText = styled.Text`
 color: ${COLORS.buttonText};
+font-family: 'Montserrat-Regular';
 margin-left: 20px;
 font-size: 18px;
 line-height: 34px;
