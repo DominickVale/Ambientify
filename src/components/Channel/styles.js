@@ -7,9 +7,8 @@ export const StyledChannelContainer = styled.View`
   flex-direction: column;
   align-items: center;
   border-radius: 12px;
-  max-width: 30%;
   margin-top: 32px;
-  width: 90px;
+  width: 94px;
   min-height: 294px;
 `
 
@@ -26,11 +25,14 @@ export const StyledButton = styled.TouchableHighlight`
 
 export const StyledButtonText = styled.Text`
   color: ${COLORS.buttonText};
+  font-size: 12px;
 `
 
 export const ChannelTitle = styled.Text`
   padding-top: 16px;
+  padding-bottom: 10px;
   color: ${COLORS.headerFore};
+  font-size: 12px;
 `
 
 export const StyledPlaybackButton = styled.TouchableHighlight`

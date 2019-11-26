@@ -7,5 +7,5 @@ export const StyledChannelsContainer = styled.View`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin: 30px;
+  margin: 40px;
 `
