@@ -25,14 +25,14 @@ export const StyledButton = styled.TouchableHighlight`
 
 export const StyledButtonText = styled.Text`
   color: ${COLORS.buttonText};
-  font-size: 12px;
+  font-size: 13px;
 `
 
 export const ChannelTitle = styled.Text`
   padding-top: 16px;
   padding-bottom: 10px;
   color: ${COLORS.headerFore};
-  font-size: 12px;
+  font-size: 13px;
 `
 
 export const StyledPlaybackButton = styled.TouchableHighlight`
