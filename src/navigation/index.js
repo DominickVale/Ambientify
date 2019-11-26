@@ -23,7 +23,7 @@ const defaultNavSettings = (navigation, title) => ({
   headerLeft: () => {
     return (
       <TouchableOpacity onPress={navigation.toggleDrawer}>
-        <Icon name="menu" size={30} color={COLORS.icons} />
+        <Icon name="menu" size={34} color={COLORS.icons} />
       </TouchableOpacity>
     )
   },
