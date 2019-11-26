@@ -38,9 +38,9 @@ const SideDrawer = (props) => {
         <SideNavButton title="Language" iconName="language" iconSize={22} material onPress={() => { setModalVisible(value => !value) }} />
 
         <Socials>
-          <SocialButton iconName="facebook" iconSize={22} />
-          <SocialButton iconName="twitter" iconSize={22} />
-          <SocialButton iconName="google-plus" iconSize={22} />
+          <SocialButton iconName="facebook" iconSize={28} />
+          <SocialButton iconName="twitter" iconSize={26} />
+          <SocialButton iconName="google-plus" iconSize={34} />
         </Socials>
 
       </StyledContainer>

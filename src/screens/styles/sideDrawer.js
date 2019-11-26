@@ -17,12 +17,13 @@ align-content: center;
 export const DrawerTitle = styled.Text`
 color: ${COLORS.headerFore};
 font-family: 'Montserrat-SemiBold';
-font-size: 20px;
+font-size: 21px;
 align-self: flex-start;
 `
 
 export const DrawerSettingsContainer = styled(DrawerTitleContainer)`
-margin-top: 50%;
+margin-top: 30%;
+margin-bottom: -8px;
 `
 
 export const StyledAd = styled.View`
@@ -48,7 +49,6 @@ justify-content: flex-start;
 
 export const SideDrawerItemText = styled.Text`
 color: ${COLORS.buttonText};
-font-family: 'Montserrat-Regular';
 margin-left: 20px;
 font-size: 18px;
 line-height: 34px;
@@ -63,6 +63,8 @@ flex: 1;
 export const Socials = styled.View`
 flex-direction: row;
 justify-content: space-between;
+align-items: center;
+width: 70%;
 margin: auto;
-width: 50%;
+margin-bottom: 20px;
 `
