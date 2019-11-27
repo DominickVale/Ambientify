@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { View } from 'react-native'
+import { View, PanResponder } from 'react-native'
+import Slider from '@react-native-community/slider'
 import { useSelector } from 'react-redux'
 
 import { setVolume } from '../../actions'
-import Slider from './Slider'
 
 const VolumeSlider = ({ channelId }) => {
   const dispatch = useDispatch()
   const [localVolume, setLocalVolume] = useState(1)
   const { soundObject, volume, file, currentSound } = useSelector(state => state.channels[channelId])
+
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: (evt, gestureState) => true,
+    onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+    onMoveShouldSetPanResponder: (evt, gestureState) => true,
+    onMoveShouldSetPanResponderCapture: (evt, gestureState) => true
+  })
+
 
   useEffect(() => {
     (async () => {
@@ -32,14 +40,29 @@ const VolumeSlider = ({ channelId }) => {
     setLocalVolume(volume)
   }, [file, currentSound, soundObject])
 
-  const volumeHandler = (newVolume) => {
+  const volumeHandler = async (newVolume) => {
     dispatch(setVolume(channelId, newVolume))
   }
 
   return (
     <>
       <View>
-        <Slider onChange={volumeHandler} />
+        <Slider
+          {...panResponder.panHandlers}
+          style={{
+            width: 120,
+            height: 120,
+            transform: [
+              { rotateZ: '-90deg' },
+            ],
+          }}
+          minimumValue={0}
+          maximumValue={1}
+          value={localVolume}
+          onValueChange={volumeHandler}
+          step={0.05}
+          minimumTrackTintColor="#FFFFFF"
+          maximumTrackTintColor="#000000" />
       </View>
     </>
   )
