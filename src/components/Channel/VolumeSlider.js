@@ -5,6 +5,7 @@ import Slider from '@react-native-community/slider'
 import { useSelector } from 'react-redux'
 
 import { setVolume } from '../../actions'
+import { COLORS } from '../../constants'
 
 const VolumeSlider = ({ channelId }) => {
   const dispatch = useDispatch()
@@ -12,12 +13,11 @@ const VolumeSlider = ({ channelId }) => {
   const { soundObject, volume, file, currentSound } = useSelector(state => state.channels[channelId])
 
   const panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: (evt, gestureState) => true,
-    onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-    onMoveShouldSetPanResponder: (evt, gestureState) => true,
-    onMoveShouldSetPanResponderCapture: (evt, gestureState) => true
+    onStartShouldSetPanResponder: () => true,
+    onStartShouldSetPanResponderCapture: () => true,
+    onMoveShouldSetPanResponder: () => true,
+    onMoveShouldSetPanResponderCapture: () => true
   })
-
 
   useEffect(() => {
     (async () => {
@@ -50,10 +50,12 @@ const VolumeSlider = ({ channelId }) => {
         <Slider
           {...panResponder.panHandlers}
           style={{
-            width: 120,
+            width: 100,
             height: 120,
+            marginTop: 6,
             transform: [
               { rotateZ: '-90deg' },
+              { scaleX: 1.3 }, { scaleY: 1.3 }
             ],
           }}
           minimumValue={0}
@@ -61,8 +63,9 @@ const VolumeSlider = ({ channelId }) => {
           value={localVolume}
           onValueChange={volumeHandler}
           step={0.05}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000" />
+          minimumTrackTintColor={COLORS.sliderBar}
+          maximumTrackTintColor={COLORS.head}
+          thumbTintColor={COLORS.sliderTop} />
       </View>
     </>
   )
