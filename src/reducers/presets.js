@@ -12,8 +12,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRESET:
       const channelsState = action.payload.currentChannelsState
-      const savedState = Object.keys(channelsState).map((_, key) =>
-        ({
+      const savedState = Object.keys(channelsState).map((_, key) => {
+        return ({
           currentSoundCategory: channelsState[key].currentSoundCategory,
           currentSound: channelsState[key].currentSound,
           volume: channelsState[key].volume,
@@ -21,7 +21,9 @@ export default (state = initialState, action) => {
           randomizing: channelsState[key].randomizing,
           loops: channelsState[key].loops,
           uri: channelsState[key].currentSoundCategory === 'CUSTOM' ? channelsState[key].file : false
-        }))
+        })
+      }
+      )
       return {
         ...state,
         [action.payload.name]: savedState

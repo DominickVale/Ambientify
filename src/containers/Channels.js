@@ -26,7 +26,7 @@ const Channels = (props) => {
 
   const getChannels = () => {
     let channels = [];
-    for (let i = 1; i <= NUMBER_OF_CHANNELS; i++) {
+    for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
       channels.push(<Channel channelId={i} key={i} />)
     }
     return channels

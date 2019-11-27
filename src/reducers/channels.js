@@ -11,7 +11,7 @@ import { NUMBER_OF_CHANNELS } from '../constants';
 // Initialize the state, fill it with the preferred number of channels with default settings
 const initialState = {};
 
-for (let i = 1; i <= NUMBER_OF_CHANNELS; i++) {
+for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
   initialState[i] = {
     soundObject: new Audio.Sound(),
     file: false,
