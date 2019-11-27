@@ -35,7 +35,7 @@ const LoopsWheel = ({ navigation }) => {
   const buttonHandler = () => {
     dispatch(setLoops(channelId.current, { times: timesWheelState + 1, minutes: minutesWheelState + 1 })) //Set loops with state values +1. React Native Wheel Picker maps values by id starting from 0 to n, whereas wheelData starts from 1.
     console.log('times: ', timesWheelState, 'minutes: ', minutesWheelState)
-    if (timesWheelState > 1) toggleRandomShuffle();
+    if (timesWheelState + 1 > 1) toggleRandomShuffle();
     navigation.goBack();
   }
 
