@@ -47,5 +47,7 @@ export const COLORS = {
   sliderBar: '#rgba(210, 207, 226, 0.7)',
   playButtonBG: '#0C2029',
   playButtonFore: '#B2B5BD',
-  sideDrawerButtonActive: '#074752'
+  sideDrawerButtonActive: '#074752',
+  bigPlayButtonBG: '#1C4B55',
+  close: '#B74444',
 }
