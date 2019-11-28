@@ -48,6 +48,8 @@ export const COLORS = {
   playButtonBG: '#0C2029',
   playButtonFore: '#B2B5BD',
   sideDrawerButtonActive: '#074752',
+  bigPlayButtonShadowBG: 'rgba(255, 201, 187, 1)',
   bigPlayButtonBG: '#1C4B55',
+  bigPlayButtonFore: '#EAEDF4',
   close: '#B74444',
 }
