@@ -1,4 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
+
+export const usePrev = value => {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
 
 export const useBackHandler = (BackHandler, navigation, callback) => {
 
