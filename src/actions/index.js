@@ -6,7 +6,9 @@
 export const LOAD_SOUND = 'LOAD_SOUND';
 export const LOAD_SOUND_ERR = 'LOAD_SOUND_ERR';
 export const PLAY_SOUND = 'PLAY_SOUND'
+export const PLAY_SOUND_ALL = 'PLAY_SOUND_ALL'
 export const STOP_SOUND = 'STOP_SOUND'
+export const STOP_SOUND_ALL = 'STOP_SOUND_ALL'
 export const SET_VOLUME = 'SET_VOLUME'
 export const SET_LOOPS = 'SET_LOOPS'
 export const TOGGLE_RANDOM = 'TOGGLE_RANDOM'
@@ -37,6 +39,14 @@ export const playSound = channelId => ({
 export const stopSound = channelId => ({
   type: STOP_SOUND,
   channelId
+})
+
+export const playSoundAll = () => ({
+  type: PLAY_SOUND_ALL
+})
+
+export const stopSoundAll = () => ({
+  type: STOP_SOUND_ALL
 })
 
 export const setVolume = (channelId, newVolume) => ({

@@ -1,7 +1,7 @@
 import { Audio } from 'expo-av'
 import { merge } from 'lodash'
 
-import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, SET_VOLUME, LOAD_PRESET, SET_LOOPS, TOGGLE_RANDOM } from '../actions'
+import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, PLAY_SOUND_ALL, STOP_SOUND_ALL, SET_VOLUME, LOAD_PRESET, SET_LOOPS, TOGGLE_RANDOM } from '../actions'
 import { NUMBER_OF_CHANNELS } from '../constants';
 /**
  * TODO:
@@ -54,6 +54,28 @@ export default (state = initialState, action) => {
         playing: false,
       },
     };
+
+    case STOP_SOUND_ALL: {
+      const newState = Object.keys(state).map((key) => ({
+        ...state[key],
+        playing: false
+      }));
+      return {
+        ...state,
+        ...newState
+      }
+    }
+
+    case PLAY_SOUND_ALL: {
+      const newState = Object.keys(state).map((key) => ({
+        ...state[key],
+        playing: state[key].file ? true : false
+      }));
+      return {
+        ...state,
+        ...newState
+      }
+    }
 
     case SET_VOLUME: return {
       ...state,
