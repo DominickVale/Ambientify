@@ -21,14 +21,9 @@ const LoopsWheel = ({ navigation }) => {
   useBackHandler(BackHandler, navigation, () => navigation.goBack());
 
   const toggleRandomShuffle = async () => {
-    if (file) {
-      console.log('should start randomizing')
-      playFromLastMillis(soundObject);
-
-      if (!randomizing) {
-        dispatch(toggleRandom(channelId.current))
-        dispatch(playSound(navigation.getParam('channelId')))
-      }
+    if (file && !randomizing) {
+      dispatch(toggleRandom(channelId.current))
+      dispatch(playSound(navigation.getParam('channelId')))
     }
   }
 
