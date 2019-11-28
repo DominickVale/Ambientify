@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ToastAndroid } from 'react-native'
 import _ from 'lodash'
@@ -26,12 +26,9 @@ const Channel = ({ channelId }) => {
   const { soundObject, file, currentSoundCategory, currentSound, playing, randomizing } = useSelector(state => state.channels[channelId])
   const [channelTitle, setChannelTitle] = useState(`Channel ${channelId + 1}`)
 
-  const sound = useRef(currentSound)
-  const oldSound = sound.current;
-
-  const loadSoundWithTitle = async () => {
+  const loadSoundWithTitle = async (soundFile) => {
     console.log('should be loading a channel sound...')
-    await soundObject.loadAsync(file)
+    await soundObject.loadAsync(soundFile)
       .then(async () => {
         setChannelTitle(currentSound.split('_').join(' '));
         dispatch(stopSound(channelId))
@@ -50,24 +47,25 @@ const Channel = ({ channelId }) => {
         let soundFile;
         if (currentSoundCategory !== 'CUSTOM') soundFile = SOUND_FILES[currentSoundCategory][currentSound];
         if (file) {
-          const status = await soundObject.getStatusAsync()
-          try {
-            if (!status.isLoaded) {
-              setChannelTitle('Loading...')
-              loadSoundWithTitle();
-            } else {
-              // In case of new sound file being loaded by preset dispatch
-              await soundObject.unloadAsync().then(async () => loadSoundWithTitle());
-              //if (oldSound != currentSound) dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
-            }
-          } catch (error) { console.error('Error in loading sound in handler at Channel: ', channelId, error) }
-        } else {
-          if (currentSound != 'none') dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
-        }
+          console.log('FILE: ', file, ' NEW FILE ASSET: ', soundFile)
+          const soundStatus = await soundObject.getStatusAsync()
 
+          try {
+
+            setChannelTitle('Loading...')
+            if (soundStatus.isLoaded) {
+              await soundObject.unloadAsync().then(async () => {
+                loadSoundWithTitle(soundFile)
+              });
+            } else loadSoundWithTitle(soundFile)
+
+          } catch (error) { console.error('Error in loading sound in handler at Channel: ', channelId, error) }
+        }
+        else if (currentSound != 'none') dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))
       }
     })()
-  }, [file, currentSound, currentSound, oldSound, currentSoundCategory])
+  }, [file, currentSound, currentSoundCategory])
+
 
   return (
     <>
