@@ -51,5 +51,9 @@ export const COLORS = {
   bigPlayButtonShadowBG: 'rgba(255, 201, 187, 1)',
   bigPlayButtonBG: '#1C4B55',
   bigPlayButtonFore: '#EAEDF4',
+  modalBG: '#06191F',
+  modalContainerBG: 'rgba(0, 7, 16, 0.7)',
+  modalButtonBG: '#34415B',
+  modalButtonCancelBG: '#0C2029',
   close: '#B74444',
 }

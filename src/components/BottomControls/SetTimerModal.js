@@ -3,6 +3,7 @@ import { View, Text, Alert, Button, ToastAndroid } from 'react-native'
 import { WheelPicker, TimePicker } from 'react-native-wheel-picker-android'
 import { withNavigation } from 'react-navigation'
 
+import Modal from '../../components/Modal'
 
 const SetTimer = (props) => {
 
@@ -33,28 +34,25 @@ const SetTimer = (props) => {
     const value = hoursMillis + minutesMillis;
 
     console.log(value)
-    if (value < 5 * 60000) {
+    if (value === 0) {
       ToastAndroid.showWithGravity(
-        'Please choose a different date',
+        'Timer disabled',
         ToastAndroid.SHORT,
         ToastAndroid.BOTTOM,
       );
-    } else {
-      props.onSetTimer(value);
-      props.onCloseModal();
-    }
+      props.onSetTimer(-1)
+    } else props.onSetTimer(value);
+
+    props.onCloseModal();
     setHoursMillis(0)
     setMinutesMillis(0)
   }
   return (
-    <View onPress={() => navigation.pop()} style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
-      <View style={{ height: "80%", width: '80%', backgroundColor: "white", justifyContent: "flex-start" }}>
-        <Text>Set timer</Text>
-        <WheelPicker onItemSelected={parseHoursMillis} data={_getWheelData('hours')} />
-        <WheelPicker onItemSelected={parseMinutesMillis} data={_getWheelData('minutes')} />
-        <Button title="ok" onPress={buttonHandler} />
-      </View>
-    </View>
+    <Modal headerTitle="Choose a value" onSave={buttonHandler} onCloseModal={props.onCloseModal}>
+      <Text>Set timer</Text>
+      <WheelPicker onItemSelected={parseHoursMillis} data={_getWheelData('hours')} />
+      <WheelPicker onItemSelected={parseMinutesMillis} data={_getWheelData('minutes')} />
+    </Modal>
   )
 }
 

@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation'
 
 import { addPreset } from '../actions'
 import { useBackHandler } from '../utils'
-
+import Modal from '../components/Modal'
 /**
  * TODO:
  * 
@@ -24,16 +24,10 @@ const AddPreset = ({ navigation }) => {
   }
 
   return (
-    <View onPress={() => navigation.pop()} style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
-      <View style={{ height: "80%", width: '80%', backgroundColor: "white", justifyContent: "flex-start" }}>
-        <Text>Add a new preset</Text>
-        {textValue ? (<TextInput value={textValue} autoCorrect={true} onChangeText={textValueHandler} />) : (
-          <TextInput placeholder="Enter the new preset name" autoCorrect={true} onChangeText={textValueHandler} />)}
-
-        <Button title="Add" onPress={addPresetHandler} />
-        <Button title="Cancel" onPress={() => navigation.goBack()} />
-      </View>
-    </View>
+    <Modal headerTitle="Add a new preset" onSave={addPresetHandler} onCloseModal={() => navigation.goBack()}>
+      {textValue ? (<TextInput value={textValue} autoCorrect={true} onChangeText={textValueHandler} />) : (
+        <TextInput placeholder="Enter the new preset name" autoCorrect={true} onChangeText={textValueHandler} />)}
+    </Modal>
   )
 }
 
