@@ -43,3 +43,13 @@ margin: -10px;
 `
 
 export const StyledTimerButton = styled(StyledPitchButton)``
+
+export const StyledTimerText = styled.Text`
+position: absolute;
+text-align: center;
+font-size: 13px;
+top: 30px;
+width: 120px;
+right: -45px;
+padding-top: 5px;
+color: ${COLORS.headerFore}`
