@@ -22,17 +22,27 @@ const Timer = () => {
   const openModal = () => setModalOpen(true)
   const closeModal = () => setModalOpen(false)
 
+  const clearTimers = () => {
+    if (intervalId.current) BackgroundTimer.clearInterval(intervalId.current)
+    if (timeoutId.current) BackgroundTimer.clearTimeout(timeoutId.current)
+  }
+
   const setTimer = (value) => {
     console.log('Closing in ms: ', value)
+
+    clearTimers();
+    if (value < 0) {
+      setRemainingTimeString('');
+      return;
+    };
+
     const startHours = new Date(value).getUTCHours()
     const startMinutes = new Date(value).getUTCMinutes()
-    console.log(startHours, startMinutes)
     setRemainingTimeString(`${startHours > 0 ? startHours + 'h ' : ''}${startMinutes > 0 ? startMinutes + 'm' : ''}`)
 
     const initialTime = Date.now();
 
-    if (intervalId.current) BackgroundTimer.clearInterval(intervalId.current)
-    if (timeoutId.current) BackgroundTimer.clearInterval(timeoutId.current)
+
 
     intervalId.current = BackgroundTimer.setInterval(() => {
       let elapsedTime = Date.now() - initialTime;
@@ -45,8 +55,8 @@ const Timer = () => {
     timeoutId.current = BackgroundTimer.setTimeout(() => {
       dispatch(stopSoundAll())
       setRemainingTimeString('')
-      BackgroundTimer.clearInterval(intervalId.current)
-      BackgroundTimer.clearTimeout(timeoutId.current)
+
+      clearTimers();
     }, value)
 
   }
