@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ToastAndroid } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
@@ -13,9 +13,17 @@ const PitchRandomizationButton = () => {
   const dispatch = useDispatch()
   const pitchEnabled = useSelector(state => state.settings.pitchRandomization)
 
+  const buttonHandler = () => {
+    ToastAndroid.showWithGravity(
+      `Pitch randomization ${pitchEnabled ? 'disabled' : 'enabled'}`,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM,
+    );
+    dispatch(togglePitch())
+  }
   return (
     <View>
-      <StyledPitchButton onPress={() => dispatch(togglePitch())}>
+      <StyledPitchButton onPress={buttonHandler}>
         <Icon name="music-note" size={32} color={pitchEnabled ? 'white' : COLORS.bigPlayButtonFore} />
       </StyledPitchButton>
     </View >
