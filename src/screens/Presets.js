@@ -28,7 +28,7 @@ const Presets = ({ componentId, navigation }) => {
 
   return (
     <>
-      <ImageBackground source={require('../../assets/images/bg.jpg')} style={{ width: '100%', height: '100%' }}>
+      <ImageBackground source={require('#ambientify-images/bg.jpg')} style={{ width: '100%', height: '100%' }}>
         <ScrollView stickyHeaderIndices={[1]}>
           <Filler height={80} />
           <AddPresetButton>

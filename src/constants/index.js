@@ -11,6 +11,16 @@
 
 export const NUMBER_OF_CHANNELS = 9;
 
+export const CATEGORY_IMAGES = {
+  NATURE: require('#ambientify-images/nature.jpg'),
+  ANIMALS: require('#ambientify-images/nature.jpg'),
+  DARK: require('#ambientify-images/nature.jpg'),
+  ENVIRONMENT: require('#ambientify-images/nature.jpg'),
+  WEATHER: require('#ambientify-images/nature.jpg'),
+  MUSIC: require('#ambientify-images/nature.jpg'),
+  CUSTOM: require('#ambientify-images/nature.jpg'),
+}
+
 export const SOUND_FILES = {
   NATURE: {
     wind: require('#ambientify-sounds/wind.ogg'),
