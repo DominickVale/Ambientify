@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import DocumentPicker from 'react-native-document-picker'
 import * as FileSystem from 'expo-file-system'
-import { Text, View, Button, TextInput } from 'react-native'
+import { Text, View, Button, TextInput, FlatList } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
 import SoundItem from './SoundItem'
 import { SOUND_FILES } from '../../constants'
 import { addCustomSound } from '../../actions'
+import { SoundListContainer } from './styles'
 
 const index = (props) => {
   const dispatch = useDispatch()
   const [textValue, setTextValue] = useState('');
 
   const customSounds = useSelector(state => state.presets.customSounds)
-
-  useEffect(() => {
-    console.log(SOUND_FILES[props.category])
-  }, [])
 
   const pickCustomSound = async () => {
     try {
@@ -34,9 +31,12 @@ const index = (props) => {
     }
   }
 
-  const soundsFromCategory = Object.keys(SOUND_FILES[props.category]).map(soundName => (
-    <SoundItem soundName={soundName} soundCategory={props.category} channelId={props.channelId} key={`${props.category}.${soundName}`} />
-  ))
+  const renderSoundList = ({ item }) => {
+    console.log(item)
+    return (
+      <SoundItem soundName={item} soundCategory={props.category} channelId={props.channelId} />
+    )
+  }
 
   const soundsFromCustom = Object.keys(customSounds).map(soundName => (
     <SoundItem soundName={soundName} soundCategory={props.category} channelId={props.channelId} key={`${props.category}.${soundName}`} />
@@ -46,8 +46,8 @@ const index = (props) => {
 
 
   return (
-    <View>
-      <Text>{props.category}</Text>
+    <SoundListContainer>
+
 
       {props.category == 'CUSTOM' && (
         <View>
@@ -59,8 +59,8 @@ const index = (props) => {
           {soundsFromCustom}
         </View>)}
 
-      {soundsFromCategory}
-    </View>
+      <FlatList data={Object.keys(SOUND_FILES[props.category])} renderItem={renderSoundList} keyExtractor={item => `${props.soundCategory}.${item}`} />
+    </SoundListContainer>
   )
 }
 
