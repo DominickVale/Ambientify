@@ -23,16 +23,18 @@ const index = (props) => {
           {props.children}
         </ChildrenContainer>
 
-        <ModalButtonsContainer>
-          <ModalButton onPress={() => props.onSave()}>
-            <ModalButtonText>Save</ModalButtonText>
-          </ModalButton>
-          <ModalButtonCancel onPress={() => props.onCloseModal()}>
-            <ModalButtonCancelText>
-              Cancel
-            </ModalButtonCancelText>
-          </ModalButtonCancel>
-        </ModalButtonsContainer>
+        {!props.disableButtons && (
+          <ModalButtonsContainer>
+            <ModalButton onPress={() => props.onSave()}>
+              <ModalButtonText>Save</ModalButtonText>
+            </ModalButton>
+            <ModalButtonCancel onPress={() => props.onCloseModal()}>
+              <ModalButtonCancelText>
+                Cancel
+                    </ModalButtonCancelText>
+            </ModalButtonCancel>
+          </ModalButtonsContainer>
+        )}
       </InnerContainer>
     </OuterContainer>
   )
