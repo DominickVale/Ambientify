@@ -11,10 +11,12 @@ background-color: ${COLORS.modalContainerBG};
 `
 
 export const InnerContainer = styled.View`
-height: 80%;
+height: ${props => props.modalHeight};
+min-height: 240px;
 width: 80%;
 background-color: ${COLORS.modalBG};
 justify-content: space-around;
+align-content: center;
 border-radius: 12px;
 `
 

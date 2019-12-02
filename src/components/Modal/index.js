@@ -11,7 +11,7 @@ import { COLORS } from '../../constants'
 const index = (props) => {
   return (
     <OuterContainer>
-      <InnerContainer>
+      <InnerContainer modalHeight={props.modalHeight || '80%'}>
 
         {props.headerTitle && (<ModalHeader>
           <ModalHeaderTitle>{props.headerTitle}</ModalHeaderTitle>

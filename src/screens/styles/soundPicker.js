@@ -5,6 +5,7 @@ import { InnerContainer } from '../../components/Modal/styles'
 
 export const SoundCategoryContainer = styled(InnerContainer)`
 width: ${props => props.width};
+height: 80%;
 align-self: center;
 padding: 0 22px 22px 22px;
 margin: auto 0;
