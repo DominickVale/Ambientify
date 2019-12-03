@@ -47,10 +47,11 @@ width: 28px;
 height: 28px;
 max-width: 28px;
 margin: 4px 12px;
+border: 1px solid ${COLORS.buttonText};
 `
 
 export const CustomSoundDeleteButton = styled(SoundPreviewButton)`
-border: 1px solid red;
+border: none;
 `
 
 export const StyledText = styled.Text`

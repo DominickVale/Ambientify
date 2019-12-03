@@ -57,18 +57,18 @@ const SoundItem = ({ isCustomSound, soundDeleteHandler, channelId, navigation, s
 
   return (
     <StyledSoundItem>
+
+      <SoundPreviewButton onPress={() => setPlaying(playing => !playing)}>
+        <StyledText>{playing ? pauseIcon : playIcon}</StyledText>
+      </SoundPreviewButton>
+      <SoundLoadButton onPress={loadButtonHandler}>
+        <StyledText numberOfLines={1}>{soundName}</StyledText>
+      </SoundLoadButton>
       {isCustomSound && (
         <CustomSoundDeleteButton onPress={soundDeleteHandler}>
           <StyledText>{isCustomSound && deleteIcon}</StyledText>
         </CustomSoundDeleteButton>)
       }
-
-      <SoundLoadButton onPress={loadButtonHandler}>
-        <StyledText numberOfLines={1}>{soundName}</StyledText>
-      </SoundLoadButton>
-      <SoundPreviewButton onPress={() => setPlaying(playing => !playing)}>
-        <StyledText>{playing ? pauseIcon : playIcon}</StyledText>
-      </SoundPreviewButton>
     </StyledSoundItem>
   )
 }
