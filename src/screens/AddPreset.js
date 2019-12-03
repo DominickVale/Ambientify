@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, Button, BackHandler } from 'react-native'
+import { View, Text, Button, BackHandler } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 
 import { addPreset } from '../actions'
 import { useBackHandler } from '../utils'
-import { InputContainer, StyledTextInput, StyledText } from './styles/addPreset'
-import { ModalStyledText } from '../components/Modal/styles'
+import { ModalStyledText } from '../components/ModalLayout/styles'
 
-import { COLORS } from '../constants'
+import TextInput from '../components/TextInput'
 
-import Modal from '../components/Modal'
+import ModalLayout from '../components/ModalLayout'
 /**
  * TODO:
  * 
@@ -29,23 +28,15 @@ const AddPreset = ({ navigation }) => {
   }
 
   return (
-    <Modal modalHeight={'60%'} headerTitle="Add a new preset" onSave={addPresetHandler} onCloseModal={() => navigation.goBack()}>
+    <ModalLayout modalHeight={'60%'} headerTitle="Add a new preset" onSave={addPresetHandler} onCloseModal={() => navigation.goBack()}>
       <ModalStyledText>Choose a name</ModalStyledText>
-      <InputContainer>
-        <StyledTextInput autoFocus={true}
-          value={textValue}
-          placeholder=" Max 26 characters"
-          placeholderTextColor={COLORS.icons}
-          selectionColor={COLORS.headerFore}
-          autoCorrect={true}
-          onChangeText={textValueHandler}
-          selectionColor={COLORS.headerFore}
-          underlineColorAndroid={COLORS.bigPlayButtonFore}
-          clearButtonMode='always'
-          style={{ color: COLORS.bigPlayButtonFore }}
-        />
-      </InputContainer>
-    </Modal>
+      <TextInput
+        value={textValue}
+        placeholder=" Max 26 characters"
+        autoCorrect={true}
+        onChangeText={textValueHandler}
+      />
+    </ModalLayout>
   )
 }
 
