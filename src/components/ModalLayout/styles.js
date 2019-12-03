@@ -71,6 +71,8 @@ export const ModalButtonText = styled.Text`
 color: ${COLORS.bigPlayButtonFore};
 font-size: 18px;
 align-self: center;
+text-align: center;
+margin: auto;
 `
 
 export const ModalButtonCancelText = styled(ModalButtonText)`
@@ -81,5 +83,5 @@ export const ModalStyledText = styled.Text`
 color: ${COLORS.buttonText};
 align-self: center;
 text-align: center;
-font-size: 16px;
+font-size: ${props => props.fontSize ? props.fontSize + 'px' : '16px'};
 `

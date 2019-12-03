@@ -6,7 +6,7 @@ import Carousel, { Pagination, ParallaxImage } from 'react-native-snap-carousel'
 import { useBackHandler } from '../utils/'
 import SoundList from '../components/SoundList'
 import { SOUND_FILES, CATEGORY_IMAGES } from '../constants'
-import { OuterContainer } from '../components/Modal/styles'
+import { OuterContainer } from '../components/ModalLayout/styles'
 import { SoundCategoryContainer, SoundCategoryText, SoundCategoryImageContainer, Filler } from './styles/soundPicker'
 
 

@@ -7,8 +7,8 @@ import { withNavigation } from 'react-navigation'
 import { useBackHandler, playFromLastMillis } from '../utils/'
 import { setLoops, toggleRandom, playSound } from '../actions'
 import { WheelsContainer, StyledWheelPicker, SemiColonSpacer } from './styles/wheels'
-import { ModalStyledText } from '../components/Modal/styles'
-import Modal from '../components/Modal'
+import { ModalStyledText } from '../components/ModalLayout/styles'
+import ModalLayout from '../components/ModalLayout'
 import { COLORS } from '../constants'
 
 const LoopsWheel = ({ navigation }) => {
@@ -39,7 +39,7 @@ const LoopsWheel = ({ navigation }) => {
   }
 
   return (
-    <Modal headerTitle="Configure loops" onSave={buttonHandler} onCloseModal={() => navigation.goBack()}>
+    <ModalLayout headerTitle="Configure loops" onSave={buttonHandler} onCloseModal={() => navigation.goBack()}>
       <ModalStyledText>Choose how many times the sound should be looped for.</ModalStyledText>
       <WheelsContainer>
         <StyledWheelPicker>
@@ -79,7 +79,7 @@ const LoopsWheel = ({ navigation }) => {
           <ModalStyledText>Minutes</ModalStyledText>
         </StyledWheelPicker>
       </WheelsContainer>
-    </Modal>
+    </ModalLayout>
   )
 }
 

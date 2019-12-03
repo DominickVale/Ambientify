@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
 import { COLORS } from '../../constants'
-import { InnerContainer } from '../../components/Modal/styles'
+import { InnerContainer } from '../../components/ModalLayout/styles'
 
 export const SoundCategoryContainer = styled(InnerContainer)`
 width: ${props => props.width};

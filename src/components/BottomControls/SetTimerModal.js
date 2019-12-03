@@ -3,9 +3,9 @@ import { View, Text, Alert, Button, ToastAndroid } from 'react-native'
 import { WheelPicker, TimePicker } from 'react-native-wheel-picker-android'
 import { withNavigation } from 'react-navigation'
 
-import Modal from '../../components/Modal'
+import ModalLayout from '../../components/ModalLayout'
 import { WheelsContainer, StyledWheelPicker, SemiColonSpacer } from '../../screens/styles/wheels'
-import { ModalStyledText } from '../Modal/styles'
+import { ModalStyledText } from '../ModalLayout/styles'
 import { COLORS } from '../../constants'
 
 
@@ -52,7 +52,7 @@ const SetTimer = (props) => {
     setMinutesMillis(0)
   }
   return (
-    <Modal headerTitle="Timer settings" onSave={buttonHandler} onCloseModal={props.onCloseModal}>
+    <ModalLayout headerTitle="Timer settings" onSave={buttonHandler} onCloseModal={props.onCloseModal}>
       <ModalStyledText>Choose a value</ModalStyledText>
       <WheelsContainer>
         <StyledWheelPicker>
@@ -90,7 +90,7 @@ const SetTimer = (props) => {
           <ModalStyledText>Minutes</ModalStyledText>
         </StyledWheelPicker>
       </WheelsContainer>
-    </Modal>
+    </ModalLayout>
   )
 }
 
