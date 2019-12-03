@@ -28,7 +28,6 @@ background-color: ${COLORS.bigPlayButtonBG};
 width: 70;
 height: 70;
 border-radius: 50px;
-border: 1px solid red;
 align-content: center;
 align-items: center;
 justify-content: center;

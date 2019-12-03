@@ -64,7 +64,7 @@ const Timer = () => {
   return (
     <View>
       <StyledTimerButton onPress={openModal}>
-        <Icon name="timer" size={32} color={COLORS.bigPlayButtonFore} />
+        <Icon name="timer" size={32} color={remainingTimeString ? COLORS.bigPlayButtonFore : COLORS.buttonText} />
       </StyledTimerButton>
       <StyledTimerText>{remainingTimeString}</StyledTimerText>
       <Modal
