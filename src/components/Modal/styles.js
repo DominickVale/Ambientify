@@ -18,12 +18,13 @@ background-color: ${COLORS.modalBG};
 justify-content: space-around;
 align-content: center;
 border-radius: 12px;
+padding: 0 28px;
 `
 
 export const ModalHeader = styled.View`
 flex-direction: row;
 justify-content: space-around;
-margin: 18px 25px;
+margin: 18px auto 40px auto;
 align-content: center;
 align-items: center;
 `
@@ -38,13 +39,13 @@ text-align: center;
 
 export const ChildrenContainer = styled.View`
 flex: 4;
-margin: 18px 25px;
+margin: 18px auto;
 `
 
 export const ModalButtonsContainer = styled.View`
 flex: 1;
 flex-direction: row;
-justify-content: space-around;
+justify-content: space-between;
 align-content: center;
 align-items: center;
 margin-bottom: 18px;
@@ -52,8 +53,8 @@ margin-bottom: 18px;
 
 export const ModalButton = styled.TouchableHighlight`
 background-color: ${COLORS.modalButtonBG};
-height: 47px;
-max-width: 141px;
+height: 46px;
+max-width: 130px;
 border-radius: 12px;
 justify-content: center;
 align-content: center;
@@ -71,5 +72,12 @@ align-self: center;
 `
 
 export const ModalButtonCancelText = styled(ModalButtonText)`
-color:${COLORS.buttonText}
+color:${COLORS.buttonText};
+`
+
+export const ModalStyledText = styled.Text`
+color: ${COLORS.buttonText};
+align-self: center;
+text-align: center;
+font-size: 16px;
 `
