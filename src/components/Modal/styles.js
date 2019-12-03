@@ -12,7 +12,7 @@ background-color: ${COLORS.modalContainerBG};
 
 export const InnerContainer = styled.View`
 height: ${props => props.modalHeight};
-min-height: 240px;
+min-height: 290px;
 width: 80%;
 background-color: ${COLORS.modalBG};
 justify-content: space-around;
@@ -40,6 +40,7 @@ text-align: center;
 export const ChildrenContainer = styled.View`
 flex: 4;
 margin: 18px auto;
+min-height: 80px;
 `
 
 export const ModalButtonsContainer = styled.View`
@@ -49,6 +50,7 @@ justify-content: space-between;
 align-content: center;
 align-items: center;
 margin-bottom: 18px;
+min-height: 40px;
 `
 
 export const ModalButton = styled.TouchableHighlight`

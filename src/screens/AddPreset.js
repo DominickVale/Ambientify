@@ -29,7 +29,7 @@ const AddPreset = ({ navigation }) => {
   }
 
   return (
-    <Modal modalHeight={'40%'} headerTitle="Add a new preset" onSave={addPresetHandler} onCloseModal={() => navigation.goBack()}>
+    <Modal modalHeight={'60%'} headerTitle="Add a new preset" onSave={addPresetHandler} onCloseModal={() => navigation.goBack()}>
       <ModalStyledText>Choose a name</ModalStyledText>
       <InputContainer>
         <StyledTextInput autoFocus={true}
