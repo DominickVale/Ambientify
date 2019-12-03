@@ -3,20 +3,22 @@ import { View, Button } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 import { Audio } from 'expo-av'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import FontistoIcon from 'react-native-vector-icons/Fontisto'
 
 import { COLORS } from '../../constants'
 import { loadSound } from '../../actions'
 import { SOUND_FILES } from '../../constants/index'
-import { SoundLoadButton, SoundPreviewButton, StyledSoundItem, StyledText } from './styles'
+import { SoundLoadButton, SoundPreviewButton, StyledSoundItem, StyledText, CustomSoundDeleteButton } from './styles'
 
-const SoundItem = ({ channelId, navigation, soundName, soundCategory }) => {
+const SoundItem = ({ isCustomSound, soundDeleteHandler, channelId, navigation, soundName, soundCategory }) => {
   const dispatch = useDispatch();
   const [playing, setPlaying] = useState(false)
   const customSounds = useSelector(state => state.presets.customSounds)
 
-  const playIcon = <Icon name="play-arrow" size={24} color={COLORS.bigPlayButtonFore} />;
-  const pauseIcon = <Icon name="pause" size={24} color={COLORS.bigPlayButtonFore} />
+  const playIcon = <MaterialIcon name="play-arrow" size={24} color={COLORS.bigPlayButtonFore} />;
+  const pauseIcon = <MaterialIcon name="pause" size={24} color={COLORS.bigPlayButtonFore} />
+  const deleteIcon = <FontistoIcon name="close-a" size={14} color={COLORS.close} />
 
   useEffect(() => {
     let soundObject;
@@ -55,8 +57,18 @@ const SoundItem = ({ channelId, navigation, soundName, soundCategory }) => {
 
   return (
     <StyledSoundItem>
-      <SoundLoadButton onPress={loadButtonHandler}><StyledText numberOfLines={1}>{soundName}</StyledText></SoundLoadButton>
-      <SoundPreviewButton onPress={() => setPlaying(playing => !playing)}><StyledText>{playing ? pauseIcon : playIcon}</StyledText></SoundPreviewButton>
+      {isCustomSound && (
+        <CustomSoundDeleteButton onPress={soundDeleteHandler}>
+          <StyledText>{isCustomSound && deleteIcon}</StyledText>
+        </CustomSoundDeleteButton>)
+      }
+
+      <SoundLoadButton onPress={loadButtonHandler}>
+        <StyledText numberOfLines={1}>{soundName}</StyledText>
+      </SoundLoadButton>
+      <SoundPreviewButton onPress={() => setPlaying(playing => !playing)}>
+        <StyledText>{playing ? pauseIcon : playIcon}</StyledText>
+      </SoundPreviewButton>
     </StyledSoundItem>
   )
 }
