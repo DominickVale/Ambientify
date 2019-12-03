@@ -65,5 +65,6 @@ export const COLORS = {
   modalContainerBG: 'rgba(0, 7, 16, 0.6)',
   modalButtonBG: '#34415B',
   modalButtonCancelBG: '#0C2029',
+  wheelPickerInactive: 'rgba(185, 180, 177, 0.3)',
   close: '#B74444',
 }
