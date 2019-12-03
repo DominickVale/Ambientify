@@ -79,7 +79,7 @@ const SoundPicker = ({ navigation }) => {
           width: 10,
           height: 10,
           borderRadius: 5,
-          marginHorizontal: 8,
+          marginHorizontal: 1,
           backgroundColor: 'rgba(255, 255, 255, 0.92)'
         }}
         inactiveDotOpacity={0.4}
