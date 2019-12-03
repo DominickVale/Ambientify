@@ -6,7 +6,10 @@ import { withNavigation } from 'react-navigation'
 
 import { useBackHandler, playFromLastMillis } from '../utils/'
 import { setLoops, toggleRandom, playSound } from '../actions'
+import { WheelsContainer, StyledWheelPicker, SemiColonSpacer } from './styles/wheels'
+import { ModalStyledText } from '../components/Modal/styles'
 import Modal from '../components/Modal'
+import { COLORS } from '../constants'
 
 const LoopsWheel = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -37,9 +40,45 @@ const LoopsWheel = ({ navigation }) => {
 
   return (
     <Modal headerTitle="Configure loops" onSave={buttonHandler} onCloseModal={() => navigation.goBack()}>
-      <Text>Choose how many times the sound should be looped</Text>
-      <WheelPicker initPosition={0} selectedItem={timesWheelState} data={timesWheelData.current} onItemSelected={(value) => setTimesWheelState(value)} />
-      <WheelPicker initPosition={0} selectedItem={minutesWheelState} data={minutesWheelData.current} onItemSelected={(value) => setMinutesWheelState(value)} />
+      <ModalStyledText>Choose how many times the sound should be looped for.</ModalStyledText>
+      <WheelsContainer>
+        <StyledWheelPicker>
+
+          <WheelPicker style={{ width: 104, height: 190 }}
+            initPosition={0}
+            visibleItemCount={3}
+            selectedItem={timesWheelState}
+            data={timesWheelData.current}
+            selectedItemTextColor={COLORS.bigPlayButtonFore}
+            selectedItemTextSize={26}
+            itemTextColor={COLORS.wheelPickerInactive}
+            indicatorColor={COLORS.bigPlayButtonFore}
+            indicatorWidth={4}
+            itemTextFontFamily='Montserrat-Regular'
+            selectedItemTextFontFamily='Montserrat-Regular'
+            itemTextSize={22}
+            onItemSelected={(value) => setTimesWheelState(value)} />
+          <ModalStyledText>Times</ModalStyledText>
+        </StyledWheelPicker>
+        <SemiColonSpacer>x</SemiColonSpacer>
+        <StyledWheelPicker>
+
+          <WheelPicker style={{ width: 103, height: 190 }}
+            initPosition={0}
+            selectedItem={minutesWheelState}
+            data={minutesWheelData.current}
+            selectedItemTextColor={COLORS.bigPlayButtonFore}
+            selectedItemTextSize={26}
+            itemTextColor={COLORS.wheelPickerInactive}
+            indicatorColor={COLORS.bigPlayButtonFore}
+            indicatorWidth={4}
+            itemTextFontFamily='Montserrat-Regular'
+            selectedItemTextFontFamily='Montserrat-Regular'
+            itemTextSize={22}
+            onItemSelected={(value) => setMinutesWheelState(value)} />
+          <ModalStyledText>Minutes</ModalStyledText>
+        </StyledWheelPicker>
+      </WheelsContainer>
     </Modal>
   )
 }
