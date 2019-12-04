@@ -13,12 +13,12 @@ import { ModalStyledText, ModalButtonText } from '../ModalLayout/styles'
 import { SOUND_FILES } from '../../constants'
 import { addCustomSound, deleteCustomSound } from '../../actions'
 import { SoundListContainer, CustomSoundsListContainer, SelectFileButton, AddCustomSoundButton, OpenAddCustomSoundButton } from './styles'
+import { parseStringToValidFileName } from '../../utils'
 
 /**
  * 
  * TODO:
  * fix custom sound not disappearing after deletion
- * parse file for correct file name (spaces -> _ )
  */
 
 const index = (props) => {
@@ -33,7 +33,8 @@ const index = (props) => {
       const res = await DocumentPicker.pick({ type: ['application/ogg', DocumentPicker.types.audio] })
 
       const from = res.uri;
-      const to = FileSystem.documentDirectory + textValue + '.ogg/';
+      const fileType = res.uri.match(/(\.\w+$)/igm)
+      const to = FileSystem.documentDirectory + parseStringToValidFileName(textValue) + fileType + '/';
       FileSystem.copyAsync({ from, to })
       dispatch(addCustomSound(textValue, to))
 
@@ -53,23 +54,20 @@ const index = (props) => {
     dispatch(deleteCustomSound(soundName))
   }
 
-  const renderSoundList = ({ item }) => {
-    console.log(item)
-    return (
-      <SoundItem soundName={item}
-        soundCategory={props.category}
-        channelId={props.channelId} />
-    )
-  }
+  const renderSoundList = ({ item }) => (
+    <SoundItem soundName={item}
+      soundCategory={props.category}
+      channelId={props.channelId} />
+  )
 
-  const soundsFromCustom = Object.keys(customSounds).map(soundName => (
+  const renderCustomSoundList = ({ item }) => (
     <SoundItem isCustomSound={props.category === 'CUSTOM'}
       onCustomSoundDelete={soundDeleteHandler}
-      soundName={soundName}
+      soundName={item}
       soundCategory={props.category}
       channelId={props.channelId}
-      key={`${props.category}.${soundName}`} />
-  ))
+      key={`${props.category}.${item}`} />
+  )
 
   const textValueHandler = (text) => setTextValue(text)
 
@@ -107,12 +105,18 @@ const index = (props) => {
             </Modal>
 
           </View>
-          <AddCustomSoundButton onPress={() => setModalOpen(true)}>
-            <MaterialIcon name="add" size={28} color={COLORS.headerFore} onPress={() => setModalOpen(true)} />
-          </AddCustomSoundButton>
-          < CustomSoundsListContainer >
-            {soundsFromCustom}
-          </CustomSoundsListContainer>
+          <FlatList
+            stickyHeaderIndices={[1]}
+            data={Object.keys(customSounds)}
+            renderItem={renderCustomSoundList}
+            keyExtractor={item => `${props.soundCategory}.${item}`}
+            stickyHeaderIndices={[0]}
+            ListHeaderComponent={(
+              <AddCustomSoundButton onPress={() => setModalOpen(true)}>
+                <MaterialIcon name="add" size={28} color={COLORS.headerFore} onPress={() => setModalOpen(true)} />
+              </AddCustomSoundButton>
+            )} />
+
         </>
       )
       }
