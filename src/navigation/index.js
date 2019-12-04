@@ -10,6 +10,7 @@ import AddPreset from '../screens/AddPreset'
 import SideDrawer from '../screens/SideDrawer'
 import SoundPicker from '../screens/SoundPicker'
 import LoopsWheel from '../screens/LoopsWheel'
+import About from '../screens/About'
 import { COLORS } from '../constants'
 
 
@@ -21,13 +22,11 @@ const defaultNavSettings = (navigation, title) => ({
   },
   headerTintColor: COLORS.headerFore,
   headerLeftContainerStyle: { paddingLeft: 10 },
-  headerLeft: () => {
-    return (
-      <TouchableOpacity onPress={navigation.toggleDrawer}>
-        <Icon name="menu" size={34} color={COLORS.icons} />
-      </TouchableOpacity>
-    )
-  },
+  headerLeft: () => (
+    <TouchableOpacity onPress={navigation.toggleDrawer}>
+      <Icon name="menu" size={34} color={COLORS.icons} />
+    </TouchableOpacity>
+  ),
   headerTitleStyle: {
     flex: 1,
     fontFamily: 'Montserrat-SemiBold',
@@ -35,7 +34,12 @@ const defaultNavSettings = (navigation, title) => ({
     textAlign: 'center',
     alignSelf: 'center'
   },
-  headerRight: () => { return (<View></View>) } // Needed to center header title.
+  headerRightContainerStyle: { paddingRight: 10 },
+  headerRight: () => (
+    <TouchableOpacity onPress={() => navigation.navigate({ routeName: 'About' })}>
+      <Icon name="info-outline" size={28} color={COLORS.icons} />
+    </TouchableOpacity>
+  ),
 })
 
 const MixerNav = createStackNavigator(
@@ -67,6 +71,7 @@ const AppNavigator = createDrawerNavigator(
   {
     Mixer: MixerNav,
     Presets: PresetsNav,
+    About: About
   },
   {
     //First screen to show up will be Mixer
