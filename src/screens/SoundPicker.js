@@ -5,7 +5,7 @@ import Carousel, { Pagination, ParallaxImage } from 'react-native-snap-carousel'
 
 import { useBackHandler } from '../utils/'
 import SoundList from '../components/SoundList'
-import { SOUND_FILES, CATEGORY_IMAGES } from '../constants'
+import { SOUND_FILES, CATEGORY_IMAGES, COLORS } from '../constants'
 import { OuterContainer } from '../components/ModalLayout/styles'
 import { SoundCategoryContainer, SoundCategoryText, SoundCategoryImageContainer, Filler } from './styles/soundPicker'
 
@@ -41,12 +41,14 @@ const SoundPicker = ({ navigation }) => {
         <SoundCategoryText >{item}</SoundCategoryText>
         <ParallaxImage
           source={CATEGORY_IMAGES[item]}
+          showSpinner={false}
+          fadeDuration={100}
           containerStyle={{
             position: 'relative',
             flex: 1,
             borderRadius: 6,
             marginBottom: 0.1,
-            backgroundColor: 'white',
+            backgroundColor: 'transparent',
           }}
           style={{ ...StyleSheet.absoluteFillObject, resizeMode: 'cover' }}
           parallaxFactor={0.5}
