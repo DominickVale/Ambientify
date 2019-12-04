@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import BackgroundTimer from 'react-native-background-timer';
-import { View } from 'react-native'
+import { View, ToastAndroid } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Audio } from 'expo-av'
@@ -162,7 +162,14 @@ const PlaybackButton = ({ channelId }) => {
   }, [randomizing, playing])
 
 
-  const toggleSoundHandler = () => file && dispatch(playing ? stopSound(channelId) : playSound(channelId));
+  const toggleSoundHandler = () => {
+    if (file) dispatch(playing ? stopSound(channelId) : playSound(channelId));
+    else ToastAndroid.showWithGravityAndOffset(
+      'Please load a sound first',
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM,
+      0, 100)
+  }
 
   return (
     <>

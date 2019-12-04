@@ -1,12 +1,12 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, ToastAndroid } from 'react-native'
 import { useSelector } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 
 import { StyledButton, StyledButtonText } from './styles'
 
 const LoopsWheelButton = ({ channelId, navigation }) => {
-  const { randomizing, loops, soundObject, currentSound } = useSelector(state => state.channels[channelId])
+  const { randomizing, loops, soundObject, currentSound, file } = useSelector(state => state.channels[channelId])
 
   let timesWheelData = []
   let minutesWheelData = []
@@ -37,6 +37,11 @@ const LoopsWheelButton = ({ channelId, navigation }) => {
     if (currentSound !== 'none') {
       await checkData().then(() => navigation.push('LoopsWheel', { minutesWheelData, timesWheelData, channelId }));
     }
+    if (!file) ToastAndroid.showWithGravityAndOffset(
+      'Please load a sound first',
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM,
+      0, 100)
   }
 
   return (
