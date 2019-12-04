@@ -48,3 +48,11 @@ export const playFromLastMillis = async (soundObject) => {
   soundObject.playFromPositionAsync(durationMillis - 1)
   await soundObject.setIsLoopingAsync(false);
 }
+
+/**
+ * TODO:
+ * finish implementation and check for more characters
+ */
+export const parseStringToValidFileName = (string) => {
+  return string.replace(/\s/g, '_')
+}
