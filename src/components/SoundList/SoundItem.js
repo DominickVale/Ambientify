@@ -3,6 +3,7 @@ import { View, Button } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 import { Audio } from 'expo-av'
+import * as FileSystem from 'expo-file-system'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import FontistoIcon from 'react-native-vector-icons/Fontisto'
 
@@ -11,7 +12,7 @@ import { loadSound } from '../../actions'
 import { SOUND_FILES } from '../../constants/index'
 import { SoundLoadButton, SoundPreviewButton, StyledSoundItem, StyledText, CustomSoundDeleteButton } from './styles'
 
-const SoundItem = ({ isCustomSound, soundDeleteHandler, channelId, navigation, soundName, soundCategory }) => {
+const SoundItem = ({ isCustomSound, onCustomSoundDelete, channelId, navigation, soundName, soundCategory }) => {
   const dispatch = useDispatch();
   const [playing, setPlaying] = useState(false)
   const customSounds = useSelector(state => state.presets.customSounds)
@@ -27,7 +28,8 @@ const SoundItem = ({ isCustomSound, soundDeleteHandler, channelId, navigation, s
       if (playing) {
         try {
           soundObject = new Audio.Sound()
-          await soundObject.loadAsync(SOUND_FILES[soundCategory][soundName]).then(async () => soundObject.playAsync());
+          await soundObject.loadAsync(soundCategory === 'CUSTOM' ? customSounds[soundName] : SOUND_FILES[soundCategory][soundName])
+            .then(async () => soundObject.playAsync());
           soundObject.setOnPlaybackStatusUpdate((playbackStatus) => { if (playbackStatus.didJustFinish) setPlaying(false) });
         } catch (error) { console.log(error) }
       } else {
@@ -53,6 +55,11 @@ const SoundItem = ({ isCustomSound, soundDeleteHandler, channelId, navigation, s
       console.log('loading custom sound')
     } else { dispatch(loadSound(channelId, SOUND_FILES[soundCategory][soundName], soundCategory, soundName)) }
     navigation.popToTop();
+  }
+
+  const soundDeleteHandler = () => {
+    const uri = customSounds[soundName].uri
+    onCustomSoundDelete(uri, soundName)
   }
 
   return (

@@ -17,6 +17,7 @@ export const ADD_PRESET = 'ADD_PRESET'
 export const LOAD_PRESET = 'LOAD_PRESET'
 export const DELETE_PRESET = 'DELETE_PRESET'
 export const ADD_CUSTOM_SOUND = 'ADD_CUSTOM_SOUND'
+export const DELETE_CUSTOM_SOUND = 'DELETE_CUSTOM_SOUND'
 
 export const TOGGLE_PITCH = 'TOGGLE_PITCH'
 
@@ -88,6 +89,11 @@ export const deletePreset = name => ({
 export const addCustomSound = (soundName, uri) => ({
   type: ADD_CUSTOM_SOUND,
   payload: { soundName, uri }
+})
+
+export const deleteCustomSound = soundName => ({
+  type: DELETE_CUSTOM_SOUND,
+  payload: { soundName }
 })
 
 export const togglePitch = () => ({

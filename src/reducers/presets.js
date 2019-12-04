@@ -1,4 +1,4 @@
-import { ADD_PRESET, REMOVE_PRESET, DELETE_PRESET, ADD_CUSTOM_SOUND } from '../actions'
+import { ADD_PRESET, REMOVE_PRESET, DELETE_PRESET, ADD_CUSTOM_SOUND, DELETE_CUSTOM_SOUND } from '../actions'
 /**
  * TODO:
  * Implement settings
@@ -43,6 +43,13 @@ export default (state = initialState, action) => {
         }
       }
     })
+
+    case DELETE_CUSTOM_SOUND: (() => {
+      const newState = { ...state };
+      delete newState.customSounds[action.payload.soundName]
+      return newState
+    })();
+
     default: return state;
   }
 };
