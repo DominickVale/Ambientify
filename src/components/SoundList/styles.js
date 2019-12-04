@@ -3,6 +3,8 @@ import styled from 'styled-components/native'
 import { COLORS } from '../../constants'
 import { ModalButton } from '../ModalLayout/styles'
 import { AddPresetButton } from '../../screens/styles/presets'
+
+
 export const SoundListContainer = styled.View`
 flex: 2;
 `
@@ -10,15 +12,17 @@ flex: 2;
 export const CustomSoundsListContainer = styled.View`
 flex: 1;
 margin-top: 4%;
+min-height: 100px;
 `
 
 export const StyledSoundItem = styled.View`
 justify-content: space-between;
+align-items: flex-start;
 flex-direction: row;
 background-color: transparent;
 border-radius: 12;
 padding: 0;
-margin-bottom: 6px;
+margin-bottom: 8px;
 `
 
 export const SelectFileButton = styled(ModalButton)`
@@ -31,7 +35,8 @@ padding: 20px;
 align-self: center;
 `
 
-export const AddCustomSoundButton = styled(AddPresetButton)``
+export const AddCustomSoundButton = styled(AddPresetButton)`
+`
 
 export const SoundLoadButton = styled.TouchableHighlight`
 flex: 4;
@@ -40,14 +45,11 @@ padding: 4px 12px;
 
 export const SoundPreviewButton = styled.TouchableHighlight`
 flex: 1;
-align-items: center;
-justify-content: center;
 border-radius: 50;
 width: 28px;
 height: 28px;
 max-width: 28px;
-margin: 4px 12px;
-border: 1px solid ${COLORS.buttonText};
+margin: 2px 12px 0 12px;
 `
 
 export const CustomSoundDeleteButton = styled(SoundPreviewButton)`
