@@ -28,6 +28,7 @@ const Channel = ({ channelId }) => {
 
   const loadSoundWithTitle = async (soundFile) => {
     console.log('should be loading a channel sound...')
+    console.log('Loading file: ', soundFile)
     await soundObject.loadAsync(soundFile)
       .then(async () => {
         setChannelTitle(currentSound.split('_').join(' '));
@@ -46,6 +47,7 @@ const Channel = ({ channelId }) => {
       if (currentSoundCategory !== 'none') {
         let soundFile;
         if (currentSoundCategory !== 'CUSTOM') soundFile = SOUND_FILES[currentSoundCategory][currentSound];
+        else soundFile = file;
         if (file) {
           console.log('FILE: ', file, ' NEW FILE ASSET: ', soundFile)
           const soundStatus = await soundObject.getStatusAsync()
