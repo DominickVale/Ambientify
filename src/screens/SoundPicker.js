@@ -48,7 +48,8 @@ const SoundPicker = ({ navigation }) => {
             flex: 1,
             borderRadius: 6,
             marginBottom: 0.1,
-            backgroundColor: 'transparent',
+            backgroundColor: COLORS.carouselCardImageBG,
+            opacity: 0.7,
           }}
           style={{ ...StyleSheet.absoluteFillObject, resizeMode: 'cover' }}
           parallaxFactor={0.5}
