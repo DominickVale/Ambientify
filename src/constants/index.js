@@ -66,5 +66,6 @@ export const COLORS = {
   modalButtonBG: '#34415B',
   modalButtonCancelBG: '#0C2029',
   wheelPickerInactive: 'rgba(185, 180, 177, 0.3)',
+  carouselCardImageBG: '#074752',
   close: '#B74444',
 }
