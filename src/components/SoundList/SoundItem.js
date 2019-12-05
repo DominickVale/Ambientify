@@ -10,6 +10,7 @@ import FontistoIcon from 'react-native-vector-icons/Fontisto'
 import { COLORS } from '../../constants'
 import { loadSound } from '../../actions'
 import { SOUND_FILES } from '../../constants/index'
+import { ParseFileNameToString, parseFileNameToString } from '../../utils'
 import { SoundLoadButton, SoundPreviewButton, StyledSoundItem, StyledText, CustomSoundDeleteButton } from './styles'
 
 const SoundItem = ({ isCustomSound, onCustomSoundDelete, channelId, navigation, soundName, soundCategory }) => {
@@ -69,7 +70,7 @@ const SoundItem = ({ isCustomSound, onCustomSoundDelete, channelId, navigation, 
         <StyledText>{playing ? pauseIcon : playIcon}</StyledText>
       </SoundPreviewButton>
       <SoundLoadButton onPress={loadButtonHandler}>
-        <StyledText numberOfLines={1}>{soundName}</StyledText>
+        <StyledText numberOfLines={1}>{parseFileNameToString(soundName)}</StyledText>
       </SoundLoadButton>
       {isCustomSound && (
         <CustomSoundDeleteButton onPress={soundDeleteHandler}>

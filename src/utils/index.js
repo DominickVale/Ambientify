@@ -56,3 +56,7 @@ export const playFromLastMillis = async (soundObject) => {
 export const parseStringToValidFileName = (string) => {
   return string.replace(/\s/g, '_')
 }
+
+export const parseFileNameToString = (string) => {
+  return string.replace(/\_/g, ' ')
+}
