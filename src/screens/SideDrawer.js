@@ -25,7 +25,7 @@ const SideDrawer = (props) => {
           </TouchableHighlight>
         </DrawerTitleContainer>
 
-        <StyledAd />
+        <StyledAd height='16%' />
 
         <SideNavButton screen="Mixer" iconName="equalizer" iconSize={22} navigation={props.navigation} />
         <SideNavButton screen="Presets" iconName="save" iconSize={22} navigation={props.navigation} />

@@ -28,7 +28,7 @@ margin-bottom: -8px;
 
 export const StyledAd = styled.View`
   width: 90%;
-  height: 14%;
+  height: ${props => props.height};
   background-color: grey;
   margin: 0 auto 20px auto;
 `
