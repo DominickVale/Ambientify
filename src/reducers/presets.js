@@ -1,8 +1,5 @@
-import { ADD_PRESET, REMOVE_PRESET, DELETE_PRESET, ADD_CUSTOM_SOUND, DELETE_CUSTOM_SOUND } from '../actions'
-/**
- * TODO:
- * Implement settings
- */
+import { ADD_PRESET, DELETE_PRESET, ADD_CUSTOM_SOUND, DELETE_CUSTOM_SOUND } from '../actions'
+
 
 const initialState = {
   customSounds: {}
@@ -10,6 +7,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+
     case ADD_PRESET:
       const channelsState = action.payload.currentChannelsState
       const savedState = Object.keys(channelsState).map((_, key) => {

@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react'
 import BackgroundTimer from 'react-native-background-timer';
-import { View, ToastAndroid } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { useDispatch, useSelector } from 'react-redux'
+import { View, ToastAndroid } from 'react-native'
 import { Audio } from 'expo-av'
 
 import { StyledPlaybackButton, StyledButtonText } from './styles'
 import { playSound, stopSound } from '../../actions'
 import { playFromLastMillis } from '../../utils'
+
+
 /**
  * 
  * TODO:
  * 
- * Improve Pitch randomization
  * Refactor and move to own file/component (optional at this point)
  * Improve pseudorandom number generator
  * 
@@ -39,7 +40,7 @@ const PlaybackButton = ({ channelId }) => {
 
 
   /**
-   * Expo-av status handler.
+   * Expo-av soundObject status handler.
    */
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const PlaybackButton = ({ channelId }) => {
 
   /**
   * Random shuffling and pitch randomization function.
-  * Sets up a timeout with a dynamic pseudo-random interval value such that given n minutes it will play ~n times before n minutes time span.
+  * Sets up a timeout with a dynamic pseudo-random interval value such that given n minutes the sound will be played ~n times before the n minutes time span.
   * Also handles pitch randomization.
   * It isn't good enough but it gets the job done pretty decently given the simplicity of it... 
   */
@@ -72,12 +73,10 @@ const PlaybackButton = ({ channelId }) => {
 
         if (pitchRandomization) {
           let nextPitch = (Math.random() * (1.8 - 0.6) + 0.6)
-          console.log('next pitch: ', nextPitch)
           soundObject.setRateAsync(nextPitch, false, Audio.PitchCorrectionQuality.Medium)
         } else { soundObject.setRateAsync(1.0) }
 
         if (playedCount - 1 >= loops.times || elapsedTime.current > (loops.minutes * 60000)) {
-          console.log('Stopping because playedCount >= loops.times || elapsedTime > loops.minutes... Played count: ', playedCount - 1, 'elapsed time:', (elapsedTime.current) / 1000)
           setPlayedCount(1)
           startTime.current = 0;
           elapsedTime.current = 0;
@@ -87,15 +86,9 @@ const PlaybackButton = ({ channelId }) => {
           let minutes = loops.minutes * 60000;
           let times = 0;
           times = loops.times
-          const max = (minutes / times) - (elapsedTime.current / 100) // fix
-          const min = max / (playedCount % (times) + 1) // fix
+          const max = (minutes / times) - (elapsedTime.current / 100) // TODO: FIX
+          const min = max / (playedCount % (times) + 1) // TODO: FIX
           let nextInterval = Math.floor((Math.random() * (max - min) + min))
-
-          console.log(
-            ' next interval: ', nextInterval,
-            ' Played count: ', playedCount,
-            ' min-max: ', min, '-', max,
-            ' current elapsed time: ', elapsedTime.current)
 
           if (soundFinishedPlaying) {
             timeoutId.current = BackgroundTimer.setTimeout(() => {
@@ -133,7 +126,7 @@ const PlaybackButton = ({ channelId }) => {
             setPlaybackButtonTitle(playIcon)
             await soundObject.stopAsync();
           }
-        } catch (e) { console.log(e) }
+        } catch (error) { console.error(error) }
       }
     })();
   }, [playing])
@@ -144,11 +137,10 @@ const PlaybackButton = ({ channelId }) => {
    */
 
   useEffect(() => {
-    (async () => {
+    (() => {
       if (file) {
         if (randomizing) {
           if (!playing) {
-            console.log('Stopped randomizing sound')
             setPlayedCount(1)
             startTime.current = 0;
             elapsedTime.current = 0;

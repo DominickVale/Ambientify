@@ -1,21 +1,20 @@
-/**
- * TODO:
- *  Render list of presets, add onPress => load preset
- *  Add 'Add preset' button
- */
-
-import React, { useEffect } from 'react'
-import { Text, Button, BackHandler, ImageBackground, ScrollView } from 'react-native'
-import { useSelector } from 'react-redux'
-import { withNavigation } from 'react-navigation'
+import React from 'react'
+import { BackHandler, ImageBackground, ScrollView } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import { withNavigation } from 'react-navigation'
+import { useSelector } from 'react-redux'
 
 import { PresetsContainer, AddPresetButton, Filler } from './styles/presets'
 import { useBackHandlerWithListener } from '../utils'
 import PresetItem from '../components/PresetItem'
 import { COLORS } from '../constants'
 
-const Presets = ({ componentId, navigation }) => {
+/**
+ * TODO: 
+ * add dynamic background image
+ */
+
+const Presets = ({ navigation }) => {
 
   const presets = useSelector(state => state.presets);
 
@@ -36,10 +35,7 @@ const Presets = ({ componentId, navigation }) => {
           </AddPresetButton>
           <PresetsContainer>
             <Filler height={50} />
-            {Object.keys(presets).map(preset => {
-              // Maybe add something else (?)
-              if (preset !== 'customSounds') return (<PresetItem presetName={preset} key={preset} />)
-            })}
+            {Object.keys(presets).map(preset => preset !== 'customSounds' && (<PresetItem presetName={preset} key={preset} />))}
           </PresetsContainer>
         </ScrollView>
 

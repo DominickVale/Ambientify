@@ -3,10 +3,7 @@ import { merge } from 'lodash'
 
 import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, PLAY_SOUND_ALL, STOP_SOUND_ALL, SET_VOLUME, LOAD_PRESET, SET_LOOPS, TOGGLE_RANDOM } from '../actions'
 import { NUMBER_OF_CHANNELS } from '../constants';
-/**
- * TODO:
- * Add Settings
- */
+
 
 // Initialize the state, fill it with the preferred number of channels with default settings
 const initialState = {};

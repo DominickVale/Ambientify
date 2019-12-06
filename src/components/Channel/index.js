@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ToastAndroid } from 'react-native'
-import _ from 'lodash'
 
 import VolumeSlider from './VolumeSlider'
 import LoopsWheelButton from './LoopsWheelButton'
@@ -10,16 +9,10 @@ import LoadButton from './LoadButton'
 
 import { StyledChannelContainer, ChannelTitle } from './styles'
 
-import { loadSound, playSound, stopSound } from '../../actions'
 import { SOUND_FILES } from '../../constants'
 import { playFromLastMillis } from '../../utils'
-/**
- * TODO:
- * 
- * Implement presets functionality
- * 
- * @param {*} props 
- */
+import { loadSound, playSound, stopSound } from '../../actions'
+
 
 const Channel = ({ channelId }) => {
   const dispatch = useDispatch();
@@ -27,8 +20,6 @@ const Channel = ({ channelId }) => {
   const [channelTitle, setChannelTitle] = useState(`Channel ${channelId + 1}`)
 
   const loadSoundWithTitle = async (soundFile) => {
-    console.log('should be loading a channel sound...')
-    console.log('Loading file: ', soundFile)
     await soundObject.loadAsync(soundFile)
       .then(async () => {
         setChannelTitle(currentSound.split('_').join(' '));
@@ -49,7 +40,6 @@ const Channel = ({ channelId }) => {
         if (currentSoundCategory !== 'CUSTOM') soundFile = SOUND_FILES[currentSoundCategory][currentSound];
         else soundFile = file;
         if (file) {
-          console.log('FILE: ', file, ' NEW FILE ASSET: ', soundFile)
           const soundStatus = await soundObject.getStatusAsync()
 
           try {
@@ -60,7 +50,6 @@ const Channel = ({ channelId }) => {
                 loadSoundWithTitle(soundFile)
               });
             } else loadSoundWithTitle(soundFile)
-
           } catch (error) { console.error('Error in loading sound in handler at Channel: ', channelId, error) }
         }
         else if (currentSound != 'none') dispatch(loadSound(channelId, soundFile, currentSoundCategory, currentSound))

@@ -1,14 +1,13 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 import { StyledButton, StyledButtonText } from './styles'
 
+
 const LoadButton = ({ channelId, navigation }) => {
 
-  const loadHandler = () => {
-    navigation.navigate('SoundPicker', { channelId: channelId })
-  }
+  const loadHandler = () => navigation.navigate('SoundPicker', { channelId: channelId })
 
   return (
     <>

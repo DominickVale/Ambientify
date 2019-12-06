@@ -1,19 +1,20 @@
 /**
  * Main screen. The channels container will be rendered inside of here.
- *
- * TODO:
- *  implement
  */
 
-import React, { useEffect } from 'react'
-import { View, BackHandler, ImageBackground } from 'react-native'
-import RNMinimizeApp from 'react-native-minimize'
+import React from 'react'
+import { BackHandler, ImageBackground } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import RNMinimizeApp from 'react-native-minimize'
 
-import { useBackHandlerWithListener } from '../utils'
 import Channels from '../containers/Channels'
+import { useBackHandlerWithListener } from '../utils'
 import BottomControls from '../components/BottomControls'
 
+/**
+ * TODO:
+ * add dynamic background image
+ */
 const Mixer = ({ navigation }) => {
 
   const backButtonHandler = () => {

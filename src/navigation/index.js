@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -40,7 +40,7 @@ const defaultNavSettings = (navigation, title) => ({
       <Icon name="info-outline" size={28} color={COLORS.icons} />
     </TouchableOpacity>
   ),
-})
+});
 
 const MixerNav = createStackNavigator(
   {
@@ -53,7 +53,7 @@ const MixerNav = createStackNavigator(
     mode: 'modal',
     transparentCard: true,
     cardStyle: { opacity: 1 }
-  })
+  });
 
 const PresetsNav = createStackNavigator(
   {
@@ -65,7 +65,7 @@ const PresetsNav = createStackNavigator(
     mode: 'modal',
     transparentCard: true,
     cardStyle: { opacity: 1 }
-  })
+  });
 
 const AppNavigator = createDrawerNavigator(
   {
@@ -74,9 +74,12 @@ const AppNavigator = createDrawerNavigator(
     About: About
   },
   {
-    //First screen to show up will be Mixer
+
+
     initialRouteName: 'Mixer',
     contentComponent: SideDrawer,
+
+
   });
 
 export default AppNavigator

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, ToastAndroid } from 'react-native'
-import { useSelector } from 'react-redux'
 import { withNavigation } from 'react-navigation'
+import { useSelector } from 'react-redux'
 
 import { StyledButton, StyledButtonText } from './styles'
 
@@ -25,12 +25,8 @@ const LoopsWheelButton = ({ channelId, navigation }) => {
     try {
       const status = await soundObject.getStatusAsync();
       const soundDuration = status.durationMillis
-      console.log('sound duration is: ', soundDuration)
-      if (currentSound !== 'none') {
-        _getWheelData(soundDuration)
-        console.log(timesWheelData, minutesWheelData)
-      }
-    } catch (error) { console.log(error) }
+      if (currentSound !== 'none') _getWheelData(soundDuration);
+    } catch (error) { console.error(error) }
   }
 
   const onButtonPress = async () => {

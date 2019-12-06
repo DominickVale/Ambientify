@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, TouchableHighlight, Linking } from 'react-native'
+import { TouchableHighlight, Linking } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import FontistoIcon from 'react-native-vector-icons/Fontisto'
 
@@ -9,7 +9,9 @@ import { COLORS } from '../constants'
 /**
  * TODO:
  * Add modal for language and finish language setting button
+ * Add social links
  */
+
 const SideDrawer = (props) => {
 
   const languages = ['English', 'Italian', 'French']

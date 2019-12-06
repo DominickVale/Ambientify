@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
-import { View, Text, Button, BackHandler } from 'react-native'
+import { BackHandler } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 
 import { addPreset } from '../actions'
 import { useBackHandler } from '../utils'
-import { ModalStyledText } from '../components/ModalLayout/styles'
-
 import TextInput from '../components/TextInput'
-
+import { ModalStyledText } from '../components/ModalLayout/styles'
 import ModalLayout from '../components/ModalLayout'
+
 /**
- * TODO:
  * 
- * Clean up
+ * TODO:
+ * add input checks
  */
 const AddPreset = ({ navigation }) => {
   const dispatch = useDispatch();

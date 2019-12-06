@@ -3,8 +3,8 @@ import styled from 'styled-components/native'
 import { COLORS } from '../../constants'
 
 export const StyledContainer = styled.View`
-  background-color: ${COLORS.sideDrawerBG};
-  flex: 1;
+background-color: ${COLORS.sideDrawerBG};
+flex: 1;
 `
 
 export const DrawerTitleContainer = styled.View`
@@ -27,10 +27,10 @@ margin-bottom: -8px;
 `
 
 export const StyledAd = styled.View`
-  width: 90%;
-  height: ${props => props.height};
-  background-color: grey;
-  margin: 0 auto 20px auto;
+width: 90%;
+height: ${props => props.height};
+background-color: grey;
+margin: 0 auto 20px auto;
 `
 
 export const SideDrawerItem = styled.TouchableHighlight`

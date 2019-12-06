@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 import FontistoIcon from 'react-native-vector-icons/Fontisto'
 
-import { View, Text, Button } from 'react-native'
 import { loadPreset, deletePreset } from '../../actions'
 import { PresetItemContainer, PresetLoadButton, PresetDeleteButton, StyledText } from './styles'
 import { COLORS } from '../../constants'

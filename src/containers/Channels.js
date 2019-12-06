@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
-import { Text, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import Channel from '../components/Channel'
 import { Audio } from 'expo-av'
 
 import { StyledChannelsContainer, Filler } from './styles'
 import { NUMBER_OF_CHANNELS } from '../constants'
 
-async function initSounds() {
-  await Audio.setAudioModeAsync({
+function _initSounds() {
+  Audio.setAudioModeAsync({
     allowsRecordingIOS: false,
     staysActiveInBackground: true,
     interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
@@ -20,11 +20,10 @@ async function initSounds() {
 
 const Channels = (props) => {
 
-  useEffect(() => {
-    initSounds();
-  }, [])
+  useEffect(() => _initSounds()
+    , [])
 
-  const getChannels = () => {
+  const _getChannels = () => {
     let channels = [];
     for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
       channels.push(<Channel channelId={i} key={i} />)
@@ -36,7 +35,7 @@ const Channels = (props) => {
     <>
       <ScrollView>
         <StyledChannelsContainer>
-          {getChannels()}
+          {_getChannels()}
         </StyledChannelsContainer>
         <Filler />
       </ScrollView>

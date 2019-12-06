@@ -1,6 +1,6 @@
 /**
  * int NUMBER_OF_CHANNELS: 
- *  Number of channels to be rendered at startup. Will be implemented in the settings to be stored in AsyncStorage
+ *  Number of channels to be rendered at startup. Will be implemented in the settings to be stored in AsyncStorage in premium version
  * 
  * obj SOUND_FILES:
  *  List of sound files with their final name as key. The key must be equal to the actual file name.
@@ -11,6 +11,7 @@
 
 export const NUMBER_OF_CHANNELS = 9;
 
+
 export const CATEGORY_IMAGES = {
   NATURE: require('#ambientify-images/nature.jpg'),
   ANIMALS: require('#ambientify-images/nature.jpg'),
@@ -20,6 +21,7 @@ export const CATEGORY_IMAGES = {
   MUSIC: require('#ambientify-images/nature.jpg'),
   CUSTOM: require('#ambientify-images/nature.jpg'),
 }
+
 
 export const SOUND_FILES = {
   NATURE: {
@@ -46,6 +48,8 @@ export const SOUND_FILES = {
   },
   CUSTOM: {}
 }
+
+
 export const COLORS = {
   icons: '#5B636C',
   primary: '#06191F',

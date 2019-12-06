@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, ToastAndroid } from 'react-native'
+import React from 'react'
+import { View, ToastAndroid } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import { StyledPitchButton } from './styles'
-import { playSoundAll, stopSoundAll, togglePitch } from '../../actions'
+import { togglePitch } from '../../actions'
 import { COLORS } from '../../constants'
 
 

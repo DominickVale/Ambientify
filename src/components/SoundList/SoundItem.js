@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { View, Button } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 import { Audio } from 'expo-av'
-import * as FileSystem from 'expo-file-system'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import FontistoIcon from 'react-native-vector-icons/Fontisto'
 
@@ -25,6 +23,9 @@ const SoundItem = ({ isCustomSound, onCustomSoundDelete, channelId, navigation, 
   useEffect(() => {
     let soundObject;
 
+    /**
+     * Sound preview functionality
+     */
     (async () => {
       if (playing) {
         try {
@@ -49,12 +50,16 @@ const SoundItem = ({ isCustomSound, onCustomSoundDelete, channelId, navigation, 
     })
   }, [playing])
 
+
   const loadButtonHandler = () => {
     if (soundCategory === 'CUSTOM') {
 
       dispatch(loadSound(channelId, customSounds[soundName], 'CUSTOM', soundName))
       console.log('loading custom sound')
-    } else { dispatch(loadSound(channelId, SOUND_FILES[soundCategory][soundName], soundCategory, soundName)) }
+    } else {
+      dispatch(loadSound(channelId, SOUND_FILES[soundCategory][soundName], soundCategory, soundName))
+    }
+
     navigation.popToTop();
   }
 
@@ -65,13 +70,14 @@ const SoundItem = ({ isCustomSound, onCustomSoundDelete, channelId, navigation, 
 
   return (
     <StyledSoundItem>
-
       <SoundPreviewButton onPress={() => setPlaying(playing => !playing)}>
         <StyledText>{playing ? pauseIcon : playIcon}</StyledText>
       </SoundPreviewButton>
+
       <SoundLoadButton onPress={loadButtonHandler}>
         <StyledText numberOfLines={1}>{parseFileNameToString(soundName)}</StyledText>
       </SoundLoadButton>
+
       {isCustomSound && (
         <CustomSoundDeleteButton onPress={soundDeleteHandler}>
           <StyledText>{isCustomSound && deleteIcon}</StyledText>

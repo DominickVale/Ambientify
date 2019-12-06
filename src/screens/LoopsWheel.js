@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { WheelPicker } from 'react-native-wheel-picker-android'
-import { View, Text, Button, BackHandler } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { BackHandler } from 'react-native'
 
-import { useBackHandler, playFromLastMillis } from '../utils/'
+import { useBackHandler } from '../utils/'
 import { setLoops, toggleRandom, playSound } from '../actions'
 import { WheelsContainer, StyledWheelPicker, SemiColonSpacer } from './styles/wheels'
 import { ModalStyledText } from '../components/ModalLayout/styles'
@@ -13,7 +13,7 @@ import { COLORS } from '../constants'
 
 const LoopsWheel = ({ navigation }) => {
   const dispatch = useDispatch();
-  const { soundObject, file, randomizing } = useSelector(state => state.channels[navigation.getParam('channelId')])
+  const { file, randomizing } = useSelector(state => state.channels[navigation.getParam('channelId')])
 
   const timesWheelData = useRef(navigation.getParam('timesWheelData'))
   const minutesWheelData = useRef(navigation.getParam('minutesWheelData'))
@@ -33,7 +33,6 @@ const LoopsWheel = ({ navigation }) => {
 
   const buttonHandler = () => {
     dispatch(setLoops(channelId.current, { times: timesWheelState + 1, minutes: minutesWheelState + 1 })) //Set loops with state values +1. React Native Wheel Picker maps values by id starting from 0 to n, whereas wheelData starts from 1.
-    console.log('times: ', timesWheelState, 'minutes: ', minutesWheelState)
     if (timesWheelState + 1 > 1) toggleRandomShuffle();
     navigation.goBack();
   }

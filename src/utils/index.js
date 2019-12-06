@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 export const usePrev = value => {
+
   const ref = useRef();
   useEffect(() => {
     ref.current = value;
@@ -12,11 +13,7 @@ export const useBackHandler = (BackHandler, navigation, callback) => {
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', callback);
-    console.log('added backhandler')
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress')
-      console.log('removed backhandler')
-    };
+    return () => BackHandler.removeEventListener('hardwareBackPress')
   }, [])
 }
 
@@ -34,7 +31,6 @@ export const useBackHandlerWithListener = (BackHandler, navigation, callback) =>
     return () => {
       BackHandler.removeEventListener('hardwareBackPress', callback) //Remove handler if app closes or component is unloaded
       componentDidBlur.remove();
-      console.log('removed backhandler with listener')
     }
   }, [navigation.state])
 

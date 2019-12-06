@@ -28,21 +28,16 @@ const index = (props) => {
 
   const customSounds = useSelector(state => state.presets.customSounds)
 
+
   const pickCustomSound = async () => {
-    try {
-      const res = await DocumentPicker.pick({ type: ['application/ogg', DocumentPicker.types.audio] })
 
-      const from = res.uri;
-      const fileType = res.uri.match(/(\.\w+$)/igm)
-      const to = FileSystem.documentDirectory + parseStringToValidFileName(textValue) + fileType + '/';
-      FileSystem.copyAsync({ from, to })
-      dispatch(addCustomSound(textValue, to))
+    const res = await DocumentPicker.pick({ type: ['application/ogg', DocumentPicker.types.audio] })
 
-    } catch (error) {
-      if (DocumentPicker.isCancel(error)) {
-        console.log('Canceled')
-      } else throw error;
-    }
+    const from = res.uri;
+    const fileType = res.uri.match(/(\.\w+$)/igm)
+    const to = FileSystem.documentDirectory + parseStringToValidFileName(textValue) + fileType + '/';
+    FileSystem.copyAsync({ from, to })
+    dispatch(addCustomSound(textValue, to))
   }
 
   const soundDeleteHandler = async (uri, soundName) => {
@@ -74,7 +69,6 @@ const index = (props) => {
 
   return (
     <SoundListContainer>
-
 
       {props.category === 'CUSTOM' && (
         <>

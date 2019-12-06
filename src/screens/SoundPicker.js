@@ -1,19 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, TouchableOpacity, BackHandler, Dimensions, StyleSheet, YellowBox } from 'react-native'
-import { withNavigation } from 'react-navigation'
+import { BackHandler, Dimensions, StyleSheet, YellowBox } from 'react-native'
 import Carousel, { Pagination, ParallaxImage } from 'react-native-snap-carousel'
+import { withNavigation } from 'react-navigation'
 
 import { useBackHandler } from '../utils/'
 import SoundList from '../components/SoundList'
-import { SOUND_FILES, CATEGORY_IMAGES, COLORS } from '../constants'
 import { OuterContainer } from '../components/ModalLayout/styles'
+import { SOUND_FILES, CATEGORY_IMAGES, COLORS } from '../constants'
 import { SoundCategoryContainer, SoundCategoryText, SoundCategoryImageContainer, Filler } from './styles/soundPicker'
 
-
-/**
- * TODO:
- * fix tappableDots on carousel's pagination not showing up before scrolling
- */
 
 const SoundPicker = ({ navigation }) => {
   useBackHandler(BackHandler, navigation, () => navigation.goBack());

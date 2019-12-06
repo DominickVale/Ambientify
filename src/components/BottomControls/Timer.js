@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react'
-import { View, Text, Modal } from 'react-native'
+import { View, Modal } from 'react-native'
 import { useDispatch } from 'react-redux'
 import BackgroundTimer from 'react-native-background-timer';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import { StyledTimerButton, StyledTimerText } from './styles'
-import SetTimerModal from './SetTimerModal'
 import { COLORS } from '../../constants'
+import SetTimerModal from './SetTimerModal'
 import { stopSoundAll } from '../../actions';
+import { StyledTimerButton, StyledTimerText } from './styles'
 
 
 const Timer = () => {
@@ -28,7 +28,6 @@ const Timer = () => {
   }
 
   const setTimer = (value) => {
-    console.log('Closing in ms: ', value)
 
     clearTimers();
     if (value < 0) {

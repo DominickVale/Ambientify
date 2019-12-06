@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, Alert, Button, ToastAndroid } from 'react-native'
-import { WheelPicker, TimePicker } from 'react-native-wheel-picker-android'
+import { ToastAndroid } from 'react-native'
+import { WheelPicker } from 'react-native-wheel-picker-android'
 import { withNavigation } from 'react-navigation'
 
 import ModalLayout from '../../components/ModalLayout'

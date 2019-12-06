@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { View, PanResponder } from 'react-native'
 import Slider from '@react-native-community/slider'
-import { useSelector } from 'react-redux'
+import { View, PanResponder } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { setVolume } from '../../actions'
 import { COLORS } from '../../constants'
@@ -20,12 +19,12 @@ const VolumeSlider = ({ channelId }) => {
   })
 
   useEffect(() => {
-    (async () => {
+    (() => {
       if (file) {
         try {
-          await soundObject.setVolumeAsync(volume)
+          soundObject.setVolumeAsync(volume)
         } catch (error) {
-          console.log(error)
+          console.error(error)
         }
       }
     })();
@@ -40,9 +39,7 @@ const VolumeSlider = ({ channelId }) => {
     setLocalVolume(volume)
   }, [file, currentSound, soundObject])
 
-  const volumeHandler = async (newVolume) => {
-    dispatch(setVolume(channelId, newVolume))
-  }
+  const volumeHandler = async (newVolume) => dispatch(setVolume(channelId, newVolume))
 
   return (
     <>

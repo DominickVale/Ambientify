@@ -1,8 +1,3 @@
-/**
- * TODO:
- * Settings 
- */
-
 export const LOAD_SOUND = 'LOAD_SOUND';
 export const LOAD_SOUND_ERR = 'LOAD_SOUND_ERR';
 export const PLAY_SOUND = 'PLAY_SOUND'
@@ -22,9 +17,7 @@ export const DELETE_CUSTOM_SOUND = 'DELETE_CUSTOM_SOUND'
 export const TOGGLE_PITCH = 'TOGGLE_PITCH'
 
 export const loadSound = (channelId, newSound, newSoundCategory, newSoundName) => async (dispatch, getState) => {
-  if (newSoundCategory === 'CUSTOM') {
-    newSound = getState().presets.customSounds[newSoundName]
-  }
+  if (newSoundCategory === 'CUSTOM') newSound = getState().presets.customSounds[newSoundName]
   dispatch({
     type: LOAD_SOUND,
     payload: { newSound, newSoundCategory, newSoundName },
