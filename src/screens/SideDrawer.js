@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, TouchableHighlight, Picker, Modal } from 'react-native'
+import { Text, View, TouchableHighlight, Linking } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import FontistoIcon from 'react-native-vector-icons/Fontisto'
 
@@ -29,7 +29,7 @@ const SideDrawer = (props) => {
 
         <SideNavButton screen="Mixer" iconName="equalizer" iconSize={22} navigation={props.navigation} />
         <SideNavButton screen="Presets" iconName="save" iconSize={22} navigation={props.navigation} />
-        <SideNavButton title="Get new Sounds" iconName="music-note" iconSize={22} onPress={() => console.log('pressed getnewsounds')} />
+        <SideNavButton title="Get new Sounds" iconName="music-note" iconSize={22} onPress={() => Linking.openURL('https://freesound.org/browse/tags/ambient/')} />
 
         <DrawerSettingsContainer>
           <DrawerTitle>Settings</DrawerTitle>
