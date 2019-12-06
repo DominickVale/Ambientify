@@ -3,7 +3,7 @@ import { Text, ScrollView } from 'react-native'
 import Channel from '../components/Channel'
 import { Audio } from 'expo-av'
 
-import { StyledChannelsContainer } from './styles'
+import { StyledChannelsContainer, Filler } from './styles'
 import { NUMBER_OF_CHANNELS } from '../constants'
 
 async function initSounds() {
@@ -38,6 +38,7 @@ const Channels = (props) => {
         <StyledChannelsContainer>
           {getChannels()}
         </StyledChannelsContainer>
+        <Filler />
       </ScrollView>
     </>
   )

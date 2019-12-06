@@ -9,3 +9,7 @@ export const StyledChannelsContainer = styled.View`
   align-items: center;
   margin: 40px;
 `
+
+export const Filler = styled.View`
+height: 100px;
+`
