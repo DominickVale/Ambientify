@@ -51,4 +51,20 @@ top: 30px;
 width: 120px;
 right: -45px;
 padding-top: 5px;
-color: ${COLORS.headerFore}`
+color: ${COLORS.headerFore};`
+
+export const CloudsContainer1 = styled.View`
+position: absolute;
+height: 500;
+width: 500;
+bottom: -100;
+left: -100;
+flex: 1;
+`
+
+export const CloudsContainer2 = styled(CloudsContainer1)`
+height: 600;
+width: 800;
+bottom: -180;
+transform: scaleX(-1)
+` 

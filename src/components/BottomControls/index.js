@@ -4,6 +4,7 @@ import { View, Text } from 'react-native'
 import { BottomControlsContainer } from './styles'
 import BigPlaybackButton from './BigPlaybackButton'
 import PitchRandomizationButton from './PitchRandomizationButton'
+import Clouds from './Clouds'
 import Timer from './Timer'
 
 /**
@@ -14,6 +15,7 @@ import Timer from './Timer'
 const BottomControls = () => {
   return (
     <BottomControlsContainer>
+      <Clouds />
       <Timer />
       <BigPlaybackButton />
       <PitchRandomizationButton />
