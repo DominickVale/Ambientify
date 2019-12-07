@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TouchableHighlight, Linking } from 'react-native'
+import { TouchableHighlight, Linking, Share } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import FontistoIcon from 'react-native-vector-icons/Fontisto'
 
@@ -9,13 +9,21 @@ import { COLORS } from '../constants'
 /**
  * TODO:
  * Add modal for language and finish language setting button
- * Add social links
+ * Add share message + link to appstore
  */
 
 const SideDrawer = (props) => {
 
   const languages = ['English', 'Italian', 'French']
   const [modalVisible, setModalVisible] = useState(false)
+
+  const socialButtonHandler = () => {
+
+    Share.share({
+      message:
+        'Test | ...',
+    });
+  }
 
   return (
     <>
@@ -40,9 +48,9 @@ const SideDrawer = (props) => {
         <SideNavButton title="Language" iconName="language" iconSize={22} material onPress={() => { setModalVisible(value => !value) }} />
 
         <Socials>
-          <SocialButton iconName="facebook" iconSize={28} />
-          <SocialButton iconName="twitter" iconSize={26} />
-          <SocialButton iconName="google-plus" iconSize={34} />
+          <SocialButton iconName="facebook" iconSize={28} onPress={socialButtonHandler} />
+          <SocialButton iconName="twitter" iconSize={26} onPress={socialButtonHandler} />
+          <SocialButton iconName="google-plus" iconSize={34} onPress={socialButtonHandler} />
         </Socials>
 
       </StyledContainer>
@@ -67,7 +75,7 @@ const SideNavButton = (props) => (
 )
 
 const SocialButton = (props) => (
-  <SideDrawerItem style={{ borderRadius: 50 }} activeOpacity={1} underlayColor={COLORS.sideDrawerButtonActive} onPress={() => console.log('icon pressed')}>
+  <SideDrawerItem style={{ borderRadius: 50 }} activeOpacity={1} underlayColor={COLORS.sideDrawerButtonActive} onPress={props.onPress}>
     <FontistoIcon name={props.iconName} size={props.iconSize} color={COLORS.icons} />
   </SideDrawerItem>
 )
