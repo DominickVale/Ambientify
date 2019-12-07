@@ -80,7 +80,7 @@ color:${COLORS.buttonText};
 `
 
 export const ModalStyledText = styled.Text`
-color: ${COLORS.buttonText};
+color: ${props => props.secondary ? COLORS.icons : COLORS.buttonText};
 align-self: center;
 text-align: center;
 font-size: ${props => props.fontSize ? props.fontSize + 'px' : '16px'};
