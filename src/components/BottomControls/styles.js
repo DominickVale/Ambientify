@@ -4,14 +4,14 @@ import { COLORS } from '../../constants'
 
 export const BottomControlsContainer = styled.View`
 position: absolute;
-background-color: rgba(80, 20, 20, 0.8);
-bottom: 26px;
+background-color: transparent;
+bottom: 0;
 align-self: center;
 justify-content: space-around;
 align-items: center;
 align-content: center;
 flex-direction: row;
-height: 16%;
+height: 20%;
 width: 81%;
 `
 
