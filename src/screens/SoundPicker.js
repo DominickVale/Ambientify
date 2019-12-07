@@ -60,6 +60,7 @@ const SoundPicker = ({ navigation }) => {
       <Carousel
         ref={carouselRef}
         shouldOptimizeUpdates
+        enableMomentum
         data={CATEGORIES.current}
         renderItem={renderCarouselCard}
         onSnapToItem={index => setCurrentIndex(index)}

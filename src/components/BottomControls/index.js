@@ -10,7 +10,6 @@ import Timer from './Timer'
 const BottomControls = () => {
   return (
     <BottomControlsContainer>
-      <Clouds />
       <Timer />
       <BigPlaybackButton />
       <PitchRandomizationButton />
