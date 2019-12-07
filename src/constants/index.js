@@ -73,3 +73,18 @@ export const COLORS = {
   carouselCardImageBG: '#074752',
   close: '#B74444',
 }
+
+export const CREDITS = [
+  'All the sounds and images bundled in this app belong to their respective creators listed here. Audio content creators can be all found on freesound.org.',
+
+  'Lake Waves 01 - RHumphries',
+  'Big Thunder Clap - seth-m',
+  'Thunder Clap And Rumble - Kinoton',
+  'Lake Waves 01 - RHumphries',
+  'Big Thunder Clap - seth-m',
+  'Thunder Clap And Rumble - Kinoton',
+  'Lake Waves 01 - RHumphries',
+  'Big Thunder Clap - seth-m',
+
+  'About screen illustration: undraw.co',
+]
