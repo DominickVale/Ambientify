@@ -46,7 +46,8 @@ const MixerNav = createStackNavigator(
   {
     Mixer: { screen: Mixer },
     SoundPicker: { screen: SoundPicker },
-    LoopsWheel: { screen: LoopsWheel }
+    LoopsWheel: { screen: LoopsWheel },
+    About: { screen: About }
   },
   {
     defaultNavigationOptions: ({ navigation }) => defaultNavSettings(navigation, 'Ambientify'),
@@ -71,7 +72,6 @@ const AppNavigator = createDrawerNavigator(
   {
     Mixer: MixerNav,
     Presets: PresetsNav,
-    About: About
   },
   {
 
