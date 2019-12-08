@@ -60,3 +60,7 @@ export const StyledText = styled.Text`
 color:${COLORS.buttonText};
 font-size: 14px;
 `
+
+export const Filler = styled.View`
+height: ${props => props.height};
+flex: 1`

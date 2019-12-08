@@ -12,7 +12,7 @@ import ModalLayout from '../../components/ModalLayout'
 import { ModalStyledText, ModalButtonText } from '../ModalLayout/styles'
 import { SOUND_FILES } from '../../constants'
 import { addCustomSound, deleteCustomSound } from '../../actions'
-import { SoundListContainer, CustomSoundsListContainer, SelectFileButton, AddCustomSoundButton, OpenAddCustomSoundButton } from './styles'
+import { SoundListContainer, Filler, SelectFileButton, AddCustomSoundButton, OpenAddCustomSoundButton } from './styles'
 import { parseStringToValidFileName } from '../../utils'
 
 
@@ -61,39 +61,36 @@ const index = (props) => {
 
   const textValueHandler = (text) => setTextValue(text)
 
-
   return (
     <SoundListContainer>
 
       {props.category === 'CUSTOM' && (
         <>
-          <View>
-            <Modal
-              animationType="slide"
-              onRequestClose={() => setModalOpen(false)}
-              transparent={true}
-              visible={isModalOpen}>
-              <ModalLayout headerTitle="Add a custom sound"
-                disableButtons
-                modalHeight='70%'
-                onSave={() => setModalOpen(false)}
-                onCloseModal={() => setModalOpen(false)}>
-                <ModalStyledText>Choose your new sound's name</ModalStyledText>
-                <ModalStyledText fontSize={12}>(Valid file formats are: .ogg and .mp3)</ModalStyledText>
-                <TextInput
-                  value={textValue}
-                  placeholder=" Max 26 characters"
-                  autoCorrect={true}
-                  autoFocus={false}
-                  onChangeText={textValueHandler}
-                />
-                <SelectFileButton onPress={pickCustomSound}>
-                  <ModalButtonText>Select file</ModalButtonText>
-                </SelectFileButton>
-              </ModalLayout>
-            </Modal>
-
-          </View>
+          <Modal
+            animationType="slide"
+            onRequestClose={() => setModalOpen(false)}
+            transparent={true}
+            visible={isModalOpen}>
+            <ModalLayout headerTitle="Add a custom sound"
+              disableButtons
+              modalHeight='50%'
+              onSave={() => setModalOpen(false)}
+              onCloseModal={() => setModalOpen(false)}>
+              <ModalStyledText>Choose your new sound's name</ModalStyledText>
+              <ModalStyledText fontSize={12}>(Valid file formats are: .ogg and .mp3)</ModalStyledText>
+              <TextInput
+                value={textValue}
+                placeholder=" Max 26 characters"
+                autoCorrect={true}
+                autoFocus={false}
+                onChangeText={textValueHandler}
+              />
+              <Filler height={20} />
+              <SelectFileButton onPress={pickCustomSound}>
+                <ModalButtonText>Select file</ModalButtonText>
+              </SelectFileButton>
+            </ModalLayout>
+          </Modal>
           <FlatList
             stickyHeaderIndices={[1]}
             data={Object.keys(customSounds)}
@@ -101,9 +98,12 @@ const index = (props) => {
             keyExtractor={item => `${props.soundCategory}.${item}`}
             stickyHeaderIndices={[0]}
             ListHeaderComponent={(
-              <AddCustomSoundButton onPress={() => setModalOpen(true)}>
-                <MaterialIcon name="add" size={28} color={COLORS.headerFore} onPress={() => setModalOpen(true)} />
-              </AddCustomSoundButton>
+              <>
+                <AddCustomSoundButton onPress={() => setModalOpen(true)}>
+                  <MaterialIcon name="add" size={28} color={COLORS.headerFore} onPress={() => setModalOpen(true)} />
+                </AddCustomSoundButton>
+                <Filler height={20} />
+              </>
             )} />
 
         </>
