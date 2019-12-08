@@ -43,11 +43,11 @@ const SideDrawer = (props) => {
         <SideNavButton screen='Presets' title={t('presets')} iconName="save" iconSize={22} navigation={props.navigation} />
         <SideNavButton title={t('get_new_sounds')} iconName="music-note" iconSize={22} onPress={() => Linking.openURL('https://freesound.org/browse/tags/ambient/')} />
 
-        <DrawerSettingsContainer>
+        {/*         <DrawerSettingsContainer>
           <DrawerTitle>{t('settings')}</DrawerTitle>
         </DrawerSettingsContainer>
 
-        <SideNavButton title={t('language')} iconName="language" iconSize={22} material onPress={() => { setModalVisible(value => !value) }} />
+        <SideNavButton title={t('language')} iconName="language" iconSize={22} material onPress={() => { setModalVisible(value => !value) }} /> */}
 
         <Socials>
           <SocialButton iconName="facebook" iconSize={28} onPress={socialButtonHandler} />
