@@ -2,10 +2,17 @@ import styled from 'styled-components/native'
 
 import { COLORS } from '../../constants'
 
+export const StyledAd = styled.View`
+position: absolute;
+bottom: 0;
+left: 0;
+z-index: 10000;
+`
+
 export const BottomControlsContainer = styled.View`
 position: absolute;
 background-color: transparent;
-bottom: 0;
+bottom: 38;
 align-self: center;
 justify-content: space-around;
 align-items: center;

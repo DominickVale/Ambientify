@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation'
 import { useSelector } from 'react-redux'
 
 import { PresetsContainer, AddPresetButton, Filler } from './styles/presets'
+import BottomControls from '../components/BottomControls'
 import { useBackHandlerWithListener } from '../utils'
 import PresetItem from '../components/PresetItem'
 import { COLORS } from '../constants'
@@ -38,7 +39,7 @@ const Presets = ({ navigation }) => {
             {Object.keys(presets).map(preset => preset !== 'customSounds' && (<PresetItem presetName={preset} key={preset} />))}
           </PresetsContainer>
         </ScrollView>
-
+        <BottomControls />
       </ImageBackground>
     </>
   )

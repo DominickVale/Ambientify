@@ -35,7 +35,9 @@ const SideDrawer = (props) => {
           </TouchableHighlight>
         </DrawerTitleContainer>
 
-        <StyledAd height='16%' />
+        <StyledAd height='16%'>
+          {/* TODO: Custom "buy premium version" ad here */}
+        </StyledAd>
 
         <SideNavButton screen='Mixer' title={t('mixer')} iconName="equalizer" iconSize={22} navigation={props.navigation} />
         <SideNavButton screen='Presets' title={t('presets')} iconName="save" iconSize={22} navigation={props.navigation} />
