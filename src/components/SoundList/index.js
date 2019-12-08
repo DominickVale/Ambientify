@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import DocumentPicker from 'react-native-document-picker'
 import * as FileSystem from 'expo-file-system'
-import { Text, View, Button, FlatList, Modal, ToastAndroid } from 'react-native'
+import { FlatList, Modal, ToastAndroid } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import { useTranslation } from 'react-i18next';
 
 import { COLORS } from '../../constants'
 import SoundItem from './SoundItem'
@@ -17,6 +18,7 @@ import { parseStringToValidFileName } from '../../utils'
 
 
 const index = (props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch()
   const [textValue, setTextValue] = useState('');
   const [isModalOpen, setModalOpen] = useState(false)
@@ -37,7 +39,7 @@ const index = (props) => {
 
   const soundDeleteHandler = async (uri, soundName) => {
     await FileSystem.deleteAsync(uri, { idempotent: true }).then(() => ToastAndroid.showWithGravityAndOffset(
-      'Custom sound deleted',
+      t('custom_sound_deleted'),
       ToastAndroid.SHORT,
       ToastAndroid.BOTTOM,
       0, 100))
@@ -71,23 +73,23 @@ const index = (props) => {
             onRequestClose={() => setModalOpen(false)}
             transparent={true}
             visible={isModalOpen}>
-            <ModalLayout headerTitle="Add a custom sound"
+            <ModalLayout headerTitle={t('channel')}
               disableButtons
               modalHeight='50%'
               onSave={() => setModalOpen(false)}
               onCloseModal={() => setModalOpen(false)}>
-              <ModalStyledText>Choose your new sound's name</ModalStyledText>
-              <ModalStyledText fontSize={12}>(Valid file formats are: .ogg and .mp3)</ModalStyledText>
+              <ModalStyledText>{t('choose_sound_name')}</ModalStyledText>
+              <ModalStyledText fontSize={12}>{t('supported_files')}</ModalStyledText>
               <TextInput
                 value={textValue}
-                placeholder=" Max 26 characters"
+                placeholder={" Max 26 " + t('characters')}
                 autoCorrect={true}
                 autoFocus={false}
                 onChangeText={textValueHandler}
               />
               <Filler height={20} />
               <SelectFileButton onPress={pickCustomSound}>
-                <ModalButtonText>Select file</ModalButtonText>
+                <ModalButtonText>{t('select_file')}</ModalButtonText>
               </SelectFileButton>
             </ModalLayout>
           </Modal>

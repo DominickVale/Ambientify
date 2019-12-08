@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
+import i18n from '../translations';
 
 import Mixer from '../screens/Mixer'
 import Presets from '../screens/Presets'
@@ -15,7 +16,7 @@ import { COLORS } from '../constants'
 
 
 const defaultNavSettings = (navigation, title) => ({
-  title: title,
+  title: i18n.t(title.toLowerCase()),
   headerStyle: {
     backgroundColor: COLORS.primary,
     height: 78

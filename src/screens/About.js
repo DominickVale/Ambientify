@@ -1,6 +1,7 @@
 import React from 'react'
 import { BackHandler, Image, FlatList } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { useTranslation } from 'react-i18next';
 
 import ModalLayout from '../components/ModalLayout'
 import { useBackHandler } from '../utils'
@@ -10,7 +11,7 @@ import packageJson from '../../package.json'
 import { CREDITS } from '../constants'
 
 const About = ({ navigation }) => {
-
+  const { t } = useTranslation();
   useBackHandler(BackHandler, navigation, () => navigation.goBack())
 
   const renderCredits = ({ item }) => (
@@ -20,7 +21,7 @@ const About = ({ navigation }) => {
     </>
   )
   return (
-    <ModalLayout disableButtons modalHeight={'90%'} headerTitle="About" onCloseModal={() => navigation.goBack()}>
+    <ModalLayout disableButtons modalHeight={'90%'} headerTitle={t('about')} onCloseModal={() => navigation.goBack()}>
       <ImageContainer>
         <Image source={require('#ambientify-images/about.png')} style={{ width: 270, height: 150, resizeMode: 'contain' }} />
       </ImageContainer>
@@ -29,7 +30,7 @@ const About = ({ navigation }) => {
       <ModalStyledText fontSize={13} secondary>v{packageJson.version}</ModalStyledText>
 
       <Filler height={15} />
-      <ModalStyledText fontSize={13} secondary>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora autem, vitae voluptates eum rem</ModalStyledText>
+      <ModalStyledText fontSize={13} secondary>{t('info_body')}</ModalStyledText>
       <Filler height={30} />
 
       <ModalStyledText fontSize={20}>Credits</ModalStyledText>

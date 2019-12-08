@@ -12,6 +12,7 @@ import { name as appName } from './app.json';
 import { AppRegistry } from 'react-native';
 import configureStore from './src/store';
 import App from './App';
+import './src/translations/index'
 
 const { store, persistor } = configureStore();
 

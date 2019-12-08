@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { WheelPicker } from 'react-native-wheel-picker-android'
 import { withNavigation } from 'react-navigation'
 import { BackHandler } from 'react-native'
+import { useTranslation } from 'react-i18next';
 
 import { useBackHandler } from '../utils/'
 import { setLoops, toggleRandom, playSound } from '../actions'
@@ -12,6 +13,7 @@ import ModalLayout from '../components/ModalLayout'
 import { COLORS } from '../constants'
 
 const LoopsWheel = ({ navigation }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { file, randomizing } = useSelector(state => state.channels[navigation.getParam('channelId')])
 
@@ -38,8 +40,8 @@ const LoopsWheel = ({ navigation }) => {
   }
 
   return (
-    <ModalLayout headerTitle="Configure loops" onSave={buttonHandler} onCloseModal={() => navigation.goBack()}>
-      <ModalStyledText>Choose how many times the sound should be looped for.</ModalStyledText>
+    <ModalLayout headerTitle={t("configure_loops")} onSave={buttonHandler} onCloseModal={() => navigation.goBack()}>
+      <ModalStyledText>{t('choose_loops')}</ModalStyledText>
       <WheelsContainer>
         <StyledWheelPicker>
 
@@ -57,7 +59,7 @@ const LoopsWheel = ({ navigation }) => {
             selectedItemTextFontFamily='Montserrat-Regular'
             itemTextSize={22}
             onItemSelected={(value) => setTimesWheelState(value)} />
-          <ModalStyledText>Times</ModalStyledText>
+          <ModalStyledText>{t('times')}</ModalStyledText>
         </StyledWheelPicker>
         <SemiColonSpacer>x</SemiColonSpacer>
         <StyledWheelPicker>
@@ -75,7 +77,7 @@ const LoopsWheel = ({ navigation }) => {
             selectedItemTextFontFamily='Montserrat-Regular'
             itemTextSize={22}
             onItemSelected={(value) => setMinutesWheelState(value)} />
-          <ModalStyledText>Minutes</ModalStyledText>
+          <ModalStyledText>{t('times')}</ModalStyledText>
         </StyledWheelPicker>
       </WheelsContainer>
     </ModalLayout>

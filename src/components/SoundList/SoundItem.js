@@ -4,14 +4,16 @@ import { withNavigation } from 'react-navigation'
 import { Audio } from 'expo-av'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import FontistoIcon from 'react-native-vector-icons/Fontisto'
+import { useTranslation } from 'react-i18next';
 
 import { COLORS } from '../../constants'
 import { loadSound } from '../../actions'
 import { SOUND_FILES } from '../../constants/index'
-import { ParseFileNameToString, parseFileNameToString } from '../../utils'
 import { SoundLoadButton, SoundPreviewButton, StyledSoundItem, StyledText, CustomSoundDeleteButton } from './styles'
 
 const SoundItem = ({ isCustomSound, onCustomSoundDelete, channelId, navigation, soundName, soundCategory }) => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const [playing, setPlaying] = useState(false)
   const customSounds = useSelector(state => state.presets.customSounds)
@@ -52,13 +54,10 @@ const SoundItem = ({ isCustomSound, onCustomSoundDelete, channelId, navigation, 
 
 
   const loadButtonHandler = () => {
-    if (soundCategory === 'CUSTOM') {
-
-      dispatch(loadSound(channelId, customSounds[soundName], 'CUSTOM', soundName))
-      console.log('loading custom sound')
-    } else {
-      dispatch(loadSound(channelId, SOUND_FILES[soundCategory][soundName], soundCategory, soundName))
-    }
+    if (soundCategory === 'CUSTOM')
+      dispatch(loadSound(channelId, customSounds[soundName], 'CUSTOM', soundName));
+    else
+      dispatch(loadSound(channelId, SOUND_FILES[soundCategory][soundName], soundCategory, soundName));
 
     navigation.popToTop();
   }
@@ -75,7 +74,7 @@ const SoundItem = ({ isCustomSound, onCustomSoundDelete, channelId, navigation, 
       </SoundPreviewButton>
 
       <SoundLoadButton onPress={loadButtonHandler}>
-        <StyledText numberOfLines={1}>{parseFileNameToString(soundName)}</StyledText>
+        <StyledText numberOfLines={1}>{t(soundName) || soundName}</StyledText>
       </SoundLoadButton>
 
       {isCustomSound && (

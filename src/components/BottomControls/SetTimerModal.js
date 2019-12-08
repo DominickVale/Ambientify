@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { ToastAndroid } from 'react-native'
 import { WheelPicker } from 'react-native-wheel-picker-android'
 import { withNavigation } from 'react-navigation'
+import { useTranslation } from 'react-i18next';
 
 import ModalLayout from '../../components/ModalLayout'
 import { WheelsContainer, StyledWheelPicker, SemiColonSpacer } from '../../screens/styles/wheels'
@@ -10,7 +11,7 @@ import { COLORS } from '../../constants'
 
 
 const SetTimer = (props) => {
-
+  const { t } = useTranslation();
   const [hoursMillis, setHoursMillis] = useState(0)
   const [minutesMillis, setMinutesMillis] = useState(0)
 
@@ -40,7 +41,7 @@ const SetTimer = (props) => {
     console.log(value)
     if (value === 0) {
       ToastAndroid.showWithGravity(
-        'Timer disabled',
+        t('timer_disabled'),
         ToastAndroid.SHORT,
         ToastAndroid.BOTTOM,
       );
@@ -52,8 +53,8 @@ const SetTimer = (props) => {
     setMinutesMillis(0)
   }
   return (
-    <ModalLayout headerTitle="Timer settings" onSave={buttonHandler} onCloseModal={props.onCloseModal}>
-      <ModalStyledText>Choose a value</ModalStyledText>
+    <ModalLayout headerTitle={t('timer_settings')} onSave={buttonHandler} onCloseModal={props.onCloseModal}>
+      <ModalStyledText>{t('choose_value')}</ModalStyledText>
       <WheelsContainer>
         <StyledWheelPicker>
 
@@ -70,14 +71,14 @@ const SetTimer = (props) => {
             selectedItemTextFontFamily='Montserrat-Regular'
             itemTextSize={22}
             onItemSelected={parseHoursMillis} />
-          <ModalStyledText>Hours</ModalStyledText>
+          <ModalStyledText>{t('hours')}</ModalStyledText>
         </StyledWheelPicker>
         <SemiColonSpacer>x</SemiColonSpacer>
         <StyledWheelPicker>
 
           <WheelPicker style={{ width: 103, height: 190 }}
             initPosition={0}
-            data={_getWheelData('minutes')}
+            data={_getWheelData('hours')}
             selectedItemTextColor={COLORS.bigPlayButtonFore}
             selectedItemTextSize={26}
             itemTextColor={COLORS.wheelPickerInactive}
@@ -87,7 +88,7 @@ const SetTimer = (props) => {
             selectedItemTextFontFamily='Montserrat-Regular'
             itemTextSize={22}
             onItemSelected={parseMinutesMillis} />
-          <ModalStyledText>Minutes</ModalStyledText>
+          <ModalStyledText>{t('minutes')}</ModalStyledText>
         </StyledWheelPicker>
       </WheelsContainer>
     </ModalLayout>

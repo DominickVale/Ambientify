@@ -1,5 +1,6 @@
 import React from 'react'
 import FontistoIcon from 'react-native-vector-icons/Fontisto'
+import { useTranslation } from 'react-i18next';
 
 import {
   OuterContainer, InnerContainer, ModalHeader, ModalHeaderTitle,
@@ -9,6 +10,8 @@ import {
 import { COLORS } from '../../constants'
 
 const index = (props) => {
+  const { t } = useTranslation();
+
   return (
     <OuterContainer>
       <InnerContainer modalHeight={props.modalHeight || '80%'}>
@@ -26,12 +29,12 @@ const index = (props) => {
         {!props.disableButtons && (
           <ModalButtonsContainer>
             <ModalButton onPress={() => props.onSave()}>
-              <ModalButtonText>Save</ModalButtonText>
+              <ModalButtonText>{t('save')}</ModalButtonText>
             </ModalButton>
             <ModalButtonCancel onPress={() => props.onCloseModal()}>
               <ModalButtonCancelText>
-                Cancel
-                    </ModalButtonCancelText>
+                {t('cancel')}
+              </ModalButtonCancelText>
             </ModalButtonCancel>
           </ModalButtonsContainer>
         )}

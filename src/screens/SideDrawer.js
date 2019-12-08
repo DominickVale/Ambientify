@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { TouchableHighlight, Linking, Share } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import FontistoIcon from 'react-native-vector-icons/Fontisto'
+import { useTranslation } from 'react-i18next';
 
 import { StyledContainer, StyledAd, DrawerTitleContainer, DrawerTitle, DrawerSettingsContainer, SideDrawerItem, SideDrawerItemText, SideDrawerItemButton, SideDrawerIcon, Socials } from './styles/sideDrawer'
 import { COLORS } from '../constants'
@@ -13,15 +14,14 @@ import { COLORS } from '../constants'
  */
 
 const SideDrawer = (props) => {
-
-  const languages = ['English', 'Italian', 'French']
+  const { t, i18n } = useTranslation();
   const [modalVisible, setModalVisible] = useState(false)
 
   const socialButtonHandler = () => {
 
     Share.share({
       message:
-        'Test | ...',
+        t('share_message'),
     });
   }
 
@@ -29,7 +29,7 @@ const SideDrawer = (props) => {
     <>
       <StyledContainer>
         <DrawerTitleContainer>
-          <DrawerTitle>Menu</DrawerTitle>
+          <DrawerTitle>{t('menu')}</DrawerTitle>
           <TouchableHighlight onPress={props.navigation.toggleDrawer}>
             <FontistoIcon name="close-a" size={22} color={COLORS.icons} />
           </TouchableHighlight>
@@ -37,15 +37,15 @@ const SideDrawer = (props) => {
 
         <StyledAd height='16%' />
 
-        <SideNavButton screen="Mixer" iconName="equalizer" iconSize={22} navigation={props.navigation} />
-        <SideNavButton screen="Presets" iconName="save" iconSize={22} navigation={props.navigation} />
-        <SideNavButton title="Get new Sounds" iconName="music-note" iconSize={22} onPress={() => Linking.openURL('https://freesound.org/browse/tags/ambient/')} />
+        <SideNavButton screen='Mixer' title={t('mixer')} iconName="equalizer" iconSize={22} navigation={props.navigation} />
+        <SideNavButton screen='Presets' title={t('presets')} iconName="save" iconSize={22} navigation={props.navigation} />
+        <SideNavButton title={t('get_new_sounds')} iconName="music-note" iconSize={22} onPress={() => Linking.openURL('https://freesound.org/browse/tags/ambient/')} />
 
         <DrawerSettingsContainer>
-          <DrawerTitle>Settings</DrawerTitle>
+          <DrawerTitle>{t('settings')}</DrawerTitle>
         </DrawerSettingsContainer>
 
-        <SideNavButton title="Language" iconName="language" iconSize={22} material onPress={() => { setModalVisible(value => !value) }} />
+        <SideNavButton title={t('language')} iconName="language" iconSize={22} material onPress={() => { setModalVisible(value => !value) }} />
 
         <Socials>
           <SocialButton iconName="facebook" iconSize={28} onPress={socialButtonHandler} />
@@ -68,7 +68,7 @@ const SideNavButton = (props) => (
         {props.material ? <MaterialIcon name={props.iconName} size={props.iconSize} color={COLORS.icons} /> :
           <FontistoIcon name={props.iconName} size={props.iconSize} color={COLORS.icons} />}
       </SideDrawerIcon>
-      <SideDrawerItemText>{props.screen || props.title}</SideDrawerItemText>
+      <SideDrawerItemText>{props.title}</SideDrawerItemText>
       {props.children}
     </SideDrawerItemButton>
   </SideDrawerItem>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ToastAndroid } from 'react-native'
+import { useTranslation } from 'react-i18next';
 
 import VolumeSlider from './VolumeSlider'
 import LoopsWheelButton from './LoopsWheelButton'
@@ -15,9 +16,12 @@ import { loadSound, playSound, stopSound } from '../../actions'
 
 
 const Channel = ({ channelId }) => {
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
   const { soundObject, file, currentSoundCategory, currentSound, playing, randomizing } = useSelector(state => state.channels[channelId])
-  const [channelTitle, setChannelTitle] = useState(`Channel ${channelId + 1}`)
+  const [channelTitle, setChannelTitle] = useState(`${t('channel')} ${channelId + 1}`)
+
 
   const loadSoundWithTitle = async (soundFile) => {
     await soundObject.loadAsync(soundFile)
@@ -44,7 +48,7 @@ const Channel = ({ channelId }) => {
 
           try {
 
-            setChannelTitle('Loading...')
+            setChannelTitle(`${t('loading')}...`)
             if (soundStatus.isLoaded) {
               await soundObject.unloadAsync().then(async () => {
                 loadSoundWithTitle(soundFile)

@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { useDispatch, useSelector } from 'react-redux'
 import { View, ToastAndroid } from 'react-native'
 import { Audio } from 'expo-av'
+import { useTranslation } from 'react-i18next';
 
 import { StyledPlaybackButton, StyledButtonText } from './styles'
 import { playSound, stopSound } from '../../actions'
@@ -22,6 +23,7 @@ const playIcon = <Icon name="play-arrow" size={30} />;
 const pauseIcon = <Icon name="pause" size={30} />
 
 const PlaybackButton = ({ channelId }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { soundObject, playing, file, loops, randomizing, currentSound, volume } = useSelector(state => state.channels[channelId])
   const { pitchRandomization, muted } = useSelector(state => state.settings)
@@ -157,7 +159,7 @@ const PlaybackButton = ({ channelId }) => {
   const toggleSoundHandler = () => {
     if (file) dispatch(playing ? stopSound(channelId) : playSound(channelId));
     else ToastAndroid.showWithGravityAndOffset(
-      'Please load a sound first',
+      t('select_file_first'),
       ToastAndroid.SHORT,
       ToastAndroid.BOTTOM,
       0, 100)
