@@ -42,11 +42,9 @@ export default (state = initialState, action) => {
       }
     })
 
-    case DELETE_CUSTOM_SOUND: (() => {
-      const newState = { ...state };
-      delete newState.customSounds[action.payload.soundName]
-      return newState
-    })();
+    case DELETE_CUSTOM_SOUND:
+      const { [action.payload.soundName]: _, ...newCustomSounds } = state.customSounds;
+      return { ...state, ['customSounds']: newCustomSounds }
 
     default: return state;
   }

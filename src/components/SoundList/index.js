@@ -15,11 +15,6 @@ import { addCustomSound, deleteCustomSound } from '../../actions'
 import { SoundListContainer, CustomSoundsListContainer, SelectFileButton, AddCustomSoundButton, OpenAddCustomSoundButton } from './styles'
 import { parseStringToValidFileName } from '../../utils'
 
-/**
- * 
- * TODO:
- * fix custom sound not disappearing after deletion
- */
 
 const index = (props) => {
   const dispatch = useDispatch()
