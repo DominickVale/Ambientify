@@ -10,12 +10,14 @@ const LoopsWheelButton = ({ channelId, navigation }) => {
   const { t } = useTranslation();
   const { randomizing, loops, soundObject, currentSound, file } = useSelector(state => state.channels[channelId])
 
-  let timesWheelData = []
-  let minutesWheelData = []
+  let timesWheelData;
+  let minutesWheelData;
 
   const _getWheelData = (soundDuration) => {
+    timesWheelData = [];
+    minutesWheelData = [];
     let minutes = loops.minutes * 60000;
-    let timesCanBePlayed = minutes / soundDuration
+    let timesCanBePlayed = (minutes / soundDuration) + 1
 
     for (let i = 1; i < 60; i++) {
       minutesWheelData.push(`${i}`);

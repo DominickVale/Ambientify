@@ -77,7 +77,7 @@ const LoopsWheel = ({ navigation }) => {
             selectedItemTextFontFamily='Montserrat-Regular'
             itemTextSize={22}
             onItemSelected={(value) => setMinutesWheelState(value)} />
-          <ModalStyledText>{t('times')}</ModalStyledText>
+          <ModalStyledText>{t('minutes')}</ModalStyledText>
         </StyledWheelPicker>
       </WheelsContainer>
     </ModalLayout>
