@@ -15,7 +15,6 @@
     "expo-av": "^7.0.1",
     "i18next": "^19.0.1",
     "lodash": "^4.17.15",
-    "lottie-react-native": "^3.3.2",
     "react": "16.8.1",
     "react-i18next": "^11.2.5",
     "react-native": "0.61.3",
