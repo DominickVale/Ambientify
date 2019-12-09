@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { BackHandler, Dimensions, StyleSheet, YellowBox } from 'react-native'
 import Carousel, { Pagination, ParallaxImage } from 'react-native-snap-carousel'
 import { withNavigation } from 'react-navigation'
+import { useTranslation } from 'react-i18next';
 
 import { useBackHandler } from '../utils/'
 import SoundList from '../components/SoundList'
@@ -12,7 +13,7 @@ import { SoundCategoryContainer, SoundCategoryText, SoundCategoryImageContainer,
 
 const SoundPicker = ({ navigation }) => {
   useBackHandler(BackHandler, navigation, () => navigation.goBack());
-
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const CATEGORIES = useRef([]);
@@ -33,7 +34,7 @@ const SoundPicker = ({ navigation }) => {
     <SoundCategoryContainer width={CAROUSEL_CARD_WIDTH}>
       <Filler />
       <SoundCategoryImageContainer height={CAROUSEL_IMAGE_HEIGHT}>
-        <SoundCategoryText >{item}</SoundCategoryText>
+        <SoundCategoryText >{t(item)}</SoundCategoryText>
         <ParallaxImage
           source={CATEGORY_IMAGES[item]}
           showSpinner={false}

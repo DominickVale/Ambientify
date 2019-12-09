@@ -33,6 +33,15 @@
     "timer_disabled": "Timer disabilitato",
     "pitch_enabled": "Pitch casuale abilitato",
     "pitch_disabled": "Pitch casuale disabilitato",
+    "--------start of category names translation": "--------",
+    "NATURE": "Natura",
+    "ANIMALS": "Animali",
+    "DARK": "Dark",
+    "ENVIRONMENT": "Ambienti",
+    "WEATHER": "Clima",
+    "MUSIC": "Musica",
+    "CUSTOM": "Personali",
+    "--------start of sound names translation": "--------",
     "wind": "Vento",
     "Lake_Waves_01": "Onde di lago"
   }
