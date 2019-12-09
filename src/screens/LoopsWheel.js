@@ -6,7 +6,7 @@ import { BackHandler } from 'react-native'
 import { useTranslation } from 'react-i18next';
 
 import { useBackHandler } from '../utils/'
-import { setLoops, toggleRandom, playSound } from '../actions'
+import { setLoops, toggleRandom, playSound, stopSound } from '../actions'
 import { WheelsContainer, StyledWheelPicker, SemiColonSpacer } from './styles/wheels'
 import { ModalStyledText } from '../components/ModalLayout/styles'
 import ModalLayout from '../components/ModalLayout'
@@ -35,7 +35,11 @@ const LoopsWheel = ({ navigation }) => {
 
   const buttonHandler = () => {
     dispatch(setLoops(channelId.current, { times: timesWheelState + 1, minutes: minutesWheelState + 1 })) //Set loops with state values +1. React Native Wheel Picker maps values by id starting from 0 to n, whereas wheelData starts from 1.
-    if (timesWheelState + 1 > 1) toggleRandomShuffle();
+    if ((timesWheelState + minutesWheelState) <= 1 && randomizing) {
+      dispatch(stopSound(channelId.current))
+      dispatch(toggleRandom(channelId.current));
+    } else if (timesWheelState > 0) toggleRandomShuffle();
+
     navigation.goBack();
   }
 
