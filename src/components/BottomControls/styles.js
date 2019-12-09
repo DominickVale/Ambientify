@@ -3,16 +3,23 @@ import styled from 'styled-components/native'
 import { COLORS } from '../../constants'
 
 export const StyledAd = styled.View`
-position: absolute;
+position: relative;
+max-height: ${props => props.maxHeight || '80px'};
+height: ${props => props.maxHeight || '80px'};
+background-color: ${COLORS.primary};
+justify-content: center;
+align-content: center;
+align-items: center;
 bottom: 0;
 left: 0;
 z-index: 10000;
+overflow: hidden;
 `
 
 export const BottomControlsContainer = styled.View`
 position: absolute;
 background-color: transparent;
-bottom: 38;
+bottom: ${props => props.bottom};
 align-self: center;
 justify-content: space-around;
 align-items: center;
@@ -32,8 +39,8 @@ justify-content: center;
 
 export const MuteButton = styled.TouchableHighlight`
 background-color: ${COLORS.bigPlayButtonBG};
-width: 70;
-height: 70;
+width: 60;
+height: 60;
 border-radius: 50px;
 align-content: center;
 align-items: center;
@@ -62,16 +69,10 @@ color: ${COLORS.headerFore};`
 
 export const CloudsContainer1 = styled.View`
 position: absolute;
-height: 500;
-width: 500;
-bottom: -100;
-left: -100;
+bottom: -40;
+left: -60;
 flex: 1;
 `
 
 export const CloudsContainer2 = styled(CloudsContainer1)`
-height: 600;
-width: 800;
-bottom: -180;
-transform: scaleX(-1)
 ` 
