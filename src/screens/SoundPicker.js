@@ -19,7 +19,7 @@ const SoundPicker = ({ navigation }) => {
   const CATEGORIES = useRef([]);
   const carouselRef = useRef()
 
-  const CAROUSEL_CARD_WIDTH = Dimensions.get('screen').width - 100;
+  const CAROUSEL_CARD_WIDTH = Dimensions.get('screen').width - 90;
   const CAROUSEL_IMAGE_HEIGHT = Dimensions.get('screen').height / 4;
 
   const _initData = () => { Object.keys(SOUND_FILES).map(category => CATEGORIES.current.push(category)) }
@@ -61,14 +61,18 @@ const SoundPicker = ({ navigation }) => {
       <Carousel
         ref={carouselRef}
         shouldOptimizeUpdates
-        enableMomentum
         data={CATEGORIES.current}
         renderItem={renderCarouselCard}
         onSnapToItem={index => setCurrentIndex(index)}
         sliderWidth={Dimensions.get('screen').width}
         itemWidth={CAROUSEL_CARD_WIDTH}
+        activeSlideOffset={1}
+        enableMomentum
+        swipeThreshold={40}
+        activeAnimationType='spring'
         hasParallaxImages={true}
         firstItem={2}
+        loop
       />
       <Pagination
         carouselRef={carouselRef.current}

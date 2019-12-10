@@ -47,12 +47,12 @@ const VolumeSlider = ({ channelId }) => {
         <Slider
           {...panResponder.panHandlers}
           style={{
-            width: 100,
+            width: 120,
             height: 120,
             marginTop: 6,
             transform: [
               { rotateZ: '-90deg' },
-              { scaleX: 1.3 }, { scaleY: 1.3 }
+              { scaleY: 1.2 }, { scaleX: 1.2 }
             ],
           }}
           minimumValue={0}

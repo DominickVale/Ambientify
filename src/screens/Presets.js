@@ -1,5 +1,5 @@
 import React from 'react'
-import { BackHandler, ImageBackground, ScrollView } from 'react-native'
+import { BackHandler, ImageBackground, ScrollView, Image, Dimensions } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { withNavigation } from 'react-navigation'
 import { useSelector } from 'react-redux'
@@ -14,6 +14,7 @@ import { COLORS } from '../constants'
  * TODO: 
  * add dynamic background image
  */
+const screenWidth = Dimensions.get('screen').width;
 
 const Presets = ({ navigation }) => {
 
@@ -28,7 +29,8 @@ const Presets = ({ navigation }) => {
 
   return (
     <>
-      <ImageBackground source={require('#ambientify-images/bg.jpg')} style={{ width: '100%', height: '100%' }}>
+      <ImageBackground resizeMethod='scale' source={require('#ambientify-images/bg.jpg')} style={{ width: '100%', height: '100%' }}>
+        <Image source={require('#ambientify-images/clouds_top.png')} style={{ height: 50, width: screenWidth + 100, position: 'absolute', left: 0, zIndex: 1000 }} />
         <ScrollView stickyHeaderIndices={[1]}>
           <Filler height={80} />
           <AddPresetButton>

@@ -12,6 +12,7 @@ import SideDrawer from '../screens/SideDrawer'
 import SoundPicker from '../screens/SoundPicker'
 import LoopsWheel from '../screens/LoopsWheel'
 import About from '../screens/About'
+import { normSize } from '../utils'
 import { COLORS } from '../constants'
 
 
@@ -19,26 +20,26 @@ const defaultNavSettings = (navigation, title) => ({
   title: i18n.t(title.toLowerCase()),
   headerStyle: {
     backgroundColor: COLORS.primary,
-    height: 78
+    height: 64
   },
   headerTintColor: COLORS.headerFore,
-  headerLeftContainerStyle: { paddingLeft: 10 },
+  headerLeftContainerStyle: { paddingLeft: 12 },
   headerLeft: () => (
     <TouchableOpacity onPress={navigation.toggleDrawer}>
-      <Icon name="menu" size={34} color={COLORS.icons} />
+      <Icon name="menu" size={30} color={COLORS.icons} />
     </TouchableOpacity>
   ),
   headerTitleStyle: {
     flex: 1,
     fontFamily: 'Montserrat-SemiBold',
-    fontSize: 21,
+    fontSize: normSize(1),
     textAlign: 'center',
     alignSelf: 'center'
   },
-  headerRightContainerStyle: { paddingRight: 10 },
+  headerRightContainerStyle: { paddingRight: 14 },
   headerRight: () => (
     <TouchableOpacity onPress={() => navigation.navigate({ routeName: 'About' })}>
-      <Icon name="info-outline" size={28} color={COLORS.icons} />
+      <Icon name="info-outline" size={24} color={COLORS.icons} />
     </TouchableOpacity>
   ),
 });

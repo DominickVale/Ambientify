@@ -9,12 +9,11 @@ import { COLORS } from '../constants'
 
 /**
  * TODO:
- * Add modal for language and finish language setting button
  * Add share message + link to appstore
  */
 
 const SideDrawer = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [modalVisible, setModalVisible] = useState(false)
 
   const socialButtonHandler = () => {
@@ -31,7 +30,7 @@ const SideDrawer = (props) => {
         <DrawerTitleContainer>
           <DrawerTitle>{t('menu')}</DrawerTitle>
           <TouchableHighlight onPress={props.navigation.toggleDrawer}>
-            <FontistoIcon name="close-a" size={22} color={COLORS.icons} />
+            <FontistoIcon name="close-a" size={20} color={COLORS.icons} />
           </TouchableHighlight>
         </DrawerTitleContainer>
 

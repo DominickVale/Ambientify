@@ -51,26 +51,27 @@ export const SOUND_FILES = {
 
 
 export const COLORS = {
-  icons: '#5B636C',
+  icons: '#586569',
   primary: '#06191F',
+  secondary: '#B2B5BD',
   channelBG: 'rgba(6, 25, 31, 0.65)',
   headerFore: '#EBDAD0',
   sideDrawerBG: '#0F2A32',
-  buttonText: '#B9B4B1',
+  buttonText: '#8F989A',
   sliderTop: '#EAE3D2',
-  sliderBar: '#rgba(210, 207, 226, 0.7)',
+  sliderBar: '#rgba(140, 140, 150, 0.7)',
   playButtonBG: '#0C2029',
   playButtonFore: '#B2B5BD',
   sideDrawerButtonActive: '#074752',
-  bigPlayButtonShadowBG: 'rgba(255, 201, 187, 1)',
+  bigPlayButtonShadowBG: 'rgba(255, 201, 187, 0.6)',
   bigPlayButtonBG: '#1C4B55',
   bigPlayButtonFore: '#EAEDF4',
   modalBG: '#06191F',
-  modalContainerBG: 'rgba(0, 7, 16, 0.6)',
+  modalContainerBG: 'rgba(0, 7, 16, 0.8)',
   modalButtonBG: '#34415B',
   modalButtonCancelBG: '#0C2029',
   wheelPickerInactive: 'rgba(185, 180, 177, 0.3)',
-  carouselCardImageBG: '#074752',
+  carouselCardImageBG: 'rgba(15, 42, 50, 0.4);',
   close: '#B74444',
 }
 

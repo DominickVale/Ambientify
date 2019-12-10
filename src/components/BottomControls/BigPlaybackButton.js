@@ -12,8 +12,8 @@ const BigPlaybackButton = () => {
 
   const dispatch = useDispatch()
   const isPlaying = useSelector(state => Object.keys(state.channels).some(channel => state.channels[channel].playing))
-  const playIcon = <Icon name="play-arrow" size={49} color={COLORS.bigPlayButtonFore} />;
-  const pauseIcon = <Icon name="pause" size={49} color={COLORS.bigPlayButtonFore} />
+  const playIcon = <Icon name="play-arrow" size={39} color={COLORS.bigPlayButtonFore} />;
+  const pauseIcon = <Icon name="pause" size={39} color={COLORS.bigPlayButtonFore} />
 
 
   return (

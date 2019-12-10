@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { StyledPlaybackButton, StyledButtonText } from './styles'
 import { playSound, stopSound } from '../../actions'
 import { playFromLastMillis } from '../../utils'
+import { COLORS } from '../../constants';
 
 
 /**
@@ -19,14 +20,14 @@ import { playFromLastMillis } from '../../utils'
  * Improve pseudorandom number generator
  * 
  */
-const playIcon = <Icon name="play-arrow" size={30} />;
-const pauseIcon = <Icon name="pause" size={30} />
+const playIcon = <Icon name="play-arrow" size={30} color={COLORS.buttonText} />
+const pauseIcon = <Icon name="pause" size={30} color={COLORS.secondary} />;
 
 const PlaybackButton = ({ channelId }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { soundObject, playing, file, loops, randomizing, currentSound, volume } = useSelector(state => state.channels[channelId])
-  const { pitchRandomization, muted } = useSelector(state => state.settings)
+  const { soundObject, playing, file, loops, randomizing, currentSound } = useSelector(state => state.channels[channelId])
+  const { pitchRandomization } = useSelector(state => state.settings)
 
   const [playedCount, setPlayedCount] = useState(1)
   const [soundFinishedPlaying, setSoundFinishedPlaying] = useState(false)

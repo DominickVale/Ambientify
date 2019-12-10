@@ -23,7 +23,7 @@ padding: 0 28px;
 
 export const ModalHeader = styled.View`
 flex-direction: row;
-justify-content: space-around;
+justify-content: space-between;
 margin: 18px auto 40px auto;
 align-content: center;
 align-items: center;
@@ -69,7 +69,7 @@ background-color:${COLORS.modalButtonCancelBG};
 
 export const ModalButtonText = styled.Text`
 color: ${COLORS.bigPlayButtonFore};
-font-size: 18px;
+font-size: 18%;
 align-self: center;
 text-align: center;
 margin: auto;

@@ -14,7 +14,7 @@ export const StyledChannelContainer = styled.View`
 
 export const StyledButton = styled.TouchableHighlight`
   background-color: ${COLORS.playButtonBG};
-  height: 28px;
+  height: 30px;
   width: 73px;
   border-radius: 12px;
   align-items: center;
@@ -25,14 +25,14 @@ export const StyledButton = styled.TouchableHighlight`
 
 export const StyledButtonText = styled.Text`
   color: ${COLORS.buttonText};
-  font-size: 13px;
+  font-size: 12px;
 `
 
 export const ChannelTitle = styled.Text`
   padding-top: 16px;
   padding-bottom: 10px;
   color: ${COLORS.headerFore};
-  font-size: 13px;
+  font-size: 12px;
 `
 
 export const StyledPlaybackButton = styled.TouchableHighlight`

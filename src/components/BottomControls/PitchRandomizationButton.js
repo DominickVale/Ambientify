@@ -25,7 +25,7 @@ const PitchRandomizationButton = () => {
   return (
     <View>
       <StyledPitchButton onPress={buttonHandler}>
-        <Icon name="music-note" size={32} color={pitchEnabled ? COLORS.bigPlayButtonFore : COLORS.buttonText} />
+        <Icon name="music-note" size={32} color={pitchEnabled ? COLORS.bigPlayButtonFore : COLORS.icons} />
       </StyledPitchButton>
     </View >
   )

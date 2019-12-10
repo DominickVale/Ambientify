@@ -18,7 +18,7 @@ const index = (props) => {
 
         {props.headerTitle && (<ModalHeader>
           <ModalHeaderTitle>{props.headerTitle}</ModalHeaderTitle>
-          <FontistoIcon name="close-a" size={14} color={COLORS.icons} onPress={() => props.onCloseModal()} />
+          <FontistoIcon name="close-a" size={14} color={COLORS.icons} onPress={() => props.onCloseModal()} style={{ position: 'absolute', right: 0 }} />
         </ModalHeader>)
         }
 
