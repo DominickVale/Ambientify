@@ -1,15 +1,15 @@
 import styled from 'styled-components/native'
 
-import { COLORS } from '../../constants'
+import { normSize, heightPercentageToDP, widthPercentageToDP } from '../../utils'
 
 export const ImageContainer = styled.View`
-margin-top: -50px;
+margin-top: ${normSize(-30)};
 z-index: -1;
-width: auto;
-height: auto;
+max-width: 100%;
+max-height: ${heightPercentageToDP(26)};
 align-self: center;
 `
 
 export const Filler = styled.View`
-height: ${props => props.height};
+height: ${props => heightPercentageToDP(props.height) / 10}%;
 `

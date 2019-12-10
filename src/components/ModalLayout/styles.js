@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 
 import { COLORS } from '../../constants'
+import { normSize, widthPercentageToDP } from '../../utils'
 
 export const OuterContainer = styled.View`
 flex: 1;
@@ -12,25 +13,25 @@ background-color: ${COLORS.modalContainerBG};
 
 export const InnerContainer = styled.View`
 height: ${props => props.modalHeight};
-min-height: 290px;
-width: 80%;
+min-height: ${normSize(290)};
+width: ${widthPercentageToDP(80)};
 background-color: ${COLORS.modalBG};
 justify-content: space-around;
 align-content: center;
 border-radius: 12px;
-padding: 0 28px;
+padding: 0 ${normSize(28)}px;
 `
 
 export const ModalHeader = styled.View`
 flex-direction: row;
 justify-content: space-between;
-margin: 18px auto 40px auto;
+margin: ${normSize(18)}px auto ${normSize(24)}px auto;
 align-content: center;
 align-items: center;
 `
 
 export const ModalHeaderTitle = styled.Text`
-font-size: 20px;
+font-size: ${normSize(20)};
 font-family: 'Montserrat-SemiBold';
 color: ${COLORS.headerFore};
 flex: 1;
@@ -39,8 +40,8 @@ text-align: center;
 
 export const ChildrenContainer = styled.View`
 flex: 4;
-margin: 18px auto;
-min-height: 80px;
+margin: ${normSize(18)}px auto;
+min-height: ${normSize(80)};
 `
 
 export const ModalButtonsContainer = styled.View`
@@ -49,15 +50,15 @@ flex-direction: row;
 justify-content: space-between;
 align-content: center;
 align-items: center;
-margin-bottom: 18px;
-min-height: 40px;
+margin-bottom: ${normSize(18)}px;
+min-height: ${normSize(40)};
 `
 
 export const ModalButton = styled.TouchableHighlight`
 background-color: ${COLORS.modalButtonBG};
-height: 46px;
-max-width: 130px;
-border-radius: 12px;
+height: ${normSize(46)};
+max-width: ${widthPercentageToDP(30)};
+border-radius: 50px;
 justify-content: center;
 align-content: center;
 flex: 1;
@@ -69,7 +70,7 @@ background-color:${COLORS.modalButtonCancelBG};
 
 export const ModalButtonText = styled.Text`
 color: ${COLORS.bigPlayButtonFore};
-font-size: 18%;
+font-size: ${normSize(18)};
 align-self: center;
 text-align: center;
 margin: auto;
@@ -83,5 +84,5 @@ export const ModalStyledText = styled.Text`
 color: ${props => props.secondary ? COLORS.icons : COLORS.buttonText};
 align-self: center;
 text-align: center;
-font-size: ${props => props.fontSize ? props.fontSize + 'px' : '16px'};
+font-size: ${props => props.fontSize ? normSize(props.fontSize) : normSize(16)}px;
 `

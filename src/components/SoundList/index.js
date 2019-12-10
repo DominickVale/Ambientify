@@ -14,7 +14,7 @@ import { ModalStyledText, ModalButtonText } from '../ModalLayout/styles'
 import { SOUND_FILES } from '../../constants'
 import { addCustomSound, deleteCustomSound } from '../../actions'
 import { SoundListContainer, Filler, SelectFileButton, AddCustomSoundButton, OpenAddCustomSoundButton } from './styles'
-import { parseStringToValidFileName } from '../../utils'
+import { parseStringToValidFileName, normSize, heightPercentageToDP } from '../../utils'
 
 
 const index = (props) => {
@@ -75,11 +75,11 @@ const index = (props) => {
             visible={isModalOpen}>
             <ModalLayout headerTitle={t('channel')}
               disableButtons
-              modalHeight='50%'
+              modalHeight={heightPercentageToDP(50)}
               onSave={() => setModalOpen(false)}
               onCloseModal={() => setModalOpen(false)}>
               <ModalStyledText>{t('choose_sound_name')}</ModalStyledText>
-              <ModalStyledText fontSize={12}>{t('supported_files')}</ModalStyledText>
+              <ModalStyledText fontSize={normSize(12)} secondary>{t('supported_files')}</ModalStyledText>
               <TextInput
                 value={textValue}
                 placeholder={" Max 26 " + t('characters')}
@@ -102,7 +102,7 @@ const index = (props) => {
             ListHeaderComponent={(
               <>
                 <AddCustomSoundButton onPress={() => setModalOpen(true)}>
-                  <MaterialIcon name="add" size={28} color={COLORS.headerFore} onPress={() => setModalOpen(true)} />
+                  <MaterialIcon name="add" size={normSize(28)} color={COLORS.headerFore} onPress={() => setModalOpen(true)} />
                 </AddCustomSoundButton>
                 <Filler height={20} />
               </>

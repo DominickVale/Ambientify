@@ -9,6 +9,7 @@ import BottomControls from '../components/BottomControls'
 import { useBackHandlerWithListener } from '../utils'
 import PresetItem from '../components/PresetItem'
 import { COLORS } from '../constants'
+import { normSize } from '../utils'
 
 /**
  * TODO: 
@@ -17,7 +18,6 @@ import { COLORS } from '../constants'
 const screenWidth = Dimensions.get('screen').width;
 
 const Presets = ({ navigation }) => {
-
   const presets = useSelector(state => state.presets);
 
   const backButtonHandler = () => {
@@ -34,11 +34,12 @@ const Presets = ({ navigation }) => {
         <ScrollView stickyHeaderIndices={[1]}>
           <Filler height={80} />
           <AddPresetButton>
-            <MaterialIcon name="add" size={38} color={COLORS.headerFore} onPress={() => navigation.push('AddPreset')} />
+            <MaterialIcon name="add" size={normSize(38)} color={COLORS.headerFore} onPress={() => navigation.push('AddPreset')} />
           </AddPresetButton>
           <PresetsContainer>
             <Filler height={50} />
             {Object.keys(presets).map(preset => preset !== 'customSounds' && (<PresetItem presetName={preset} key={preset} />))}
+            <Filler height={200} />
           </PresetsContainer>
         </ScrollView>
         <BottomControls />

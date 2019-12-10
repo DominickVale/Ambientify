@@ -9,6 +9,7 @@ import { ModalStyledText } from '../components/ModalLayout/styles'
 import { ImageContainer, Filler } from './styles/about'
 import packageJson from '../../package.json'
 import { CREDITS } from '../constants'
+import { normSize, heightPercentageToDP, widthPercentageToDP } from '../utils'
 
 const About = ({ navigation }) => {
   const { t } = useTranslation();
@@ -16,25 +17,25 @@ const About = ({ navigation }) => {
 
   const renderCredits = ({ item }) => (
     <>
-      <ModalStyledText fontSize={13} secondary>{item}</ModalStyledText>
-      <Filler height={12} />
+      <ModalStyledText fontSize={normSize(13)} secondary>{item}</ModalStyledText>
+      <Filler height={4} />
     </>
   )
   return (
     <ModalLayout disableButtons modalHeight={'90%'} headerTitle={t('about')} onCloseModal={() => navigation.goBack()}>
       <ImageContainer>
-        <Image source={require('#ambientify-images/about.png')} style={{ width: 270, height: 150, resizeMode: 'contain' }} />
+        <Image source={require('#ambientify-images/about.png')} style={{ width: widthPercentageToDP(60), height: heightPercentageToDP(18), resizeMode: 'contain' }} />
       </ImageContainer>
-      <Filler height={15} />
-      <ModalStyledText fontSize={20}>Ambientify</ModalStyledText>
-      <ModalStyledText fontSize={13} secondary>v{packageJson.version}</ModalStyledText>
+      <Filler height={6} />
+      <ModalStyledText fontSize={normSize(20)}>Ambientify</ModalStyledText>
+      <ModalStyledText fontSize={normSize(10)} secondary>v{packageJson.version}</ModalStyledText>
 
-      <Filler height={15} />
-      <ModalStyledText fontSize={13} secondary>{t('info_body')}</ModalStyledText>
-      <Filler height={30} />
-
-      <ModalStyledText fontSize={20}>Credits</ModalStyledText>
+      <Filler height={6} />
+      <ModalStyledText fontSize={normSize(13)} secondary>{t('info_body')}</ModalStyledText>
       <Filler height={10} />
+
+      <ModalStyledText fontSize={normSize(20)}>Credits</ModalStyledText>
+      <Filler height={3} />
       <FlatList
         data={CREDITS}
         renderItem={renderCredits}

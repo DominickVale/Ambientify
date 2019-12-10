@@ -5,6 +5,7 @@ import BackgroundTimer from 'react-native-background-timer';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import { COLORS } from '../../constants'
+import { normSize } from '../../utils'
 import SetTimerModal from './SetTimerModal'
 import { stopSoundAll } from '../../actions';
 import { StyledTimerButton, StyledTimerText } from './styles'
@@ -63,7 +64,7 @@ const Timer = () => {
   return (
     <View>
       <StyledTimerButton onPress={openModal}>
-        <Icon name="timer" size={32} color={remainingTimeString ? COLORS.bigPlayButtonFore : COLORS.icons} />
+        <Icon name="timer" size={normSize(32)} color={remainingTimeString ? COLORS.bigPlayButtonFore : COLORS.icons} />
       </StyledTimerButton>
       <StyledTimerText>{remainingTimeString}</StyledTimerText>
       <Modal

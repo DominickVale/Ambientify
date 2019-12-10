@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { setVolume } from '../../actions'
 import { COLORS } from '../../constants'
+import { normSize } from '../../utils'
 
 const VolumeSlider = ({ channelId }) => {
   const dispatch = useDispatch()
@@ -47,8 +48,8 @@ const VolumeSlider = ({ channelId }) => {
         <Slider
           {...panResponder.panHandlers}
           style={{
-            width: 120,
-            height: 120,
+            width: normSize(120),
+            height: normSize(120),
             marginTop: 6,
             transform: [
               { rotateZ: '-90deg' },

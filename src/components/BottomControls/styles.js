@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 
 import { COLORS } from '../../constants'
+import { normSize, widthPercentageToDP, heightPercentageToDP } from '../../utils'
 
 export const StyledAd = styled.View`
 position: relative;
@@ -25,13 +26,13 @@ justify-content: space-around;
 align-items: center;
 align-content: center;
 flex-direction: row;
-height: 20%;
-width: 81%;
+height: ${heightPercentageToDP(20)};
+width: ${widthPercentageToDP(81)};
 `
 
 export const MuteButtonContainer = styled.View`
-width: 90px;
-height: 90px;
+width: ${normSize(90)};
+height: ${normSize(90)};
 border-radius: 70px;
 background-color: ${COLORS.bigPlayButtonShadowBG};
 justify-content: center;
@@ -39,8 +40,8 @@ justify-content: center;
 
 export const MuteButton = styled.TouchableHighlight`
 background-color: ${COLORS.bigPlayButtonBG};
-width: 60;
-height: 60;
+width: ${normSize(60)};
+height: ${normSize(60)};
 border-radius: 50px;
 align-content: center;
 align-items: center;
@@ -51,8 +52,8 @@ margin: 0 auto;
 export const StyledPitchButton = styled.TouchableHighlight`
 justify-content: center;
 border-radius: 50px;
-padding: 10px;
-margin: -10px;
+padding: ${normSize(10)}px;
+margin: ${normSize(-10)}px;
 `
 
 export const StyledTimerButton = styled(StyledPitchButton)``
@@ -60,17 +61,18 @@ export const StyledTimerButton = styled(StyledPitchButton)``
 export const StyledTimerText = styled.Text`
 position: absolute;
 text-align: center;
-font-size: 13px;
-top: 30px;
-width: 120px;
-right: -45px;
-padding-top: 5px;
-color: ${COLORS.headerFore};`
+top: ${normSize(30)};
+width: ${normSize(120)};
+right: ${normSize(-45)};
+padding-top: ${normSize(5)};
+color: ${COLORS.headerFore};
+font-size: ${normSize(13)};
+`
 
 export const CloudsContainer1 = styled.View`
 position: absolute;
-bottom: -40;
-left: -60;
+bottom: ${normSize(-40)};
+left: ${normSize(-60)};
 flex: 1;
 `
 

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { StyledPitchButton } from './styles'
 import { togglePitch } from '../../actions'
 import { COLORS } from '../../constants'
+import { normSize } from '../../utils'
 
 
 const PitchRandomizationButton = () => {
@@ -25,7 +26,7 @@ const PitchRandomizationButton = () => {
   return (
     <View>
       <StyledPitchButton onPress={buttonHandler}>
-        <Icon name="music-note" size={32} color={pitchEnabled ? COLORS.bigPlayButtonFore : COLORS.icons} />
+        <Icon name="music-note" size={normSize(32)} color={pitchEnabled ? COLORS.bigPlayButtonFore : COLORS.icons} />
       </StyledPitchButton>
     </View >
   )

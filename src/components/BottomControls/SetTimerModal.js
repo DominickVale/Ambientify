@@ -5,9 +5,10 @@ import { withNavigation } from 'react-navigation'
 import { useTranslation } from 'react-i18next';
 
 import ModalLayout from '../../components/ModalLayout'
-import { WheelsContainer, StyledWheelPicker, SemiColonSpacer } from '../../screens/styles/wheels'
+import { WheelsContainer, StyledWheelPicker, SemiColonSpacer, Filler } from '../../screens/styles/wheels'
 import { ModalStyledText } from '../ModalLayout/styles'
 import { COLORS } from '../../constants'
+import { normSize } from '../../utils'
 
 
 const SetTimer = (props) => {
@@ -58,36 +59,38 @@ const SetTimer = (props) => {
       <WheelsContainer>
         <StyledWheelPicker>
 
-          <WheelPicker style={{ width: 104, height: 190 }}
+          <WheelPicker style={{ width: normSize(90), height: normSize(160) }}
             initPosition={0}
             visibleItemCount={3}
             data={_getWheelData('hours')}
             selectedItemTextColor={COLORS.bigPlayButtonFore}
-            selectedItemTextSize={26}
+            selectedItemTextSize={normSize(24)}
             itemTextColor={COLORS.wheelPickerInactive}
             indicatorColor={COLORS.bigPlayButtonFore}
-            indicatorWidth={4}
+            indicatorWidth={normSize(4)}
             itemTextFontFamily='Montserrat-Regular'
             selectedItemTextFontFamily='Montserrat-Regular'
-            itemTextSize={22}
+            itemTextSize={normSize(20)}
             onItemSelected={parseHoursMillis} />
+          <Filler height={2} />
           <ModalStyledText>{t('hours')}</ModalStyledText>
         </StyledWheelPicker>
         <SemiColonSpacer>x</SemiColonSpacer>
         <StyledWheelPicker>
 
-          <WheelPicker style={{ width: 103, height: 190 }}
+          <WheelPicker style={{ width: normSize(90), height: normSize(160) }}
             initPosition={0}
             data={_getWheelData('hours')}
             selectedItemTextColor={COLORS.bigPlayButtonFore}
-            selectedItemTextSize={26}
+            selectedItemTextSize={normSize(24)}
             itemTextColor={COLORS.wheelPickerInactive}
             indicatorColor={COLORS.bigPlayButtonFore}
-            indicatorWidth={4}
+            indicatorWidth={normSize(4)}
             itemTextFontFamily='Montserrat-Regular'
             selectedItemTextFontFamily='Montserrat-Regular'
-            itemTextSize={22}
+            itemTextSize={normSize(20)}
             onItemSelected={parseMinutesMillis} />
+          <Filler height={2} />
           <ModalStyledText>{t('minutes')}</ModalStyledText>
         </StyledWheelPicker>
       </WheelsContainer>

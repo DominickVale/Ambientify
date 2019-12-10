@@ -32,7 +32,7 @@ const defaultNavSettings = (navigation, title) => ({
   headerTitleStyle: {
     flex: 1,
     fontFamily: 'Montserrat-SemiBold',
-    fontSize: normSize(1),
+    fontSize: normSize(18),
     textAlign: 'center',
     alignSelf: 'center'
   },
