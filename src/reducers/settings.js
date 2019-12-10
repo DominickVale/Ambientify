@@ -1,8 +1,4 @@
 import { TOGGLE_PITCH } from '../actions'
-/**
- * TODO:
- * Implement settings
- */
 
 const initialState = {}
 
