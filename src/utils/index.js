@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Dimensions, PixelRatio } from 'react-native';
 
 export const usePrev = value => {
 
@@ -55,4 +56,24 @@ export const parseStringToValidFileName = (string) => {
 
 export const parseFileNameToString = (string) => {
   return string.replace(/\_/g, ' ')
+}
+
+export const widthPercentageToDP = widthPercent => {
+  const screenWidth = Dimensions.get('window').width;
+  const elemWidth = parseFloat(widthPercent);
+  return PixelRatio.roundToNearestPixel(screenWidth * elemWidth / 100);
+};
+
+export const heightPercentageToDP = heightPercent => {
+  const screenHeight = Dimensions.get('window').height;
+  const elemHeight = parseFloat(heightPercent);
+  return PixelRatio.roundToNearestPixel(screenHeight * elemHeight / 100);
+};
+
+export const normSize = (size) => {
+  const SCREEN_WIDTH = Dimensions.get('window').width;
+  const SCALE = 375;
+  const ratio = size / SCALE;
+  const newSize = Math.round(ratio * SCREEN_WIDTH);
+  return newSize;
 }
