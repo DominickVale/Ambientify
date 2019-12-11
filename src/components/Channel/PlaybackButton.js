@@ -75,7 +75,7 @@ const PlaybackButton = ({ channelId }) => {
         elapsedTime.current = Date.now() - startTime.current
 
         if (pitchRandomization) {
-          let nextPitch = (Math.random() * (1.8 - 0.6) + 0.6)
+          let nextPitch = (Math.random() * (OFFSET_PITCH_MAX - OFFSET_PITCH_MIN) + OFFSET_PITCH_MIN)
           soundObject.setRateAsync(nextPitch, false, Audio.PitchCorrectionQuality.Medium)
         } else { soundObject.setRateAsync(1.0) }
 
