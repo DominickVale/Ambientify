@@ -10,11 +10,7 @@ import TextInput from '../components/TextInput'
 import { ModalStyledText } from '../components/ModalLayout/styles'
 import ModalLayout from '../components/ModalLayout'
 
-/**
- * 
- * TODO:
- * add input checks
- */
+
 const AddPreset = ({ navigation }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();

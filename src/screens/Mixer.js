@@ -17,7 +17,6 @@ import BottomControls from '../components/BottomControls'
  */
 
 const screenWidth = Dimensions.get('screen').width;
-const screenHeight = Dimensions.get('screen').height;
 
 const Mixer = ({ navigation }) => {
 
@@ -30,10 +29,10 @@ const Mixer = ({ navigation }) => {
 
   return (
     <>
-      <ImageBackground source={require('#ambientify-images/bg2.jpg')} style={{ width: '100%', height: '100%'}}> 
-      <Image source={require('#ambientify-images/clouds_top.png')} style={{ height: 50, width: screenWidth + 100, position: 'absolute', left: 0, zIndex: 1000 }} />
-      <Channels />
-      <BottomControls />
+      <ImageBackground source={require('#ambientify-images/bg2.jpg')} style={{ width: '100%', height: '100%' }}>
+        <Image source={require('#ambientify-images/clouds_top.png')} style={{ height: 50, width: screenWidth + 100, position: 'absolute', left: 0, zIndex: 1000 }} />
+        <Channels />
+        <BottomControls />
       </ImageBackground>
     </>
   )
