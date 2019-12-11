@@ -68,11 +68,10 @@ const SoundPicker = ({ navigation }) => {
         itemWidth={CAROUSEL_CARD_WIDTH}
         activeSlideOffset={1}
         enableMomentum
-        swipeThreshold={40}
-        activeAnimationType='spring'
+        swipeThreshold={10}
+        activeAnimationType='decay'
         hasParallaxImages={true}
         firstItem={2}
-        loop
       />
       <Pagination
         carouselRef={carouselRef.current}
@@ -80,10 +79,10 @@ const SoundPicker = ({ navigation }) => {
         activeDotIndex={currentIndex}
         containerStyle={{ position: 'absolute', bottom: -2 }}
         dotStyle={{
-          width: 10,
-          height: 10,
-          borderRadius: 5,
-          marginHorizontal: 1,
+          width: 20,
+          height: 20,
+          borderRadius: 20,
+          marginHorizontal: -4,
           backgroundColor: 'rgba(255, 255, 255, 0.92)'
         }}
         inactiveDotOpacity={0.4}
