@@ -3,6 +3,7 @@ import { BackHandler } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 import { useTranslation } from 'react-i18next';
+import { AdMobInterstitial } from 'react-native-admob'
 
 import { addPreset } from '../actions'
 import { useBackHandler } from '../utils'
@@ -22,6 +23,9 @@ const AddPreset = ({ navigation }) => {
   const addPresetHandler = () => {
     dispatch(addPreset(textValue))
     navigation.goBack();
+    AdMobInterstitial.setAdUnitID('ca-app-pub-3940256099942544/8691691433');
+    AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+    AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
   }
 
   return (
