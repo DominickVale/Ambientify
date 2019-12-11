@@ -1,36 +1,20 @@
-import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, SET_VOLUME } from '../actions'
-import { NUMBER_OF_CHANNELS } from '../constants';
 import { Audio } from 'expo-av'
-/**
- * TODO:
- * Add presets related actions
- */
+import { merge } from 'lodash'
+
+import { LOAD_SOUND, PLAY_SOUND, STOP_SOUND, PLAY_SOUND_ALL, STOP_SOUND_ALL, SET_VOLUME, LOAD_PRESET, SET_LOOPS, TOGGLE_RANDOM } from '../actions'
+import { NUMBER_OF_CHANNELS } from '../constants';
+
 
 // Initialize the state, fill it with the preferred number of channels with default settings
 const initialState = {};
-//After initialization, state should look like this
-/**
- * state = {
- *    0: {
-        soundObject: Audio.Sound(),
-        file: false,
-        playing: false,
-        volume: 100,
-      },
- *    1: {
-        soundObject: Audio.Sound(),
-        file: false,
-        playing: false,
-        volume: 100,
-      },
-      etc...
- * }
- */
 
 for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
   initialState[i] = {
     soundObject: new Audio.Sound(),
     file: false,
+    loops: { times: 1, minutes: 1 },
+    randomizing: false,
+    currentSoundCategory: 'none',
     currentSound: 'none',
     playing: false,
     volume: 1,
@@ -38,6 +22,8 @@ for (let i = 0; i < NUMBER_OF_CHANNELS; i++) {
 }
 
 export default (state = initialState, action) => {
+
+
   switch (action.type) {
 
     case LOAD_SOUND: return {
@@ -45,6 +31,7 @@ export default (state = initialState, action) => {
       [action.channelId]: {
         ...state[action.channelId],
         file: action.payload.newSound,
+        currentSoundCategory: action.payload.newSoundCategory,
         currentSound: action.payload.newSoundName,
       },
     };
@@ -65,6 +52,28 @@ export default (state = initialState, action) => {
       },
     };
 
+    case STOP_SOUND_ALL: {
+      const newState = Object.keys(state).map((key) => ({
+        ...state[key],
+        playing: false
+      }));
+      return {
+        ...state,
+        ...newState
+      }
+    }
+
+    case PLAY_SOUND_ALL: {
+      const newState = Object.keys(state).map((key) => ({
+        ...state[key],
+        playing: state[key].file ? true : false
+      }));
+      return {
+        ...state,
+        ...newState
+      }
+    }
+
     case SET_VOLUME: return {
       ...state,
       [action.payload.channelId]: {
@@ -73,6 +82,23 @@ export default (state = initialState, action) => {
       },
     };
 
+    case SET_LOOPS: return {
+      ...state,
+      [action.payload.channelId]: {
+        ...state[action.payload.channelId],
+        loops: action.payload.loops,
+      },
+    };
+
+    case TOGGLE_RANDOM: return {
+      ...state,
+      [action.channelId]: {
+        ...state[action.channelId],
+        randomizing: !state[action.channelId].randomizing
+      },
+    };
+
+    case LOAD_PRESET: return merge({}, state, action.payload.newChannelsState)
 
     default: return state;
   }

@@ -1,40 +1,66 @@
 import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
 import Slider from '@react-native-community/slider'
-import { useSelector } from 'react-redux'
+import { View, PanResponder } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { setVolume } from '../../actions'
+import { COLORS } from '../../constants'
+import { normSize } from '../../utils'
 
 const VolumeSlider = ({ channelId }) => {
+  const dispatch = useDispatch()
   const [localVolume, setLocalVolume] = useState(1)
-  const { soundObject, volume, file } = useSelector(state => state.channels[channelId])
+  const { soundObject, volume, file, currentSound } = useSelector(state => state.channels[channelId])
+
+  const panResponder = PanResponder.create({
+    onMoveShouldSetPanResponder: () => true,
+    onMoveShouldSetPanResponderCapture: () => true
+  })
 
   useEffect(() => {
     (() => {
-      if (file) volumeHandler(volume)
+      if (file) {
+        try {
+          soundObject.setVolumeAsync(volume)
+        } catch (error) {
+          console.error(error)
+        }
+      }
     })();
   }, [volume])
 
-  const volumeHandler = async (newVolume) => {
-    if (file) {
-      setLocalVolume(newVolume)
-      try {
-        await soundObject.setVolumeAsync(newVolume)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }
+  useEffect(() => {
+    /**
+     * Set local volume when a preset is loaded.
+     * This prevents any unwanted flickering of the slider 
+     * that would be caused by dispatching on each slider value update
+     */
+    setLocalVolume(volume)
+  }, [file, currentSound, soundObject])
+
+  const volumeHandler = async (newVolume) => dispatch(setVolume(channelId, newVolume))
 
   return (
     <>
       <View>
-        <Slider minimumValue={0}
+        <Slider
+          {...panResponder.panHandlers}
+          style={{
+            width: normSize(120),
+            height: normSize(130),
+            marginTop: 6,
+            transform: [
+              { rotateZ: '-90deg' },
+            ],
+          }}
+          minimumValue={0}
           maximumValue={1}
           value={localVolume}
           onValueChange={volumeHandler}
           step={0.05}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000" />
+          minimumTrackTintColor={COLORS.sliderBar}
+          maximumTrackTintColor={COLORS.head}
+          thumbTintColor={COLORS.sliderTop} />
       </View>
     </>
   )

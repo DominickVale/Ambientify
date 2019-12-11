@@ -1,34 +1,41 @@
 /**
  * Main screen. The channels container will be rendered inside of here.
- *
- * TODO:
- *  implement
  */
 
-import React, { useEffect } from 'react'
-import { Text, BackHandler } from 'react-native'
+import React from 'react'
+import { BackHandler, ImageBackground, Image, Dimensions } from 'react-native'
+import { withNavigation } from 'react-navigation'
 import RNMinimizeApp from 'react-native-minimize'
 
 import Channels from '../containers/Channels'
+import { useBackHandlerWithListener } from '../utils'
+import BottomControls from '../components/BottomControls'
 
-const Mixer = (props) => {
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      RNMinimizeApp.minimizeApp();
-      return true
-    })
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress')
-    };
-  }, [])
+/**
+ * TODO:
+ * add dynamic background image
+ */
+
+const screenWidth = Dimensions.get('screen').width;
+
+const Mixer = ({ navigation }) => {
+
+  const backButtonHandler = () => {
+    RNMinimizeApp.minimizeApp()
+    return true;
+  }
+
+  useBackHandlerWithListener(BackHandler, navigation, backButtonHandler);
+
   return (
     <>
-      <Text>
-        Mixer screen
-      </Text>
-      <Channels />
+      <ImageBackground source={require('#ambientify-images/bg2.jpg')} style={{ width: '100%', height: '100%' }}>
+        <Image source={require('#ambientify-images/clouds_top.png')} style={{ height: 50, width: screenWidth + 100, position: 'absolute', left: 0, zIndex: 1000 }} />
+        <Channels />
+        <BottomControls />
+      </ImageBackground>
     </>
   )
 }
 
-export default Mixer
+export default withNavigation(Mixer)

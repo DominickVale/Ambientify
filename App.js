@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react'
-import { View, Text } from 'react-native'
-import { createAppContainer } from 'react-navigation';
+import 'react-native-gesture-handler'
+import React from 'react'
+import { createAppContainer } from 'react-navigation'
+import { setCustomText } from 'react-native-global-props';
 
 import AppNavigator from './src/navigation'
 
-const App = () => {
-  //The app component doesn't render anything at this time. Check ./src/navigation
+const customTextProps = {
+  style: {
+    fontFamily: 'Montserrat-Regular',
+  }
+};
 
-  return (
-    <>
-    </>
-  )
+setCustomText(customTextProps);
+
+const App = () => {
+  //The app component doesn't render anything. Check ./src/navigation for the main screen. (Mixer)
 }
 
 export default createAppContainer(AppNavigator);

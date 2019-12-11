@@ -1,17 +1,21 @@
 import React from 'react'
-import { View, Button } from 'react-native'
+import { View } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { useTranslation } from 'react-i18next';
+
+import { StyledButton, StyledButtonText } from './styles'
+
 
 const LoadButton = ({ channelId, navigation }) => {
-
-  const loadHandler = () => {
-    navigation.navigate('SoundPicker', { channelId: channelId })
-  }
+  const { t } = useTranslation();
+  const loadHandler = () => navigation.navigate('SoundPicker', { channelId: channelId })
 
   return (
     <>
       <View>
-        <Button title="Load" onPress={loadHandler} />
+        <StyledButton onPress={loadHandler}>
+          <StyledButtonText>{t('load')}</StyledButtonText>
+        </StyledButton>
       </View>
     </>
   )
