@@ -14,7 +14,7 @@ margin-bottom: ${normSize(16)}px;
 
 export const PresetLoadButton = styled.TouchableHighlight`
 flex: 5;
-padding: ${normSize(16)}px;
+padding: ${normSize(16)}px ${normSize(12)}px;
 `
 export const PresetDeleteButton = styled.TouchableHighlight`
 flex: 1;
@@ -25,5 +25,5 @@ border-radius: 50;
 
 export const StyledText = styled.Text`
 color:${COLORS.buttonText};
-font-size: ${normSize(18)}px;
+font-size: ${normSize(14)}px;
 `

@@ -9,7 +9,7 @@ import BottomControls from '../components/BottomControls'
 import { useBackHandlerWithListener } from '../utils'
 import PresetItem from '../components/PresetItem'
 import { COLORS } from '../constants'
-import { normSize } from '../utils'
+import { normSize, heightPercentageToDP } from '../utils'
 
 /**
  * TODO: 
@@ -30,8 +30,8 @@ const Presets = ({ navigation }) => {
   return (
     <>
       <ImageBackground resizeMethod='scale' source={require('#ambientify-images/bg.jpg')} style={{ width: '100%', height: '100%' }}>
-        <Image source={require('#ambientify-images/clouds_top.png')} style={{ height: 50, width: screenWidth + 100, position: 'absolute', left: 0, zIndex: 1000 }} />
-        <ScrollView stickyHeaderIndices={[1]}>
+        <Image source={require('#ambientify-images/clouds_top.png')} style={{ height: heightPercentageToDP(10), minWidth: screenWidth + 30, position: 'absolute', left: 0, top: 0, zIndex: 0 }} />
+        <ScrollView stickyHeaderIndices={[1]} >
           <Filler height={80} />
           <AddPresetButton>
             <MaterialIcon name="add" size={normSize(38)} color={COLORS.headerFore} onPress={() => navigation.push('AddPreset')} />

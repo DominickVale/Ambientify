@@ -84,5 +84,5 @@ export const ModalStyledText = styled.Text`
 color: ${props => props.secondary ? COLORS.icons : COLORS.buttonText};
 align-self: center;
 text-align: center;
-font-size: ${props => props.fontSize ? normSize(props.fontSize) : normSize(16)}px;
+font-size: ${props => props.fontSize ? props.fontSize : normSize(16)}px;
 `
