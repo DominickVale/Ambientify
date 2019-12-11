@@ -13,8 +13,6 @@ const VolumeSlider = ({ channelId }) => {
   const { soundObject, volume, file, currentSound } = useSelector(state => state.channels[channelId])
 
   const panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onStartShouldSetPanResponderCapture: () => true,
     onMoveShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponderCapture: () => true
   })
@@ -49,11 +47,10 @@ const VolumeSlider = ({ channelId }) => {
           {...panResponder.panHandlers}
           style={{
             width: normSize(120),
-            height: normSize(120),
+            height: normSize(130),
             marginTop: 6,
             transform: [
               { rotateZ: '-90deg' },
-              { scaleY: 1.2 }, { scaleX: 1.2 }
             ],
           }}
           minimumValue={0}
