@@ -27,14 +27,20 @@ const index = (props) => {
 
 
   const pickCustomSound = async () => {
+    let res;
 
-    const res = await DocumentPicker.pick({ type: ['application/ogg', DocumentPicker.types.audio] })
-
-    const from = res.uri;
-    const fileType = res.uri.match(/(\.\w+$)/igm)
-    const to = FileSystem.documentDirectory + parseStringToValidFileName(textValue) + fileType + '/';
-    FileSystem.copyAsync({ from, to })
-    dispatch(addCustomSound(textValue, to))
+    try { res = await DocumentPicker.pick({ type: ['application/ogg', DocumentPicker.types.audio] }) }
+    catch (error) {
+      if (DocumentPicker.isCancel(error))
+        setModalOpen(false)
+    }
+    if (res) {
+      const from = res.uri;
+      const fileType = res.uri.match(/(\.\w+$)/igm)
+      const to = FileSystem.documentDirectory + parseStringToValidFileName(textValue) + fileType + '/';
+      FileSystem.copyAsync({ from, to })
+      dispatch(addCustomSound(textValue, to))
+    }
   }
 
   const soundDeleteHandler = async (uri, soundName) => {

@@ -18,7 +18,6 @@ const { store, persistor } = configureStore();
 
 /**
  * TODO:
- * Fix unhandled promise in document picker
  * After this move to private repository and add premium version implementation
  * Add sounds and sound category images
  */
