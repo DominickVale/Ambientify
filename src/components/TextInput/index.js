@@ -7,6 +7,7 @@ const index = (props) => (
   <InputContainer>
     <StyledTextInput autoFocus={props.autoFocus}
       value={props.value}
+      maxLength={26}
       placeholder={props.placeholder}
       placeholderTextColor={COLORS.icons}
       selectionColor={COLORS.headerFore}
